@@ -1,544 +1,459 @@
-<!-- pre loader area start -->
-{{-- <div id="loading">
-    <div id="loading-center">
-        <div id="loading-center-absolute">
-            <!-- loading content here -->
-            <div class="tp-preloader-content">
-                <div class="tp-preloader-logo">
-                    <div class="tp-preloader-circle">
-                        <svg width="190" height="190" viewBox="0 0 380 380" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <circle stroke="#D9D9D9" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round">
-                            </circle>
-                            <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round">
-                            </circle>
-                        </svg>
-                    </div>
-                    <img src="{{asset('public/frontend')}}/img/logo/preloader/preloader-icon.svg" alt="">
-                </div>
-                <h3 class="tp-preloader-title">Shofy</h3>
-                <p class="tp-preloader-subtitle">Loading</p>
-            </div>
-        </div>
-    </div>
-</div> --}}
-<!-- pre loader area end -->
-
-<!-- back to top start -->
-<div class="back-to-top-wrapper">
-    <button id="back_to_top" type="button" class="back-to-top-btn">
-        <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M11 6L6 1L1 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"stroke-linejoin="round" />
-        </svg>
-    </button>
-</div>
-<!-- back to top end -->
-
-<!-- offcanvas area start -->
-<div class="offcanvas__area">
-    <div class="offcanvas__wrapper">
-        <div class="offcanvas__close">
-            <button class="offcanvas__close-btn offcanvas-close-btn">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11 1L1 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M1 1L11 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-            </button>
-        </div>
-        <div class="offcanvas__content">
-            <div class="offcanvas__top mb-70 d-flex justify-content-between align-items-center">
-                <div class="offcanvas__logo logo">
-                    <a href="index.html">
-                        <img src="{{asset('public/frontend')}}/img/logo/logo.svg" alt="logo">
-                    </a>
-                </div>
-            </div>
-            <div class="offcanvas__category pb-40">
-                <button class="tp-offcanvas-category-toggle">
-                    <i class="fa-solid fa-bars"></i> All Categories
-                </button>
-                <div class="tp-category-mobile-menu"></div>
-            </div>
-            <div class="tp-main-menu-mobile fix mb-40"></div>
-
-            <div class="offcanvas__contact align-items-center d-none">
-                <div class="offcanvas__contact-icon mr-20">
-                    <span>
-                        <img src="{{asset('public/frontend')}}/img/icon/contact.png" alt="">
-                    </span>
-                </div>
-                <div class="offcanvas__contact-content">
-                    <h3 class="offcanvas__contact-title">
-                        <a href="tel:098-852-987">004524865</a>
-                    </h3>
-                </div>
-            </div>
-            <div class="offcanvas__btn">
-                <a href="contact.html" class="tp-btn-2 tp-btn-border-2">Contact Us</a>
-            </div>
-        </div>
-        <div class="offcanvas__bottom">
-            <div class="offcanvas__footer d-flex align-items-center justify-content-between">
-                <div class="offcanvas__currency-wrapper currency">
-                    <span class="offcanvas__currency-selected-currency tp-currency-toggle"
-                        id="tp-offcanvas-currency-toggle">Currency : USD</span>
-                    <ul class="offcanvas__currency-list tp-currency-list">
-                        <li>USD</li>
-                        <li>ERU</li>
-                        <li>BDT </li>
-                        <li>INR</li>
+<!-- Page Header-->
+<header class="section page-header">
+    <!-- RD Navbar-->
+    <div class="rd-navbar-wrap">
+        <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed"
+            data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed"
+            data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed"
+            data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static"
+            data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px"
+            data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+            <div class="rd-navbar-aside-outer">
+                <div class="rd-navbar-aside">
+                    <div class="rd-navbar-collapse-toggle rd-navbar-fixed-element-1"
+                        data-rd-navbar-toggle=".rd-navbar-collapse"><span></span></div>
+                    <ul class="rd-navbar-aside-list rd-navbar-collapse">
+                        <li>
+                            <div class="block-inline unit unit-spacing-xs align-items-center">
+                                <div class="unit-left"><span class="icon text-middle mdi mdi-phone"></span>
+                                </div>
+                                <div class="unit-body"><a href="tel:#">1-800-1234-567</a></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="block-inline unit unit-spacing-xs align-items-center">
+                                <div class="unit-left"><span
+                                        class="icon text-middle mdi mdi-email-outline"></span></div>
+                                <div class="unit-body"><a href="mailto:#">info@demolink.org</a></div>
+                            </div>
+                        </li>
                     </ul>
-                </div>
-                <div class="offcanvas__select language">
-                    <div class="offcanvas__lang d-flex align-items-center justify-content-md-end">
-                        <div class="offcanvas__lang-img mr-15">
-                            <img src="{{asset('public/frontend')}}/img/icon/language-flag.png" alt="">
+                    <div class="rd-navbar-aside-item">
+                        <div class="block-inline">
+                            <button class="unit unit-spacing-xs align-items-center"
+                                data-rd-navbar-toggle="#navbar-login-register"><span class="unit-left"><span
+                                        class="icon text-middle mdi mdi-login"></span></span><span
+                                    class="unit-body"><span>Login/Register</span></span></button>
                         </div>
-                        <div class="offcanvas__lang-wrapper">
-                            <span class="offcanvas__lang-selected-lang tp-lang-toggle"
-                                id="tp-offcanvas-lang-toggle">English</span>
-                            <ul class="offcanvas__lang-list tp-lang-list">
-                                <li>Spanish</li>
-                                <li>Portugese</li>
-                                <li>American</li>
-                                <li>Canada</li>
-                            </ul>
+                        <div class="rd-navbar-popup bg-gray-12" id="navbar-login-register">
+                            <!-- Bootstrap tabs-->
+                            <div class="tabs-custom tabs-horizontal tabs-line" id="navbar-tabs">
+                                <!-- Nav tabs-->
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item" role="presentation"><a class="nav-link active"
+                                            href="#navbar-tabs-1" data-bs-toggle="tab">Login</a></li>
+                                    <li class="nav-item" role="presentation"><a class="nav-link"
+                                            href="#navbar-tabs-2" data-bs-toggle="tab">Register</a></li>
+                                </ul>
+                                <!-- Tab panes-->
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="navbar-tabs-1">
+                                        <form class="rd-form form-1">
+                                            <div class="form-wrap">
+                                                <input class="form-input" id="navbar-login-email" type="email"
+                                                    name="email">
+                                                <label class="form-label"
+                                                    for="navbar-login-email">E-mail</label>
+                                            </div>
+                                            <div class="form-wrap">
+                                                <input class="form-input" id="navbar-login-password"
+                                                    type="password" name="password">
+                                                <label class="form-label"
+                                                    for="navbar-login-password">Password</label>
+                                            </div>
+                                            <div class="form-wrap">
+                                                <button class="button button-sm button-primary button-block"
+                                                    type="submit">Sign in</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane fade" id="navbar-tabs-2">
+                                        <form class="rd-form form-1">
+                                            <div class="form-wrap">
+                                                <input class="form-input" id="register-name" type="text"
+                                                    name="username">
+                                                <label class="form-label" for="register-name">Username</label>
+                                            </div>
+                                            <div class="form-wrap">
+                                                <input class="form-input" id="register-email" type="email"
+                                                    name="email">
+                                                <label class="form-label" for="register-email">E-mail</label>
+                                            </div>
+                                            <div class="form-wrap">
+                                                <input class="form-input" id="register-password" type="password"
+                                                    name="password">
+                                                <label class="form-label"
+                                                    for="register-password">Password</label>
+                                            </div>
+                                            <div class="form-wrap">
+                                                <input class="form-input" id="register-password-confirm"
+                                                    type="password" name="password">
+                                                <label class="form-label"
+                                                    for="register-password-confirm">Confirm Password</label>
+                                            </div>
+                                            <div class="form-wrap">
+                                                <button class="button button-sm button-primary button-block"
+                                                    type="submit">Create an Account</button>
+                                            </div>
+                                            <div class="form-wrap">
+                                                <div class="text-decoration-lines"><span
+                                                        class="text-decoration-lines-content">or enter
+                                                        with</span></div>
+                                            </div>
+                                            <div class="form-wrap">
+                                                <div class="button-group"><a
+                                                        class="button button-facebook button-icon button-icon-only"
+                                                        href="#" aria-label="Facebook"><span
+                                                            class="icon mdi mdi mdi-facebook"></span></a><a
+                                                        class="button button-twitter button-icon button-icon-only"
+                                                        href="#" aria-label="Twitter"><span
+                                                            class="icon mdi mdi-twitter"></span></a><a
+                                                        class="button button-google button-icon button-icon-only"
+                                                        href="#" aria-label="Google+"><span
+                                                            class="icon mdi mdi-google"></span></a></div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-<div class="body-overlay"></div>
-<!-- offcanvas area end -->
-
-<!-- mobile menu area start -->
-<div id="tp-bottom-menu-sticky" class="tp-mobile-menu d-lg-none">
-    <div class="container">
-        <div class="row row-cols-5">
-            <div class="col">
-                <div class="tp-mobile-item text-center">
-                    <a href="shop.html" class="tp-mobile-item-btn">
-                        <i class="flaticon-store"></i>
-                        <span>Store</span>
-                    </a>
-                </div>
-            </div>
-            <div class="col">
-                <div class="tp-mobile-item text-center">
-                    <button class="tp-mobile-item-btn tp-search-open-btn">
-                        <i class="flaticon-search-1"></i>
-                        <span>Search</span>
-                    </button>
-                </div>
-            </div>
-            <div class="col">
-                <div class="tp-mobile-item text-center">
-                    <a href="wishlist.html" class="tp-mobile-item-btn">
-                        <i class="flaticon-love"></i>
-                        <span>Wishlist</span>
-                    </a>
-                </div>
-            </div>
-            <div class="col">
-                <div class="tp-mobile-item text-center">
-                    <a href="profile.html" class="tp-mobile-item-btn">
-                        <i class="flaticon-user"></i>
-                        <span>Account</span>
-                    </a>
-                </div>
-            </div>
-            <div class="col">
-                <div class="tp-mobile-item text-center">
-                    <button class="tp-mobile-item-btn tp-offcanvas-open-btn">
-                        <i class="flaticon-menu-1"></i>
-                        <span>Menu</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- mobile menu area end -->
-
-<!-- search area start -->
-<section class="tp-search-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-12">
-                <div class="tp-search-form">
-                    <div class="tp-search-close text-center mb-20">
-                        <button class="tp-search-close-btn tp-search-close-btn"></button>
-                    </div>
-                    <form action="#">
-                        <div class="tp-search-input mb-10">
-                            <input type="text" placeholder="Search for product...">
-                            <button type="submit"><i class="flaticon-search-1"></i></button>
+            <div class="rd-navbar-main-outer">
+                <div class="rd-navbar-main">
+                    <!-- RD Navbar Panel-->
+                    <div class="rd-navbar-panel">
+                        <!-- RD Navbar Toggle-->
+                        <button class="rd-navbar-toggle"
+                            data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                        <!-- RD Navbar Brand-->
+                        <div class="rd-navbar-brand"><a class="brand" href="index.html"><img
+                                    class="brand-logo-dark" src="images/logo-default-121x61.png" alt=""
+                                    width="121" height="61" srcset="images/logo-default-242x122.png 2x" /><img
+                                    class="brand-logo-light" src="images/logo-inverse-121x61.png" alt=""
+                                    width="121" height="61" srcset="images/logo-inverse-242x122.png 2x" /></a>
                         </div>
-                        <div class="tp-search-category">
-                            <span>Search by : </span>
-                            <a href="#">Men, </a>
-                            <a href="#">Women, </a>
-                            <a href="#">Children, </a>
-                            <a href="#">Shirt, </a>
-                            <a href="#">Demin</a>
+                    </div>
+                    <div class="rd-navbar-nav-wrap">
+                        <!-- RD Navbar Nav-->
+                        <ul class="rd-navbar-nav">
+                            <li class="rd-nav-item"><a class="rd-nav-link" href="index.html">Home</a>
+                            </li>
+                            <li class="rd-nav-item"><a class="rd-nav-link" href="#">Properties</a>
+                                <!-- RD Navbar Dropdown-->
+                                <ul class="rd-menu rd-navbar-dropdown">
+                                    <li class="rd-dropdown-item"><a class="rd-dropdown-link"
+                                            href="properties-grid.html">Properties Grid</a></li>
+                                    <li class="rd-dropdown-item"><a class="rd-dropdown-link"
+                                            href="properties-grid-2.html">Properties Grid 2</a></li>
+                                    <li class="rd-dropdown-item"><a class="rd-dropdown-link"
+                                            href="properties-list.html">Properties List</a></li>
+                                    <li class="rd-dropdown-item"><a class="rd-dropdown-link"
+                                            href="single-property.html">Single Property</a></li>
+                                    <li class="rd-dropdown-item"><a class="rd-dropdown-link"
+                                            href="submit-property.html">Submit Property</a></li>
+                                </ul>
+                            </li>
+                            <li class="rd-nav-item"><a class="rd-nav-link" href="about-us.html">About Us</a>
+                            </li>
+                            <li class="rd-nav-item"><a class="rd-nav-link" href="blog.html">Blog</a>
+                                <!-- RD Navbar Dropdown-->
+                                <ul class="rd-menu rd-navbar-dropdown">
+                                    <li class="rd-dropdown-item"><a class="rd-dropdown-link"
+                                            href="blog-post.html">Blog post</a></li>
+                                </ul>
+                            </li>
+                            <li class="rd-nav-item active"><a class="rd-nav-link" href="#">Pages</a>
+                                <!-- RD Navbar Megamenu-->
+                                <ul class="rd-menu rd-navbar-megamenu">
+                                    <li class="rd-megamenu-item">
+                                        <h6 class="rd-megamenu-title">Pages 1</h6>
+                                        <ul class="rd-megamenu-list">
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="agents.html">Agents</a></li>
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="agents-2.html">Agents 2</a></li>
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="agent-single-page.html">Agent Single Page</a></li>
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="testimonials.html">Testimonials</a></li>
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="careers.html">Careers</a></li>
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="faq.html">FAQ</a></li>
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="gallery-grid.html">Gallery Grid</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="rd-megamenu-item">
+                                        <h6 class="rd-megamenu-title">Pages 2</h6>
+                                        <ul class="rd-megamenu-list">
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="search-results.html">Search results</a></li>
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="search-results-2.html">Search results 2</a></li>
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="coming-soon.html">Coming Soon</a></li>
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="maintenance.html">Maintenance</a></li>
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="503.html">503</a></li>
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="404.html">404</a></li>
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="privacy-policy.html">Privacy Policy</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="rd-megamenu-item">
+                                        <h6 class="rd-megamenu-title">Elements</h6>
+                                        <ul class="rd-megamenu-list">
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="typography.html">Typography</a></li>
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="buttons.html">Buttons</a></li>
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="forms.html">Forms</a></li>
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="tabs-and-accordions.html">Tabs and accordions</a></li>
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="progress-bars.html">Progress bars</a></li>
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="tables.html">Tables</a></li>
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="grid-system.html">Grid System</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="rd-megamenu-item">
+                                        <h6 class="rd-megamenu-title">Layouts</h6>
+                                        <ul class="rd-megamenu-list">
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="real-estate-1.html">Real Estate 1</a></li>
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="real-estate-2.html">Layout #2 </a></li>
+                                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link"
+                                                    href="real-estate-3.html">Layout #3</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="rd-nav-item"><a class="rd-nav-link" href="contact-us.html">Contact Us</a>
+                            </li>
+                        </ul>
+                        <div class="rd-navbar-main-item"><a class="button button-sm button-primary"
+                                href="submit-property.html">Submit property</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+<!-- FScreen-->
+<section class="section">
+    <div class="range">
+        <div class="cell-xl-6_lg box-1-cell height-fill context-dark">
+            <div class="box-1-bg-shape"><img class="box-1-bg-image" src="images/bg-shape-1.svg" alt=""></div>
+            <div class="cell-inner box-1-outer">
+                <div class="box-1">
+                    <h2>Find Your Property</h2>
+                    <form class="rd-form">
+                        <div class="row row-x-20 row-20">
+                            <div class="col-sm-6 col-lg-12 col-xl-6">
+                                <div class="form-wrap form-wrap-validation">
+                                    <select class="form-input select-filter" name="search-property-location"
+                                        data-style="modern" data-class="select-dropdown-context-dark"
+                                        data-placeholder="Choose Location"
+                                        data-minimum-results-for-search="Infinity">
+                                        <option label="placeholder"></option>
+                                        <option value="2">Alaska</option>
+                                        <option value="3">Arizona</option>
+                                        <option value="4">Arkansas</option>
+                                        <option value="5">California</option>
+                                        <option value="6">Colorado</option>
+                                        <option value="7">Connecticut</option>
+                                        <option value="8">Delaware</option>
+                                        <option value="9">Florida</option>
+                                    </select><span class="select-arrow"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-wrap form-wrap-validation">
+                                    <select class="form-input select-filter" name="search-property-type"
+                                        data-style="modern" data-class="select-dropdown-context-dark"
+                                        data-placeholder="Property Type"
+                                        data-minimum-results-for-search="Infinity">
+                                        <option label="placeholder"></option>
+                                        <option value="2">Apartment</option>
+                                        <option value="3">House</option>
+                                        <option value="4">Lot</option>
+                                    </select><span class="select-arrow"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-lg-6 col-xl-4">
+                                <div class="form-wrap form-wrap-validation">
+                                    <select class="form-input select-filter" name="search-property-status"
+                                        data-style="modern" data-class="select-dropdown-context-dark"
+                                        data-placeholder="Property Status"
+                                        data-minimum-results-for-search="Infinity">
+                                        <option label="placeholder"></option>
+                                        <option value="2">For Sale</option>
+                                        <option value="3">For Rent</option>
+                                    </select><span class="select-arrow"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-lg-6 col-xl-4">
+                                <div class="form-wrap form-wrap-validation">
+                                    <select class="form-input select-filter" name="search-property-bathrooms"
+                                        data-style="modern" data-class="select-dropdown-context-dark"
+                                        data-placeholder="Min Baths" data-minimum-results-for-search="Infinity">
+                                        <option label="placeholder"></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-lg-6 col-xl-4">
+                                <div class="form-wrap form-wrap-validation">
+                                    <select class="form-input select-filter" name="search-property-bedrooms"
+                                        data-style="modern" data-class="select-dropdown-context-dark"
+                                        data-placeholder="Min Beds" data-minimum-results-for-search="Infinity">
+                                        <option label="placeholder"></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rd-range-outer">
+                            <p class="rd-range-caption">Price Range ($)</p>
+                            <!-- RD Range-->
+                            <div class="rd-range" data-min="50" data-max="10000" data-start="[50, 10000]"
+                                data-step="10" data-tooltip="true" data-min-diff="100"></div>
+                        </div>
+                        <div class="rd-range-outer">
+                            <p class="rd-range-caption">Area (Sq Ft)</p>
+                            <!-- RD Range-->
+                            <div class="rd-range" data-min="70" data-max="20000" data-start="[70, 20000]"
+                                data-step="10" data-tooltip="true" data-min-diff="100"></div>
+                        </div>
+                        <div class="layout-5">
+                            <div class="layout-5-item layout-5-item_primary">
+                                <div class="panel-3" id="panel-3">
+                                    <div class="panel-3-header" data-multitoggle="#panel-3">
+                                        <div class="panel-3-toggle"></div>
+                                        <p class="panel-3-title">Look for certain features</p>
+                                    </div>
+                                    <div class="panel-3-content">
+                                        <div class="panel-3-content-inner">
+                                            <ul class="list-inline list-inline-sm">
+                                                <li>
+                                                    <label class="checkbox-inline">
+                                                        <input name="checkbox-1" value="checkbox-1"
+                                                            type="checkbox">Central Heating
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label class="checkbox-inline">
+                                                        <input name="checkbox-2" value="checkbox-2"
+                                                            type="checkbox">Home Theater
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label class="checkbox-inline">
+                                                        <input name="checkbox-3" value="checkbox-3"
+                                                            type="checkbox">Lawn
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label class="checkbox-inline">
+                                                        <input name="checkbox-4" value="checkbox-4"
+                                                            type="checkbox">Wi-Fi
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label class="checkbox-inline">
+                                                        <input name="checkbox-5" value="checkbox-5"
+                                                            type="checkbox">Gym
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layout-5-item"><a class="button button-secondary-outline"
+                                    href="search-results-2.html" style="min-width: 150px;">Search</a></div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+        <div class="cell-xl-6_sm height-fill">
+            <div class="box-2">
+                <!-- Owl Carousel-->
+                <div class="owl-carousel" data-items="1" data-sm-items="2" data-lg-items="1" data-xl-items="2"
+                    data-dots="false" data-nav="false" data-nav-custom="#owl-outer-nav" data-loop="true"
+                    data-margin="30" data-autoplay="true" data-autoplay-speed="3500" data-stage-padding="0"
+                    data-mouse-drag="false"><a class="product-corporate context-dark" href="single-property.html"
+                        style="background-image: url(images/real-estate-1-1-474x577.jpg);">
+                        <div class="product-corporate-inner">
+                            <div class="product-corporate-caption">
+                                <h3 class="product-corporate-title">401 Biscayne Boulevard, Miami</h3>
+                                <h4 class="product-corporate-info">3 bedrooms, $240\day</h4>
+                            </div>
+                        </div>
+                    </a><a class="product-corporate context-dark" href="single-property.html"
+                        style="background-image: url(images/real-estate-1-2-474x577.jpg);">
+                        <div class="product-corporate-inner">
+                            <div class="product-corporate-caption">
+                                <h3 class="product-corporate-title">3895 NW 107th Ave, Doral</h3>
+                                <h4 class="product-corporate-info">2 bedrooms, $130\day</h4>
+                            </div>
+                        </div>
+                    </a><a class="product-corporate context-dark" href="single-property.html"
+                        style="background-image: url(images/real-estate-1-3-474x577.jpg);">
+                        <div class="product-corporate-inner">
+                            <div class="product-corporate-caption">
+                                <h3 class="product-corporate-title">3782 Broadway St, San Francisco</h3>
+                                <h4 class="product-corporate-info">2 bedrooms, $290\day</h4>
+                            </div>
+                        </div>
+                    </a><a class="product-corporate context-dark" href="single-property.html"
+                        style="background-image: url(images/real-estate-1-4-474x577.jpg);">
+                        <div class="product-corporate-inner">
+                            <div class="product-corporate-caption">
+                                <h3 class="product-corporate-title">9021 Charter Oak Ln, San Diego</h3>
+                                <h4 class="product-corporate-info">1 bedroom, $210\day</h4>
+                            </div>
+                        </div>
+                    </a></div>
+                <div class="box-2-footer">
+                    <div class="box-2-footer-inner">
+                        <h3>Recent Properties</h3>
+                        <div class="owl-outer-nav" id="owl-outer-nav">
+                            <button class="owl-arrow owl-arrow-prev"><span
+                                    class="icon fl-budicons-free-left161"></span><span>prev</span></button>
+                            <button class="owl-arrow owl-arrow-next"><span>next</span><span
+                                    class="icon fl-budicons-free-right163"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
-<!-- search area end -->
-
-<!-- cart mini area start -->
-<div class="cartmini__area">
-    <div class="cartmini__wrapper d-flex justify-content-between flex-column">
-        <div class="cartmini__top-wrapper">
-            <div class="cartmini__top p-relative">
-                <div class="cartmini__top-title">
-                    <h4>Shopping cart</h4>
-                </div>
-                <div class="cartmini__close">
-                    <button type="button" class="cartmini__close-btn cartmini-close-btn"><i class="fal fa-times"></i></button>
-                </div>
-            </div>
-            <div class="cartmini__shipping">
-                <p>Free Shipping for all orders over <span>200 ৳</span></p>
-                <div class="progress">
-                    <div id="shipping-progress-bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
-            <!--Show Cart Item-->
-            <div class="cartmini__widget"></div>
-            <!-- for wp -->
-
-            <!-- if no item in cart -->
-            <div class="cartmini__empty text-center d-none">
-                <img src="{{asset('public/frontend')}}/img/product/cartmini/empty-cart.png" alt="">
-                <p>Your Cart is empty</p>
-                <a href="shop.html" class="tp-btn">Go to Shop</a>
-            </div>
-        </div>
-        <div class="cartmini__checkout">
-            <div class="cartmini__checkout-title mb-30">
-                <h4>Subtotal:</h4>
-                <span id="carts-subtotal">৳ 00.00</span>
-            </div>
-            <div class="cartmini__checkout-btn">
-                <a href="{{route('cart')}}" class="tp-btn mb-10 w-100"> View Cart</a>
-                <a href="{{route('checkout')}}" class="tp-btn tp-btn-border w-100"> Checkout</a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- cart mini area end -->
-
-<!-- header area start -->
-<header>
-    <div class="tp-header-area tp-header-style-primary tp-header-height">
-        <!-- header top start  -->
-        <div class="tp-header-top-2 p-relative z-index-11 tp-header-top-border d-none d-md-block">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <div class="tp-header-info d-flex align-items-center">
-                            <div class="tp-header-info-item">
-                                <a href="#">
-                                    <span>
-                                        <svg width="8" height="15" viewBox="0 0 8 15" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M8 0H5.81818C4.85376 0 3.92883 0.383116 3.24688 1.06507C2.56493 1.74702 2.18182 2.67194 2.18182 3.63636V5.81818H0V8.72727H2.18182V14.5455H5.09091V8.72727H7.27273L8 5.81818H5.09091V3.63636C5.09091 3.44348 5.16753 3.25849 5.30392 3.1221C5.44031 2.98571 5.6253 2.90909 5.81818 2.90909H8V0Z"
-                                                fill="currentColor" />
-                                        </svg>
-                                    </span> 7500k Followers
-                                </a>
-                            </div>
-                            <div class="tp-header-info-item">
-                                <a href="tel:02-55048474">
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.359 2.73916C1.59079 2.35465 2.86862 0.958795 3.7792 1.00093C4.05162 1.02426 4.29244 1.1883 4.4881 1.37943H4.48885C4.93737 1.81888 6.22423 3.47735 6.29648 3.8265C6.47483 4.68282 5.45362 5.17645 5.76593 6.03954C6.56213 7.98771 7.93402 9.35948 9.88313 10.1549C10.7455 10.4679 11.2392 9.44752 12.0956 9.62511C12.4448 9.6981 14.1042 10.9841 14.5429 11.4333V11.4333C14.7333 11.6282 14.8989 11.8698 14.9214 12.1422C14.9553 13.1016 13.4728 14.3966 13.1838 14.5621C12.502 15.0505 11.6125 15.0415 10.5281 14.5373C7.50206 13.2784 2.66618 8.53401 1.38384 5.39391C0.893174 4.31561 0.860062 3.42016 1.359 2.73916Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M9.84082 1.18318C12.5534 1.48434 14.6952 3.62393 15 6.3358" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M9.84082 3.77927C11.1378 4.03207 12.1511 5.04544 12.4039 6.34239" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </span> 02-55048474
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div
-                            class="tp-header-top-right tp-header-top-black d-flex align-items-center justify-content-end">
-                            <div class="tp-header-top-menu d-flex align-items-center justify-content-end">
-                                <div class="tp-header-top-menu-item tp-header-lang">
-                                    <span class="tp-header-lang-toggle" id="tp-header-lang-toggle">English</span>
-                                    <ul>
-                                        <li>
-                                            <a href="#">Spanish</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Russian</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Portuguese</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="tp-header-top-menu-item tp-header-currency">
-                                    <span class="tp-header-currency-toggle" id="tp-header-currency-toggle">USD</span>
-                                    <ul>
-                                        <li>
-                                            <a href="#">EUR</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">CHF</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">GBP</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">KWD</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="tp-header-top-menu-item tp-header-setting">
-                                    <span class="tp-header-setting-toggle" id="tp-header-setting-toggle">Setting</span>
-                                    <ul>
-                                        @auth
-                                            <li>
-                                                <a href="{{route('user-profile')}}">My Profile</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{route('dashboard')}}">Dashboard</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{route('wishlist')}}">Wishlist</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{route('cart')}}">Cart</a>
-                                            </li>
-                                            <li>
-                                                <form method="POST" action="{{ route('logout') }}">
-                                                    @csrf
-                                                    <a href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">Logout</a>
-                                                    
-                                                </form>
-                                            </li>
-                                        @else
-                                            <li>
-                                                <a href="{{route('login')}}">Login</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{route('register')}}">Register</a>
-                                            </li>
-                                        @endauth
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- header bottom start -->
-        <div id="header-sticky" class="tp-header-bottom-2 tp-header-sticky">
-            <div class="container">
-                <div class="tp-mega-menu-wrapper p-relative">
-                    <div class="row align-items-center">
-                        <div class="col-xl-2 col-lg-5 col-md-5 col-sm-4 col-6">
-                            <div class="logo">
-                                <a href="{{route('home')}}">
-                                    <img src="{{asset('public')}}/images/logo.png" height="50" alt="logo">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-xl-5 d-none d-xl-block">
-                            <div class="main-menu menu-style-2">
-                                <nav class="tp-main-menu-content">
-                                    <ul>
-                                        <li><a href="{{route('home')}}">Home</a></li>
-                                        <li><a href="{{route('shop')}}">Shop</a></li>
-                                        <li><a href="{{route('coupon')}}">Coupons</a></li>
-                                        <li class="has-dropdown">
-                                            <a href="#">Others</a>
-                                            <ul class="tp-submenu">
-                                                <li><a href="{{route('blog')}}">Blog</a></li>
-                                                <li><a href="{{route('blog-details')}}">About</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="{{route('contact')}}">Contact</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                        <div class="col-xl-5 col-lg-7 col-md-7 col-sm-8 col-6">
-                            <div class="tp-header-bottom-right d-flex align-items-center justify-content-end pl-30">
-                                <div class="tp-header-search-2 d-none d-sm-block">
-                                    <form action="#">
-                                        <input type="text" placeholder="Search for Products...">
-                                        <button type="submit">
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M18.9999 19L14.6499 14.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </button>
-                                    </form>
-                                </div>
-                                <div class="tp-header-action d-flex align-items-center ml-30">
-                                    <div class="tp-header-action-item d-none d-lg-block">
-                                        <a href="{{route('compare')}}" class="tp-header-action-btn">
-                                            <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M14.8396 17.3319V3.71411" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M19.1556 13L15.0778 17.0967L11 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M4.91115 1.00056V14.6183" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M0.833496 5.09667L4.91127 1L8.98905 5.09667" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </a>
-                                    </div>
-                                    <div class="tp-header-action-item d-none d-lg-block">
-                                        <a href="{{route('wishlist')}}" class="tp-header-action-btn">
-                                            <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.239 18.8538C13.4096 17.5179 15.4289 15.9456 17.2607 14.1652C18.5486 12.8829 19.529 11.3198 20.1269 9.59539C21.2029 6.25031 19.9461 2.42083 16.4289 1.28752C14.5804 0.692435 12.5616 1.03255 11.0039 2.20148C9.44567 1.03398 7.42754 0.693978 5.57894 1.28752C2.06175 2.42083 0.795919 6.25031 1.87187 9.59539C2.46978 11.3198 3.45021 12.8829 4.73806 14.1652C6.56988 15.9456 8.58917 17.5179 10.7598 18.8538L10.9949 19L11.239 18.8538Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M7.26062 5.05302C6.19531 5.39332 5.43839 6.34973 5.3438 7.47501" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                            <span class="tp-header-action-badge" id="wishlist-count">{{DB::table('wishlists')->where('user_id', Auth::id())->count()}}</span>
-                                        </a>
-                                    </div>
-                                    <div class="tp-header-action-item">
-                                        <button class="tp-header-action-btn cartmini-open-btn" id="get-carts-data">
-                                            <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.48626 20.5H14.8341C17.9004 20.5 20.2528 19.3924 19.5847 14.9348L18.8066 8.89359C18.3947 6.66934 16.976 5.81808 15.7311 5.81808H5.55262C4.28946 5.81808 2.95308 6.73341 2.4771 8.89359L1.69907 14.9348C1.13157 18.889 3.4199 20.5 6.48626 20.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M6.34902 5.5984C6.34902 3.21232 8.28331 1.27803 10.6694 1.27803V1.27803C11.8184 1.27316 12.922 1.72619 13.7362 2.53695C14.5504 3.3477 15.0081 4.44939 15.0081 5.5984V5.5984" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M7.70365 10.1018H7.74942" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M13.5343 10.1018H13.5801" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                            <span class="tp-header-action-badge" id="cart-count">{{DB::table('carts')->where('user_id', Auth::id())->count()}}</span>
-                                        </button>
-                                    </div>
-                                    <div class="tp-header-action-item tp-header-hamburger mr-20 d-xl-none">
-                                        <button type="button" class="tp-offcanvas-open-btn">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="16" viewBox="0 0 30 16">
-                                                <rect x="10" width="20" height="2" fill="currentColor" />
-                                                <rect x="5" y="7" width="25" height="2" fill="currentColor" />
-                                                <rect x="10" y="14" width="20" height="2" fill="currentColor" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-<!-- header area end -->
-
-<!-- filter offcanvas area start -->
-<div class="tp-filter-offcanvas-area">
-    <div class="tp-filter-offcanvas-wrapper">
-        <div class="tp-filter-offcanvas-close">
-            <button type="button" class="tp-filter-offcanvas-close-btn filter-close-btn">
-                <i class="fa-solid fa-xmark"></i>
-                Close
-            </button>
-        </div>
-        <div class="tp-shop-sidebar">
-            <!-- filter -->
-            <div class="tp-shop-widget mb-35">
-                <h3 class="tp-shop-widget-title no-border">Price Filter</h3>
-
-                <div class="tp-shop-widget-content">
-                    <div class="tp-shop-widget-filter">
-                        <div id="slider-range-offcanvas" class="mb-10"></div>
-                        <div class="tp-shop-widget-filter-info d-flex align-items-center justify-content-between">
-                            <span class="input-range">
-                                <input type="text" id="amount-offcanvas" readonly>
-                            </span>
-                            <button class="tp-shop-widget-filter-btn" type="button">Filter</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-
-        </div>
-    </div>
-</div>
-<!-- filter offcanvas area end -->
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('get-carts-data').addEventListener('click', function(e) {
-            e.preventDefault();
-
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', '{{ route('get-carts') }}', true);
-
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    var cartWidget = document.querySelector('.cartmini__widget');
-                    cartWidget.innerHTML = '';
-
-                    var subtotal = response.reduce((total, item) => {
-                        var priceAfterDiscount = Math.round(item.product.price - (item.product.price * item.product.discount / 100));
-                        var productVariantId = item.variants && item.variants.length > 0 ? item.variants[0].id : null; // Fetch variant ID dynamically
-                        cartWidget.innerHTML += `
-                            <div class="cartmini__widget-item remove${item.product.id}">
-                                <div class="cartmini__thumb">
-                                    <a href="product-details.html">
-                                        <img src="{{asset('public/frontend')}}/img/product/product-1.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="cartmini__content">
-                                    <h5 class="cartmini__title"><a href="product-details.html">${item.product.product_name}</a></h5>
-                                    <div class="cartmini__price-wrapper">
-                                        <span class="cartmini__price">৳ ${priceAfterDiscount}</span>
-                                        <span class="cartmini__quantity">x ${item.quantity}</span>
-                                    </div>
-                                </div>
-                                <a href="#" data-action-name="cart" data-product-id="${item.product.id}" data-product-variant-id="${productVariantId}" class="removed-item cartmini__del">
-                                    <i class="fa-regular fa-xmark"></i>
-                                </a>
-                            </div>
-                        `;
-                        return total + (priceAfterDiscount * item.quantity);
-                    }, 0);
-
-                    document.getElementById('carts-subtotal').textContent = '৳ ' + subtotal;
-                    
-                    // Check subtotal for free shipping
-                    var shippingThreshold = 200;
-                    var shippingSpan = document.querySelector('.cartmini__shipping span');
-
-                    if (subtotal > shippingThreshold) {
-                        shippingSpan.classList.add('text-success'); // Add class if above threshold
-                    } else {
-                        shippingSpan.classList.remove('text-success'); // Remove class if below threshold
-                    }
-
-                    // Update progress bar
-                    var progressBar = document.getElementById('shipping-progress-bar');
-                    var progress = Math.min((subtotal / 200) * 100, 100);
-                    progressBar.style.width = progress + '%';
-                    progressBar.setAttribute('aria-valuenow', progress);
-                } else {
-                    console.log('Error fetching cart data:', xhr);
-                }
-            };
-
-            xhr.onerror = function() {
-                console.log('Request failed');
-            };
-
-            xhr.send();
-        });
-    });
-</script>
