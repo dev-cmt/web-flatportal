@@ -123,4 +123,53 @@
         </div>
     </section>
     <!-- login area end -->
+
+
+
+    <div>
+        <!-- Session Status -->
+        <x-auth-session-status class="mb-4" :status="session('status')" />
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
+            <div class="form-wrap">
+                <input class="form-input" type="text" name="name" value="{{old('name')}}" required autofocus autocomplete="name" id="name" placeholder="Enter name">
+                <label class="form-label" for="register-name">Username</label>
+                <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            </div>
+            <div class="form-wrap">
+                <input class="form-input" type="email" name="email" value="{{old('email')}}" required autofocus autocomplete="email" id="email" placeholder="Enter email">
+                <label class="form-label" for="register-email">E-mail</label>
+                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            </div>
+            <div class="form-wrap">
+                <input class="form-input" type="password" name="password" id="tp_password" onpaste="return false" placeholder="Min. 6 character" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" autocomplete="new-password">
+                <label class="form-label" for="register-password">Password</label>
+                <x-input-error :messages="$errors->get('password')" class="mt-2"/>
+            </div>
+            <div class="form-wrap">
+                <input class="form-input" type="password" name="password_confirmation" onpaste="return false" placeholder="Confirm password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" autocomplete="new-password">
+                <label class="form-label" for="register-password-confirm">Confirm Password</label>
+                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+            </div>
+            <div class="form-wrap">
+                <button class="button button-sm button-primary button-block" type="submit">Create an Account</button>
+            </div>
+            <div class="form-wrap">
+                <div class="text-decoration-lines"><span class="text-decoration-lines-content">or enter with</span></div>
+            </div>
+            <div class="form-wrap">
+                <div class="button-group">
+                    <a class="button button-facebook button-icon button-icon-only"  href="{{ route('social.login', 'facebook') }}" aria-label="Facebook">
+                        <span class="icon mdi mdi mdi-facebook"></span>
+                    </a>
+                    {{-- <a class="button button-twitter button-icon button-icon-only" href="#" aria-label="Twitter">
+                        <span class="icon mdi mdi-twitter"></span>
+                    </a> --}}
+                    <a class="button button-google button-icon button-icon-only" href="{{ route('social.login', 'google') }}" aria-label="Google+">
+                        <span class="icon mdi mdi-google"></span>
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
 </x-frontend-layout>

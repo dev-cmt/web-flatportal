@@ -38,9 +38,19 @@ class HomeController extends Controller
     }
     public function userProfile(Request $request): View
     {
-        return view('ecommerce.frontend.profile');
+        return view('pages.frontend.profile');
     }
     
+    public function properties(Request $request)
+    {
+        return view('pages.frontend.properties');
+    }
+    public function propertiesDetails(Request $request, $id)
+    {
+        return view('pages.frontend.properties-details');
+    }
+
+
     public function shop(Request $request)
     {
         $query = Product::query();
@@ -83,8 +93,6 @@ class HomeController extends Controller
         // For non-AJAX requests (initial page load), return the full shop view
         return view('ecommerce.frontend.shop', compact('products'));
     }
-
-
 
     public function shopDetails(Request $request, $id)
     {

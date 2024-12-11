@@ -24,13 +24,14 @@ use App\Http\Controllers\Ecommerce\ShippingController;
 |
 */
 Route::get('/', [HomeController::class, 'welcome'])->name('home');
-Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
-Route::get('/shop-details/{id}/{url_slug}', [HomeController::class, 'shopDetails'])->name('shop-details');
+Route::get('/properties', [HomeController::class, 'properties'])->name('properties');
+Route::get('/properties-details/{id}/{url_slug}', [HomeController::class, 'propertiesDetails'])->name('properties-details');
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
 Route::get('/blog-details', [HomeController::class, 'blogDetails'])->name('blog-details');
 Route::get('/coupon', [HomeController::class, 'coupon'])->name('coupon');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
+
 
 Route::post('/product/review', [HomeController::class, 'storeReview'])->name('product.review.store');
 Route::get('/load-more-reviews', [HomeController::class, 'loadMoreReviews'])->name('load-more-reviews');

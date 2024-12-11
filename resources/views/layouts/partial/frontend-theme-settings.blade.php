@@ -1,3 +1,5 @@
+
+
 <div class="popup-modal modal fade" tabindex="-1" id="sg-modal-add">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
@@ -7,7 +9,7 @@
             <div class="modal-body pt-0">
                 <div class="row">
                     <div class="col-lg-6">
-                        <img src="{{asset('public')}}/images/modal.png" alt="Image" class="img-fluid">
+                        <img src="{{asset('public')}}/{{asset('public/frontend')}}/images/modal.png" alt="Image" class="img-fluid">
                     </div>
                     <div class="col-lg-6">
                         <h2>Get <span class="text-info">25%</span> Discount</h2>
@@ -96,10 +98,10 @@
                         target="_blank"><span class="icon mdi mdi-cart"></span>Buy template</a>
                     <div class="layout-panel-element">
                         <div class="brand"> <a class="brand" href="index.html"><img class="brand-logo-dark"
-                                    src="images/logo-default-121x61.png" alt="" width="121" height="61"
-                                    srcset="images/logo-default-242x122.png 2x" /><img class="brand-logo-light"
-                                    src="images/logo-inverse-121x61.png" alt="" width="121" height="61"
-                                    srcset="images/logo-inverse-242x122.png 2x" /></a>
+                                    src="{{asset('public/frontend')}}/images/logo-default-121x61.png" alt="" width="121" height="61"
+                                    srcset="{{asset('public/frontend')}}/images/logo-default-242x122.png 2x" /><img class="brand-logo-light"
+                                    src="{{asset('public/frontend')}}/images/logo-inverse-121x61.png" alt="" width="121" height="61"
+                                    srcset="{{asset('public/frontend')}}/images/logo-inverse-242x122.png 2x" /></a>
                         </div>
                     </div>
                     <!-- Isotope Content-->
@@ -108,10 +110,10 @@
                     <div class="isotope" data-isotope-layout="masonry">
                         <div class="isotope-item"><a class="thumbnail-small" href="real-estate-1.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/real-estate-1.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/real-estate-1.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/real-estate-1.jpg);"></div>
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/real-estate-1.jpg);"></div>
                                 </div>
                                 <div class="thumbnail-small-caption">
                                     <p class="thumbnail-small-header">Real Estate 1</p>
@@ -120,10 +122,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="real-estate-2.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/real-estate-2.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/real-estate-2.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/real-estate-2.jpg);"></div>
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/real-estate-2.jpg);"></div>
                                 </div>
                                 <div class="thumbnail-small-caption">
                                     <p class="thumbnail-small-header">Real Estate 2</p>
@@ -132,10 +134,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="real-estate-3.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/real-estate-3.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/real-estate-3.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/real-estate-3.jpg);"></div>
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/real-estate-3.jpg);"></div>
                                 </div>
                                 <div class="thumbnail-small-caption">
                                     <p class="thumbnail-small-header">Real Estate 3</p>
@@ -144,10 +146,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="about-us.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/about-us.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/about-us.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/about-us.jpg);"></div>
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/about-us.jpg);"></div>
                                 </div>
                                 <div class="thumbnail-small-caption">
                                     <p class="thumbnail-small-header">About Us</p>
@@ -156,10 +158,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="properties-grid.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/properties-grid.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/properties-grid.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/properties-grid.jpg);">
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/properties-grid.jpg);">
                                     </div>
                                 </div>
                                 <div class="thumbnail-small-caption">
@@ -169,10 +171,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="properties-grid-2.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/properties-grid-2.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/properties-grid-2.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/properties-grid-2.jpg);">
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/properties-grid-2.jpg);">
                                     </div>
                                 </div>
                                 <div class="thumbnail-small-caption">
@@ -182,10 +184,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="properties-list.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/properties-list.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/properties-list.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/properties-list.jpg);">
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/properties-list.jpg);">
                                     </div>
                                 </div>
                                 <div class="thumbnail-small-caption">
@@ -195,10 +197,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="single-property.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/single-property.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/single-property.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/single-property.jpg);">
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/single-property.jpg);">
                                     </div>
                                 </div>
                                 <div class="thumbnail-small-caption">
@@ -208,10 +210,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="submit-property.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/submit-property.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/submit-property.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/submit-property.jpg);">
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/submit-property.jpg);">
                                     </div>
                                 </div>
                                 <div class="thumbnail-small-caption">
@@ -221,10 +223,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="blog.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/blog.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/blog.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/blog.jpg);"></div>
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/blog.jpg);"></div>
                                 </div>
                                 <div class="thumbnail-small-caption">
                                     <p class="thumbnail-small-header">Blog</p>
@@ -233,10 +235,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="blog-post.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/blog-post.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/blog-post.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/blog-post.jpg);"></div>
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/blog-post.jpg);"></div>
                                 </div>
                                 <div class="thumbnail-small-caption">
                                     <p class="thumbnail-small-header">Blog post</p>
@@ -245,10 +247,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="agents.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/agents.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/agents.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/agents.jpg);"></div>
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/agents.jpg);"></div>
                                 </div>
                                 <div class="thumbnail-small-caption">
                                     <p class="thumbnail-small-header">Agents</p>
@@ -257,10 +259,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="agents-2.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/agents-2.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/agents-2.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/agents-2.jpg);"></div>
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/agents-2.jpg);"></div>
                                 </div>
                                 <div class="thumbnail-small-caption">
                                     <p class="thumbnail-small-header">Agents 2</p>
@@ -269,10 +271,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="agent-single-page.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/agent-single-page.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/agent-single-page.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/agent-single-page.jpg);">
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/agent-single-page.jpg);">
                                     </div>
                                 </div>
                                 <div class="thumbnail-small-caption">
@@ -282,10 +284,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="testimonials.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/testimonials.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/testimonials.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/testimonials.jpg);"></div>
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/testimonials.jpg);"></div>
                                 </div>
                                 <div class="thumbnail-small-caption">
                                     <p class="thumbnail-small-header">Testimonials</p>
@@ -294,10 +296,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="careers.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/careers.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/careers.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/careers.jpg);"></div>
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/careers.jpg);"></div>
                                 </div>
                                 <div class="thumbnail-small-caption">
                                     <p class="thumbnail-small-header">Careers</p>
@@ -306,10 +308,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="faq.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/faq.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/faq.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/faq.jpg);"></div>
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/faq.jpg);"></div>
                                 </div>
                                 <div class="thumbnail-small-caption">
                                     <p class="thumbnail-small-header">FAQ</p>
@@ -318,10 +320,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="gallery-grid.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/gallery-grid.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/gallery-grid.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/gallery-grid.jpg);"></div>
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/gallery-grid.jpg);"></div>
                                 </div>
                                 <div class="thumbnail-small-caption">
                                     <p class="thumbnail-small-header">Gallery Grid</p>
@@ -330,10 +332,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="search-results.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/search-results.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/search-results.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/search-results.jpg);">
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/search-results.jpg);">
                                     </div>
                                 </div>
                                 <div class="thumbnail-small-caption">
@@ -343,10 +345,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="search-results-2.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/search-results-2.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/search-results-2.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/search-results-2.jpg);">
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/search-results-2.jpg);">
                                     </div>
                                 </div>
                                 <div class="thumbnail-small-caption">
@@ -356,10 +358,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="contact-us.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/contact-us.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/contact-us.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/contact-us.jpg);"></div>
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/contact-us.jpg);"></div>
                                 </div>
                                 <div class="thumbnail-small-caption">
                                     <p class="thumbnail-small-header">Contact Us</p>
@@ -368,10 +370,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="coming-soon.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/coming-soon.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/coming-soon.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/coming-soon.jpg);"></div>
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/coming-soon.jpg);"></div>
                                 </div>
                                 <div class="thumbnail-small-caption">
                                     <p class="thumbnail-small-header">Coming Soon</p>
@@ -380,10 +382,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="maintenance.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/maintenance.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/maintenance.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/maintenance.jpg);"></div>
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/maintenance.jpg);"></div>
                                 </div>
                                 <div class="thumbnail-small-caption">
                                     <p class="thumbnail-small-header">Maintenance</p>
@@ -392,10 +394,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="503.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/503.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/503.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/503.jpg);"></div>
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/503.jpg);"></div>
                                 </div>
                                 <div class="thumbnail-small-caption">
                                     <p class="thumbnail-small-header">503</p>
@@ -404,10 +406,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="404.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/404.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/404.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/404.jpg);"></div>
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/404.jpg);"></div>
                                 </div>
                                 <div class="thumbnail-small-caption">
                                     <p class="thumbnail-small-header">404</p>
@@ -416,10 +418,10 @@
                         </div>
                         <div class="isotope-item"><a class="thumbnail-small" href="privacy-policy.html">
                                 <div class="thumbnail-small-image"
-                                    style="background-image: url(images/layout-panel/privacy-policy.jpg);"></div>
+                                    style="background-image: url({{asset('public/frontend')}}/images/layout-panel/privacy-policy.jpg);"></div>
                                 <div class="thumbnail-small-hover-media">
                                     <div class="thumbnail-small-hover-image"
-                                        style="background-image: url(images/layout-panel/privacy-policy.jpg);">
+                                        style="background-image: url({{asset('public/frontend')}}/images/layout-panel/privacy-policy.jpg);">
                                     </div>
                                 </div>
                                 <div class="thumbnail-small-caption">

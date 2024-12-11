@@ -6,7 +6,7 @@
                 <h3 class="heading-square fw-sbold" data-item=".heading-square-item"><span
                         class="heading-square-item"></span>Latest Properties</h3><a class="post-minimal"
                     href="single-property.html">
-                    <div class="post-minimal-image"><img src="images/post-minimal-01-161x136.jpg" alt=""
+                    <div class="post-minimal-image"><img src="{{asset('public/frontend')}}/images/post-minimal-01-161x136.jpg" alt=""
                             width="161" height="136" />
                     </div>
                     <div class="post-minimal-body">
@@ -14,7 +14,7 @@
                         <div class="post-minimal-text"><span>From $120/month</span></div>
                     </div>
                 </a><a class="post-minimal" href="single-property.html">
-                    <div class="post-minimal-image"><img src="images/post-minimal-02-161x136.jpg" alt=""
+                    <div class="post-minimal-image"><img src="{{asset('public/frontend')}}/images/post-minimal-02-161x136.jpg" alt=""
                             width="161" height="136" />
                     </div>
                     <div class="post-minimal-body">
