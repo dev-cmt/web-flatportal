@@ -39,9 +39,10 @@
     <div class="page">
         @include('layouts.partial.frontend-header')
 
-        @if (Route::currentRouteName() == '/')
+        @if (Route::currentRouteName() == 'home')
             @include('layouts.partial.frontend-slider')
         @endif
+        
         {{ $slot }}
 
         

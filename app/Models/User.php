@@ -21,7 +21,6 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
-        'unique_id',
         'name',
         'email',
         'password',
@@ -35,16 +34,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'status',
     ];
 
-
-    public function mastNationality()
-    {
-        return $this->belongsTo(MastNationality::class);
-    }
-
-    public function generalProfile()
-    {
-        return $this->hasOne(GeneralProfile::class, 'patient_id');
-    }
 
 
 

@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('unique_id')->nullable();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -24,8 +23,6 @@ return new class extends Migration
             
             $table->string('phone')->nullable();
             $table->text('profile_images')->nullable();
-            $table->unsignedBigInteger('store_id')->nullable();
-            $table->unsignedBigInteger('customer_group_id')->nullable();
             $table->boolean('is_admin')->default(false);
             $table->boolean('status')->default(true);
             $table->timestamps();
