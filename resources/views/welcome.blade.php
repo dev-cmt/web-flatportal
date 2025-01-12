@@ -602,7 +602,7 @@
         </div>
     </section>
     <!-- Subscribe to Our Newsletter-->
-    <section class="section parallax-container" data-parallax-img="{{asset('public/frontend')}}/images/bg-01-1920x653.jpg">
+    <section class="section parallax-container" data-parallax-img="images/bg-01-1920x653.jpg">
         <div class="parallax-content section-lg context-dark text-center bg-darkblue-2">
             <div class="container">
                 <div class="row justify-content-md-center">
@@ -643,5 +643,6 @@
                         height="35" /></a></div>
         </div>
     </section>
+    
 
 </x-frontend-layout>

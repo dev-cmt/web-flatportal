@@ -43,9 +43,11 @@
             @include('layouts.partial.frontend-slider')
         @endif
         {{ $slot }}
+
+        
+        @include('layouts.partial.frontend-footer')
     </div>
 
-    @include('layouts.partial.frontend-footer')
 
     @include('layouts.partial.frontend-theme-settings')
 
@@ -55,13 +57,6 @@
     
     @stack('scripts')
 
-
-    <script>
-        var itemActionStoreUrl = '{{ route('item-action.store') }}';
-        var csrfToken = '{{ csrf_token() }}';
-        var loginUrl = '{{ route('login') }}';
-    </script>
-    <script src="{{ asset('public/frontend/js/ajax.min.js') }}"></script>
 
 </body>
 </html>
