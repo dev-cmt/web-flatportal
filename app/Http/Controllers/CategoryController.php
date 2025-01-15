@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Ecommerce;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
-use App\Models\Ecommerce\Category;
+use App\Models\Category;
 use Illuminate\Validation\Rule;
 use App\Helpers\ImageHelper;
 
