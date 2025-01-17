@@ -23,19 +23,26 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'name',
         'email',
+        'phone',
         'password',
         'email_verified_at',
         'provider', 
         'provider_id',
 
-        'phone',
+        'type',
         'profile_images',
         'is_admin',
         'status',
     ];
 
 
+    public function properties() {
+        return $this->hasMany(Property::class, 'agent_id');
+    }
 
+    public function otherInformation() {
+        return $this->hasOne(OtherInformation::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

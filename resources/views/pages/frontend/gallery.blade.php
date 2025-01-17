@@ -1,0 +1,111 @@
+<x-frontend-layout :title="'Gallery'">
+    <!-- Breadcrumbs-->
+    <section class="breadcrumbs-custom bg-image context-dark" data-opacity="38" style="background-image: url({{asset('public/frontend')}}/images/breadcrumbs-bg-06-1922x427.jpg);">
+        <div class="container">
+            <h2 class="breadcrumbs-custom-title">Gallery Grid</h2>
+        </div>
+    </section>
+    <section class="section-xs bg-white">
+        <div class="container">
+            <ul class="breadcrumbs-custom-path">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Pages</a></li>
+                <li class="active">Gallery</li>
+            </ul>
+        </div>
+    </section>
+    <div class="divider-section"></div>
+    <section class="section section-md bg-gray-12 oh text-center">
+        <div class="container isotope-wrap">
+            <!-- Isotope Filters-->
+            <div class="isotope-filters isotope-filters-line">
+                <ul class="isotope-filters-list" id="isotope-filters">
+                    <li><a class="active" data-isotope-filter="*" href="#">All</a></li>
+                    <li><a data-isotope-filter="for-sale" href="#">For Sale</a></li>
+                    <li><a data-isotope-filter="for-rent" href="#">For Rent</a></li>
+                </ul>
+            </div>
+            <!-- Isotope Content-->
+            <div class="isotope row row-50" data-isotope-layout="fitRows">
+                <div class="col-sm-6 col-md-4 isotope-item" data-filter="for-sale">
+                    <!-- Product Modern--><a class="product-modern" href="single-property.html">
+                        <div class="product-modern-media">
+                            <figure class="product-modern-figure"><img class="product-modern-image"
+                                    src="{{asset('public/frontend')}}/images/gallery-grid-1-370x230.jpg" alt="" width="370" height="230" />
+                            </figure>
+                            <div class="product-modern-overlay"></div>
+                        </div>
+                        <div class="product-modern-caption">
+                            <h5 class="product-modern-title">401 Biscayne Boulevard, Miami</h5>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-4 isotope-item" data-filter="for-sale">
+                    <!-- Product Modern--><a class="product-modern" href="single-property.html">
+                        <div class="product-modern-media">
+                            <figure class="product-modern-figure"><img class="product-modern-image"
+                                    src="{{asset('public/frontend')}}/images/gallery-grid-2-370x230.jpg" alt="" width="370" height="230" />
+                            </figure>
+                            <div class="product-modern-overlay"></div>
+                        </div>
+                        <div class="product-modern-caption">
+                            <h5 class="product-modern-title">923 Folsom St, San Francisco</h5>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-4 isotope-item" data-filter="for-rent">
+                    <!-- Product Modern--><a class="product-modern" href="single-property.html">
+                        <div class="product-modern-media">
+                            <figure class="product-modern-figure"><img class="product-modern-image"
+                                    src="{{asset('public/frontend')}}/images/gallery-grid-3-370x230.jpg" alt="" width="370" height="230" />
+                            </figure>
+                            <div class="product-modern-overlay"></div>
+                        </div>
+                        <div class="product-modern-caption">
+                            <h5 class="product-modern-title">225 Maywood Dr, San Francisco</h5>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-4 isotope-item" data-filter="for-sale">
+                    <!-- Product Modern--><a class="product-modern" href="single-property.html">
+                        <div class="product-modern-media">
+                            <figure class="product-modern-figure"><img class="product-modern-image"
+                                    src="{{asset('public/frontend')}}/images/gallery-grid-4-370x230.jpg" alt="" width="370" height="230" />
+                            </figure>
+                            <div class="product-modern-overlay"></div>
+                        </div>
+                        <div class="product-modern-caption">
+                            <h5 class="product-modern-title">623 Willow Rd, Dallas</h5>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-4 isotope-item" data-filter="for-rent">
+                    <!-- Product Modern--><a class="product-modern" href="single-property.html">
+                        <div class="product-modern-media">
+                            <figure class="product-modern-figure"><img class="product-modern-image"
+                                    src="{{asset('public/frontend')}}/images/gallery-grid-5-370x230.jpg" alt="" width="370" height="230" />
+                            </figure>
+                            <div class="product-modern-overlay"></div>
+                        </div>
+                        <div class="product-modern-caption">
+                            <h5 class="product-modern-title">182 3rd St, Seattle</h5>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-4 isotope-item" data-filter="for-rent">
+                    <!-- Product Modern--><a class="product-modern" href="single-property.html">
+                        <div class="product-modern-media">
+                            <figure class="product-modern-figure"><img class="product-modern-image"
+                                    src="{{asset('public/frontend')}}/images/gallery-grid-6-370x230.jpg" alt="" width="370" height="230" />
+                            </figure>
+                            <div class="product-modern-overlay"></div>
+                        </div>
+                        <div class="product-modern-caption">
+                            <h5 class="product-modern-title">35 Pond St, New York</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</x-frontend-layout>

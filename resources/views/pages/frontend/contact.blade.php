@@ -1,166 +1,87 @@
 <x-frontend-layout :title="'Contact Us'">
-    <!-- breadcrumb area start -->
-    <section class="breadcrumb__area include-bg text-center pt-95 pb-50">
+    <!-- Breadcrumbs-->
+    <section class="breadcrumbs-custom bg-image context-dark" style="background-image: url({{asset('public/frontend')}}/images/breadcrumbs-bg-07-1920x420.jpg);">
         <div class="container">
-            <div class="row">
-                <div class="col-xxl-12">
-                    <div class="breadcrumb__content p-relative z-index-1">
-                        <h3 class="breadcrumb__title">Keep In Touch with Us</h3>
-                        <div class="breadcrumb__list">
-                            <span><a href="#">Home</a></span>
-                            <span>Contact</span>
+            <h2 class="breadcrumbs-custom-title">Contact Us</h2>
+        </div>
+    </section>
+    <section class="section-xs bg-white">
+        <div class="container">
+            <ul class="breadcrumbs-custom-path">
+                <li><a href="{{route('home')}}">Home</a></li>
+                <li class="active">Contact Us</li>
+            </ul>
+        </div>
+    </section>
+    <div class="divider-section"></div>
+    <section class="section section-lg bg-default">
+        <div class="container">
+            <div class="layout-bordered">
+                <div class="layout-bordered-aside">
+                    <div class="layout-bordered-aside-inner">
+                        <h2>Contact Details</h2>
+                        <p>If you have any questions, just fill in the contact form, and we will answer you shortly.
+                            If you are living nearby, come visit our office.</p>
+                        <div class="layout-bordered-aside-group">
+                            <dl class="list-terms-1">
+                                <dt>Client Support:</dt>
+                                <dd><span class="icon mdi-phone mdi"></span><a class="list-terms-1-link-big" href="tel:#">01909302126</a></dd>
+                            </dl>
+                            <dl class="list-terms-1">
+                                <dt>E-mail:</dt>
+                                <dd><span class="icon mdi mdi-email-outline"></span><a href="mailto:#">info@flatportal.org</a></dd>
+                            </dl>
+                            <dl class="list-terms-1">
+                                <dt>Main Office:</dt>
+                                <dd><span class="icon mdi mdi-map-marker"></span><a href="#">251/A Tejgaon I/A, Dhaka 1208</a></dd>
+                            </dl>
                         </div>
+                    </div>
+                </div>
+                <div class="layout-bordered-main">
+                    <div class="layout-bordered-main-inner">
+                        <h2>Get in Touch</h2>
+                        <!-- RD Mailform-->
+                        <form class="rd-form rd-mailform" method="POST" action="{{ route('contact.store') }}">
+                            @csrf
+                            <div class="row row-20">
+                                <div class="col-md-12">
+                                    <div class="form-wrap">
+                                        <input class="form-input" id="contact-name" type="text" name="name" required>
+                                        <label class="form-label" for="contact-name">Your Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-wrap">
+                                        <input class="form-input" id="contact-email" type="email" name="email" required>
+                                        <label class="form-label" for="contact-email">E-mail</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-wrap">
+                                        <input class="form-input" id="contact-phone" type="text" name="phone">
+                                        <label class="form-label" for="contact-phone">Phone</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-wrap">
+                                        <label class="form-label" for="contact-message">Message</label>
+                                        <textarea class="form-input" id="contact-message" name="message" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button class="button button-sm button-secondary" type="submit">Send message</button>
+                                </div>
+                            </div>
+                        </form>
+                        
+                        @if(session('success'))
+                            <div class="alert alert-success">{{ session('success') }}</div>
+                        @endif
+                        
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- breadcrumb area end -->
-
-
-    <!-- contact area start -->
-    <section class="tp-contact-area pb-100">
-        <div class="container">
-            <div class="tp-contact-inner">
-                <div class="row">
-                    <div class="col-xl-9 col-lg-8">
-                        <div class="tp-contact-wrapper">
-                            <h3 class="tp-contact-title">Sent A Message</h3>
-
-                            <div class="tp-contact-form">
-                                <form id="contact-form" action="https://template.wphix.com/shofy-prv/shofy/assets/mail.php"
-                                    method="POST">
-                                    <div class="tp-contact-input-wrapper">
-                                        <div class="tp-contact-input-box">
-                                            <div class="tp-contact-input">
-                                                <input name="name" id="name" type="text" placeholder="Shahnewaz Sakil">
-                                            </div>
-                                            <div class="tp-contact-input-title">
-                                                <label for="name">Your Name</label>
-                                            </div>
-                                        </div>
-                                        <div class="tp-contact-input-box">
-                                            <div class="tp-contact-input">
-                                                <input name="email" id="email" type="email" placeholder="shofy@mail.com">
-                                            </div>
-                                            <div class="tp-contact-input-title">
-                                                <label for="email">Your Email</label>
-                                            </div>
-                                        </div>
-                                        <div class="tp-contact-input-box">
-                                            <div class="tp-contact-input">
-                                                <input name="subject" id="subject" type="text"
-                                                    placeholder="Write your subject">
-                                            </div>
-                                            <div class="tp-contact-input-title">
-                                                <label for="subject">Subject</label>
-                                            </div>
-                                        </div>
-                                        <div class="tp-contact-input-box">
-                                            <div class="tp-contact-input">
-                                                <textarea id="message" name="message"
-                                                    placeholder="Write your message here..."></textarea>
-                                            </div>
-                                            <div class="tp-contact-input-title">
-                                                <label for="message">Your Message</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tp-contact-suggetions mb-20">
-                                        <div class="tp-contact-remeber">
-                                            <input id="remeber" type="checkbox">
-                                            <label for="remeber">Save my name, email, and website in this browser for the
-                                                next time I comment.</label>
-                                        </div>
-                                    </div>
-                                    <div class="tp-contact-btn">
-                                        <button type="submit">Send Message</button>
-                                    </div>
-                                </form>
-                                <p class="ajax-response"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4">
-                        <div class="tp-contact-info-wrapper">
-                            <div class="tp-contact-info-item">
-                                <div class="tp-contact-info-icon">
-                                    <span>
-                                        <img src="{{asset('public/frontend')}}/img/contact/contact-icon-1.png" alt="">
-                                    </span>
-                                </div>
-                                <div class="tp-contact-info-content">
-                                    <p data-info="mail"><a
-                                            href="https://template.wphix.com/cdn-cgi/l/email-protection#e4878b8a90858790a4978c8b829dca878b89"><span
-                                                class="__cf_email__"
-                                                data-cfemail="4d2e2223392c2e390d3e25222b34632e2220">[email&#160;protected]</span></a>
-                                    </p>
-                                    <p data-info="phone"><a href="tel:670-413-90-762">+670 413 90 762</a></p>
-                                </div>
-                            </div>
-                            <div class="tp-contact-info-item">
-                                <div class="tp-contact-info-icon">
-                                    <span>
-                                        <img src="{{asset('public/frontend')}}/img/contact/contact-icon-2.png" alt="">
-                                    </span>
-                                </div>
-                                <div class="tp-contact-info-content">
-                                    <p>
-                                        <a href="https://www.google.com/maps/place/New+York,+NY,+USA/@40.6976637,-74.1197638,11z/data=!3m1!4b1!4m6!3m5!1s0x89c24fa5d33f083b:0xc80b8f06e177fe62!8m2!3d40.7127753!4d-74.0059728!16zL20vMDJfMjg2"
-                                            target="_blank">
-                                            84 sleepy hollow st. <br> jamaica, New York 1432
-                                        </a>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="tp-contact-info-item">
-                                <div class="tp-contact-info-icon">
-                                    <span>
-                                        <img src="{{asset('public/frontend')}}/img/contact/contact-icon-3.png" alt="">
-                                    </span>
-                                </div>
-                                <div class="tp-contact-info-content">
-                                    <div class="tp-contact-social-wrapper mt-5">
-                                        <h4 class="tp-contact-social-title">Find on social media</h4>
-
-                                        <div class="tp-contact-social-icon">
-                                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                                            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- contact area end -->
-
-    <!-- map area start -->
-    <section class="tp-map-area pb-120">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="tp-map-wrapper">
-                        <div class="tp-map-hotspot">
-                            <span class="tp-hotspot tp-pulse-border">
-                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="6" cy="6" r="6" fill="#821F40" />
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="tp-map-iframe">
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830894612!2d-74.11976383964465!3d40.69766374865766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1678114595329!5m2!1sen!2sbd"></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- map area end -->
 </x-frontend-layout>

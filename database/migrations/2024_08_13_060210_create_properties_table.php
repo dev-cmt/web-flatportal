@@ -13,15 +13,21 @@ return new class extends Migration
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
-            $table->enum('property_status', ['For Sale', 'For Rent']);
-            $table->string('property_type');
-            $table->string('property_condition');
-            $table->year('built_year')->nullable();
-            $table->string('dimension')->nullable();
-            $table->string('country');
-            $table->string('city');
-            $table->string('location');
-            $table->string('phases');
+            $table->string('property_name')->nullable();
+            $table->decimal('area_size', 10, 2)->nullable();
+            $table->decimal('price', 10, 2)->nullable();
+            $table->integer('bedroom_count')->nullable();
+            $table->integer('dining_room_count')->nullable();
+            $table->integer('bathroom_count')->nullable();
+            $table->integer('balcony_count')->nullable();
+            $table->json('other_features')->nullable();
+            $table->text('description')->nullable();
+            $table->string('image_path')->nullable();
+            $table->string('video_path')->nullable();
+            $table->string('floor_plan_path')->nullable();
+            $table->string('pdf_path')->nullable();
+            $table->string('phases')->nullable();
+            $table->foreignId('agent_id')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
         });
     }

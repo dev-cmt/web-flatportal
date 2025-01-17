@@ -50,11 +50,14 @@
                                     </ul>
                                 </div>
                                 <div class="tab-pane fade" id="tabs-1-3">
-                                    <p>Our mission is to be the most successful real estate firm in the local states and beyond.</p>
-                                    <p>Real Estate incorporates proven, professional state of-the-art techniques specializing in the marketing, listing and selling of new and resale luxury homes.</p>
+                                    <p>Our mission is to be the most successful real estate firm in the local states
+                                        and beyond.</p>
+                                    <p>Real Estate incorporates proven, professional state of-the-art techniques
+                                        specializing in the marketing, listing and selling of new and resale luxury
+                                        homes.</p>
                                 </div>
                             </div>
-                        </div><a class="button button-sm button-secondary" href="{{route('contact')}}">Get in Touch</a>
+                        </div><a class="button button-sm button-secondary" href="contact-us.html">Get in Touch</a>
                     </div>
                 </div>
             </article>
@@ -78,7 +81,8 @@
                     <article class="box-modern"><span class="icon box-modern-icon fl-bigmug-line-wallet26"></span>
                         <div class="box-modern-main">
                             <h4 class="box-modern-title">No Commission</h4>
-                            <p>Opportunity to acquire a quality apartment for rent without having to pay any commission.</p>
+                            <p>Opportunity to acquire a quality apartment for rent without having to pay any
+                                commission.</p>
                         </div>
                     </article>
                 </div>
@@ -87,7 +91,8 @@
                     <article class="box-modern"><span class="icon box-modern-icon fl-bigmug-line-search74"></span>
                         <div class="box-modern-main">
                             <h4 class="box-modern-title">View Apartments</h4>
-                            <p>View apartment listings with photos, HD videos, virtual tours, 3D floor plans etc.</p>
+                            <p>View apartment listings with photos, HD videos, virtual tours, 3D floor plans etc.
+                            </p>
                         </div>
                     </article>
                 </div>
@@ -100,8 +105,8 @@
             <h2 class="heading-decoration-1"><span class="heading-inner">Our Agents</span></h2>
             <div class="row row-30">
                 <div class="col-sm-6 col-lg-3">
-                    <!-- Block Agent-->
-                    <a class="block-agent" href="agent-single-page.html"><img src="{{asset('public/frontend')}}/images/agents-01-540x460.jpg" alt="" width="540" height="460" />
+                    <!-- Block Agent--><a class="block-agent" href="agent-single-page.html"><img
+                            src="{{asset('public/frontend')}}/images/agents-01-540x460.jpg" alt="" width="540" height="460" />
                         <div class="block-agent-body">
                             <h3 class="block-agent-title">Michael Rutter</h3>
                             <p>Certified Real Estate Broker</p>

@@ -3,15 +3,14 @@
     <section class="breadcrumbs-custom bg-image context-dark" data-opacity="37"
         style="background-image: url({{asset('public/frontend')}}/images/breadcrumbs-bg-06-1922x427.jpg);">
         <div class="container">
-            <h2 class="breadcrumbs-custom-title">Properties Grid #2</h2>
+            <h2 class="breadcrumbs-custom-title">Properties</h2>
         </div>
     </section>
     <section class="section-xs bg-white">
         <div class="container">
             <ul class="breadcrumbs-custom-path">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#">Properties</a></li>
-                <li class="active">Properties Grid #2</li>
+                <li><a href="{{route('home')}}">Home</a></li>
+                <li>Properties</li>
             </ul>
         </div>
     </section>
@@ -480,64 +479,60 @@
                         <div class="col-md-6 col-lg-12">
                             <div class="block-info bg-default">
                                 <h3>Mortgage Calculator</h3>
-                                <form class="rd-mailform form-select" data-form-output="form-output-global"
-                                    data-form-type="contact" method="post" action="bat/rd-mailform.php">
+                                <form class="rd-mailform form-select" method="POST" action="{{ route('mortgage.store') }}">
+                                    @csrf
                                     <div class="form-wrap">
-                                        <input class="form-input" id="contact-1-name" type="text" name="name">
+                                        <input class="form-input" id="contact-1-name" type="number" step="0.01" name="home_value" required>
                                         <label class="form-label" for="contact-1-name">Home Value</label>
                                     </div>
                                     <div class="form-wrap form-wrap-validation">
-                                        <select class="form-input select-filter" data-style="modern"
-                                            data-placeholder="Loan Amount"
-                                            data-minimum-results-for-search="Infinity">
-                                            <option label="placeholder"></option>
-                                            <option value="2">50000</option>
-                                            <option value="3">100000</option>
-                                            <option value="4">200000</option>
-                                            <option value="5">500000</option>
-                                            <option value="6">1000000</option>
-                                            <option value="7">1500000</option>
+                                        <select class="form-input select-filter" name="loan_amount" required>
+                                            <option value="">Loan Amount</option>
+                                            <option value="50000">50,000</option>
+                                            <option value="100000">100,000</option>
+                                            <option value="200000">200,000</option>
+                                            <option value="500000">500,000</option>
+                                            <option value="1000000">1,000,000</option>
+                                            <option value="1500000">1,500,000</option>
                                         </select>
                                     </div>
                                     <div class="form-wrap form-wrap-validation">
-                                        <select class="form-input select-filter" data-style="modern"
-                                            data-placeholder="Term (Years)"
-                                            data-minimum-results-for-search="Infinity">
-                                            <option label="placeholder"></option>
-                                            <option value="2">10</option>
-                                            <option value="3">15</option>
-                                            <option value="4">20</option>
-                                            <option value="5">25</option>
-                                            <option value="6">30</option>
-                                            <option value="7">40</option>
+                                        <select class="form-input select-filter" name="term_years" required>
+                                            <option value="">Term (Years)</option>
+                                            <option value="10">10</option>
+                                            <option value="15">15</option>
+                                            <option value="20">20</option>
+                                            <option value="25">25</option>
+                                            <option value="30">30</option>
+                                            <option value="40">40</option>
                                         </select>
                                     </div>
                                     <div class="form-wrap form-wrap-validation">
-                                        <select class="form-input select-filter" data-style="modern"
-                                            data-placeholder="Interest Rate in %"
-                                            data-minimum-results-for-search="Infinity">
-                                            <option label="placeholder"></option>
-                                            <option value="2">0.1%</option>
-                                            <option value="3">0.3%</option>
-                                            <option value="4">0.5%</option>
-                                            <option value="5">0.7%</option>
-                                            <option value="6">0.9%</option>
-                                            <option value="7">1%</option>
+                                        <select class="form-input select-filter" name="interest_rate" required>
+                                            <option value="">Interest Rate (%)</option>
+                                            <option value="0.1">0.1%</option>
+                                            <option value="0.3">0.3%</option>
+                                            <option value="0.5">0.5%</option>
+                                            <option value="0.7">0.7%</option>
+                                            <option value="0.9">0.9%</option>
+                                            <option value="1.0">1.0%</option>
                                         </select>
                                     </div>
-                                    <ul class="form-wrap-list">
-                                        <li>Financed Amount: <span>0</span>
-                                        </li>
-                                        <li>Mortgage Payments: <span>0</span>
-                                        </li>
-                                        <li>Annual Cost of Loan: <span>0</span>
-                                        </li>
-                                    </ul>
                                     <div class="form-button">
-                                        <button class="button button-block button-secondary"
-                                            type="submit">Calculate</button>
+                                        <button class="button button-block button-secondary" type="submit">Calculate</button>
                                     </div>
                                 </form>
+                            
+                                @if(session('mortgage'))
+                                    <div class="mt-4">
+                                        <h3>Calculation Results:</h3>
+                                        <ul>
+                                            <li>Financed Amount: ${{ number_format(session('mortgage')->financed_amount, 2) }}</li>
+                                            <li>Mortgage Payments: ${{ number_format(session('mortgage')->mortgage_payments, 2) }} / month</li>
+                                            <li>Annual Cost of Loan: ${{ number_format(session('mortgage')->annual_cost_of_loan, 2) }}</li>
+                                        </ul>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

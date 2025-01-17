@@ -54,15 +54,15 @@
                                 </tr>
                             </thead>
                             <tbody id="product-list">
-                                @foreach ($products as $product)
+                                @foreach ($property as $item)
                                     <tr data-id="{{ $product->id }}">
-                                        <td>{{ $product->id }}</td>
-                                        <td>{{ $product->product_name }}</td>
-                                        <td>{{ $product->sku_code }}</td>
-                                        <td>{{ $product->category->category_name }}</td>
-                                        <td>{{ $product->brand->brand_name ?? 'No Brand'}}</td>
-                                        <td>{{ $product->price }}</td>
-                                        <td>{{ $product->status === 'active' ? 'Active' : 'Inactive' }}</td>
+                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->product_name }}</td>
+                                        <td>{{ $item->sku_code }}</td>
+                                        <td>{{ $item->category->category_name }}</td>
+                                        <td>{{ $item->brand->brand_name ?? 'No Brand'}}</td>
+                                        <td>{{ $item->price }}</td>
+                                        <td>{{ $item->status === 'active' ? 'Active' : 'Inactive' }}</td>
                                         <td>
                                             <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-primary edit-category">Edit</a>
                                             <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm btn-info show-category">Show</a>

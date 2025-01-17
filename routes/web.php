@@ -3,16 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Response;
 
+use App\Http\Controllers\Auth\SocialAuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Auth\SocialAuthController;
-use App\Http\Controllers\Ecommerce\CategoryController;
-use App\Http\Controllers\Ecommerce\BrandController;
-use App\Http\Controllers\Ecommerce\ColorController;
-use App\Http\Controllers\Ecommerce\ProductController;
-use App\Http\Controllers\Ecommerce\OrderController;
-use App\Http\Controllers\Ecommerce\ShippingController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PropertyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,8 +25,10 @@ Route::get('/properties', [HomeController::class, 'properties'])->name('properti
 Route::get('/properties-details/{id}/{url_slug}', [HomeController::class, 'propertiesDetails'])->name('properties-details');
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
 Route::get('/blog-details', [HomeController::class, 'blogDetails'])->name('blog-details');
-Route::get('/coupon', [HomeController::class, 'coupon'])->name('coupon');
+Route::get('/agents', [HomeController::class, 'agents'])->name('agents');
+Route::get('/gallery', [HomeController::class, 'gallery'])->name('gallery');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::post('/contact-store', [ContactController::class, 'store'])->name('contact.store');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 
 
@@ -40,20 +39,8 @@ Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('p
 Route::get('/terms-condition', [HomeController::class, 'termsCondition'])->name('terms-condition');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/cart', [HomeController::class, 'cart'])->name('cart');
-    Route::get('/checkout', [HomeController::class, 'checkout'])->name('checkout');
-    Route::get('/wishlist', [HomeController::class, 'wishlist'])->name('wishlist');
-    Route::get('/compare', [HomeController::class, 'compare'])->name('compare');
-    Route::post('/item-action/store', [HomeController::class, 'itemActionStore'])->name('item-action.store');
-
-
-    Route::get('/order-complete.', [HomeController::class, 'orderComplete.'])->name('order-complete');
-    Route::get('/order-history', [HomeController::class, 'orderHistory.'])->name('order-history');
-    Route::get('/order-details.', [HomeController::class, 'orderDetails.'])->name('order-details');
-    Route::get('/order-track', [HomeController::class, 'orderTrack.'])->name('order-track');
-
     Route::get('/user-profile', [HomeController::class, 'userProfile'])->name('user-profile');
-    Route::get('/get-carts', [HomeController::class, 'getCarts'])->name('get-carts');
+    Route::get('/wishlist', [HomeController::class, 'wishlist'])->name('wishlist');
 });
 
 Route::get('/app-download', function () {
@@ -89,44 +76,20 @@ Route::group(['middleware' => ['auth']], function() {
 });
 
 /**-------------------------------------------------------------------------
- * KEY : ECOMMERCE
+ * KEY : FLATPORTAL
  * -------------------------------------------------------------------------
  */
 
 Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::resource('categories', CategoryController::class);
-    Route::resource('brands', BrandController::class);
-    Route::resource('colors', ColorController::class);
 
-    //--------------------ProductController
-    Route::resource('products', ProductController::class);
-    Route::post('products/{id}/add-variant', [ProductController::class, 'addVariant'])->name('products.addVariant');
-    Route::post('products/{id}/add-image', [ProductController::class, 'addImage'])->name('products.addImage');
-    Route::post('products/{id}/add-detail', [ProductController::class, 'addDetail'])->name('products.addDetail');
-    Route::post('products/{id}/add-specification', [ProductController::class, 'addSpecification'])->name('products.addSpecification');
-    Route::post('products/{id}/add-review', [ProductController::class, 'addReview'])->name('products.addReview');
-    Route::delete('products/{id}/product-images', [ProductController::class, 'productImagesDestroy'])->name('product-images.destroy');
-    Route::delete('products/{id}/product-variant', [ProductController::class, 'productVariantDestroy'])->name('product-variant.destroy');
-    Route::delete('products/{id}/product-specification', [ProductController::class, 'productSpecificationDestroy'])->name('product-specification.destroy');
-    Route::delete('products/{id}/product-detail', [ProductController::class, 'productDetailDestroy'])->name('product-detail.destroy');
+    //--------------------PropertyController
+    Route::resource('property', PropertyController::class);
+    Route::post('property/{id}/add-image', [PropertyController::class, 'addImage'])->name('property.addImage');
+    Route::delete('property/{id}/remove-images', [PropertyController::class, 'productImagesDestroy'])->name('property-images.destroy');
 
-
-    //--------------------OrderController
-    Route::resource('orders', OrderController::class);
-    Route::get('/order-index', [OrderController::class, 'orderIndex'])->name('order.index');
-    Route::get('/order-details', [OrderController::class, 'orderDetailsView'])->name('order.details');
-});
-
-Route::prefix('shipping')->middleware(['auth', 'verified'])->group(function () {
-    // -----------------------------
-    // Shipping Methods Routes
-    // -----------------------------
-    Route::get('methods', [ShippingController::class, 'index'])->name('shipping-methods.index'); // List all shipping methods
-    Route::post('methods', [ShippingController::class, 'store'])->name('shipping-methods.store'); // Store a new shipping method
-    Route::get('methods/{shippingMethod}/edit', [ShippingController::class, 'edit'])->name('shipping-methods.edit'); // Show form to edit a shipping method
-    Route::delete('methods/{shippingMethod}', [ShippingController::class, 'destroy'])->name('shipping-methods.destroy'); // Delete a shipping method
-
-    Route::delete('zones/{id}', [ShippingController::class, 'destroyZone'])->name('shipping-zones.destroy');
+    //--------------------PropertyCalculation
+    Route::post('/mortgage-store', [PropertyController::class, 'storeMortgage'])->name('mortgage.store');
 });
 
 

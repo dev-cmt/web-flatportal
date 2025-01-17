@@ -12,14 +12,12 @@
                     <ul class="list-inline-bordered heading-7">
                         <li>
                             <label>
-                                <input name="input-group-radio" value="radio-1" type="radio" checked><span>For
-                                    Rent</span>
+                                <input name="input-group-radio" value="radio-1" type="radio" checked><span>For Rent</span>
                             </label>
                         </li>
                         <li>
                             <label>
-                                <input name="input-group-radio" value="radio-2" type="radio"><span>For
-                                    sale</span>
+                                <input name="input-group-radio" value="radio-2" type="radio"><span>For sale</span>
                             </label>
                         </li>
                     </ul>
