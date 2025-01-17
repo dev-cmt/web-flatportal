@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('floor_plan_path')->nullable();
             $table->string('pdf_path')->nullable();
             $table->string('phases')->nullable();
+            $table->enum('status', ['Published', 'Unpublished', 'Draft'])->default('Draft');
             $table->foreignId('agent_id')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
         });

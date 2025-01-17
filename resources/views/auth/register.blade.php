@@ -28,13 +28,13 @@
 
             <div class="form-wrap">
                 <div class="button-group">
-                    <a class="button button-facebook button-icon button-icon-only"  href="{{ route('social.login', 'facebook') }}" aria-label="Facebook">
+                    <a class="button button-facebook button-icon button-icon-only mx-2"  href="{{ route('social.login', 'facebook') }}" aria-label="Facebook">
                         <span class="icon mdi mdi mdi-facebook"></span>
                     </a>
                     {{-- <a class="button button-twitter button-icon button-icon-only" href="#" aria-label="Twitter">
                         <span class="icon mdi mdi-twitter"></span>
                     </a> --}}
-                    <a class="button button-google button-icon button-icon-only" href="{{ route('social.login', 'google') }}" aria-label="Google+">
+                    <a class="button button-google button-icon button-icon-only mx-2" href="{{ route('social.login', 'google') }}" aria-label="Google+">
                         <span class="icon mdi mdi-google"></span>
                     </a>
                 </div>

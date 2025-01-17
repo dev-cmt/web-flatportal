@@ -18,123 +18,39 @@
     @endpush
 
     <div class="container">
-        <!-- Product Details -->
-        <div class="card mb-4">
+        <div class="card">
             <div class="card-header">
-                <h5 class="card-title">{{ $product->product_name }}</h5>
+                <h4>Property Details</h4>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <!-- Product Image -->
-                    <div class="col-md-4">
-                        <img src="{{ asset('public/images/product/'.$product->img_path) }}" alt="{{ $product->product_name }}" class="product-image">
+                <!-- Property Details -->
+                <h5>Property Title: {{ $property->property_name }}</h5>
+                <p><strong>Area Size:</strong> {{ $property->area_size }} sq ft</p>
+                <p><strong>Price:</strong> ${{ number_format($property->price, 2) }}</p>
+                <p><strong>Bedrooms:</strong> {{ $property->bedroom_count }}</p>
+                <p><strong>Bathrooms:</strong> {{ $property->bathroom_count }}</p>
+                <p><strong>Dining Rooms:</strong> {{ $property->dining_room_count }}</p>
+                <p><strong>Balcony Count:</strong> {{ $property->balcony_count }}</p>
+                <p><strong>Description:</strong> {!! old('description', $property->description ?? null) !!}</p>
+    
+                <!-- Property Address -->
+                <h6>Property Address:</h6>
+                <p><strong>Country:</strong> {{ $property->propertyAddress->country }}</p>
+                <p><strong>City:</strong> {{ $property->propertyAddress->city }}</p>
+                <p><strong>Location:</strong> {{ $property->propertyAddress->location }}</p>
+                <p><strong>Property Status:</strong> {{ $property->propertyAddress->property_status }}</p>
+                <p><strong>Property Type:</strong> {{ $property->propertyAddress->property_type }}</p>
+                <p><strong>Condition:</strong> {{ $property->propertyAddress->property_condition }}</p>
+                <p><strong>Built Year:</strong> {{ $property->propertyAddress->built_year }}</p>
+    
+                <!-- Property Images -->
+                <h6>Property Images:</h6>
+                @foreach ($property->propertyImages as $image)
+                    <div class="mb-3">
+                        <img src="{{ asset('storage/' . $image->image_path) }}" alt="Property Image" width="200">
+                        <p>{{ $image->image_path }}</p>
                     </div>
-                    <!-- Product Description -->
-                    <div class="col-md-8">
-                        <h6>Description</h6>
-                        <p>{!! $product->description !!}</p>
-                        <hr>
-                        <h6>Price: ${{ number_format($product->price, 2) }}</h6>
-                        @if($product->discount)
-                            <p>Discount: {{ $product->discount }}%</p>
-                        @endif
-                        <hr>
-                        <h6>Manufacturer: {{ $product->manufacturer_name }}</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Product Gallery Images -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5 class="card-title">Product Gallery</h5>
-            </div>
-            <div class="card-body product-gallery">
-                @foreach($product->galleryImages as $image)
-                    <img src="{{ asset('public/images/product/gallery/'.$image->path) }}" alt="Gallery Image">
                 @endforeach
-            </div>
-        </div>
-
-        <!-- Product Variants -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5 class="card-title">Variants</h5>
-            </div>
-            <div class="card-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Image</th>
-                            <th>Color</th>
-                            <th>Size</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($product->variants as $variant)
-                            <tr>
-                                <td><img src="{{ asset('public/images/product/variants/'.$variant->img_path) }}" alt="Variant Image" class="product-image"></td>
-                                <td>{{ $variant->color }}</td>
-                                <td>{{ $variant->size }}</td>
-                                <td>${{ number_format($variant->price, 2) }}</td>
-                                <td>{{ $variant->quantity }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Product Specifications -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5 class="card-title">Specifications</h5>
-            </div>
-            <div class="card-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Specification Name</th>
-                            <th>Specification Value</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($product->specifications as $specification)
-                            <tr>
-                                <td>{{ $specification->specification_name }}</td>
-                                <td>{{ $specification->specification_value }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Product Details -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5 class="card-title">Details</h5>
-            </div>
-            <div class="card-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Detail Name</th>
-                            <th>Detail Value</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($product->details as $detail)
-                            <tr>
-                                <td>{{ $detail->detail_name }}</td>
-                                <td>{{ $detail->detail_value }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>

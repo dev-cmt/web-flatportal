@@ -15,7 +15,7 @@ class Property extends Model
         'property_name', 'area_size', 'price', 'bedroom_count',
         'dining_room_count', 'bathroom_count', 'balcony_count',
         'other_features', 'description', 'image_path',
-        'video_path', 'floor_plan_path', 'pdf_path', 'phases', 'agent_id'
+        'video_path', 'floor_plan_path', 'pdf_path', 'phases', 'status', 'agent_id'
     ];
 
     protected $casts = [
@@ -26,11 +26,11 @@ class Property extends Model
         return $this->belongsTo(User::class, 'agent_id');
     }
 
-    public function address() {
+    public function propertyAddress() {
         return $this->hasOne(PropertyAddress::class);
     }
 
-    public function images() {
+    public function propertyImages() {
         return $this->hasMany(PropertyImage::class);
     }
 }

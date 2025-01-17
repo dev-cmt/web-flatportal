@@ -43,22 +43,88 @@
 
     <form action="{{ route('property.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="product_id" id="product_id" value="{{ old('product_id', $property->id ?? null) }}">
+        <input type="hidden" name="property_id" id="property_id" value="{{ old('property_id', $property->id ?? null) }}">
         <div class="row">
             <div class="col-lg-8">
                 <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Property Information</h5>
+                    </div>
                     <div class="card-body">
+                        <!-- Property Title -->
                         <div class="mb-3">
-                            <label class="form-label" for="product_name">Property Title</label>
-                            <input type="text" name="product_name" id="product_name" class="form-control @error('product_name') is-invalid @enderror" placeholder="Enter Property title" value="{{ old('product_name', $property->product_name ?? null) }}" required>
-                            @error('product_name')
+                            <label class="form-label" for="property_name">Property Title</label>
+                            <input type="text" name="property_name" id="property_name" class="form-control @error('property_name') is-invalid @enderror" placeholder="Enter Property Title" value="{{ old('property_name', $property->property_name ?? '') }}" required>
+                            @error('property_name')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
+                        <!-- Area Size & Price -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label" for="area_size">Area Size (sq ft)</label>
+                                    <input type="number" name="area_size" id="area_size" class="form-control" placeholder="Enter Area Size" value="{{ old('area_size', $property->area_size ?? '') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label" for="price">Price (৳)</label>
+                                    <input type="number" name="price" id="price" class="form-control" placeholder="Enter Price" value="{{ old('price', $property->price ?? '') }}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bedrooms, Bathrooms, Dining & Balcony Count -->
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label" for="bedroom_count">Bedrooms</label>
+                                    <input type="number" name="bedroom_count" id="bedroom_count" class="form-control" value="{{ old('bedroom_count', $property->bedroom_count ?? '') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label" for="bathroom_count">Bathrooms</label>
+                                    <input type="number" name="bathroom_count" id="bathroom_count" class="form-control" value="{{ old('bathroom_count', $property->bathroom_count ?? '') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label" for="dining_room_count">Dining Rooms</label>
+                                    <input type="number" name="dining_room_count" id="dining_room_count" class="form-control" value="{{ old('dining_room_count', $property->dining_room_count ?? '') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label" for="balcony_count">Balconies</label>
+                                    <input type="number" name="balcony_count" id="balcony_count" class="form-control" value="{{ old('balcony_count', $property->balcony_count ?? '') }}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- Upload Floor Plan -->
+                                <div class="mb-3">
+                                    <label class="form-label" for="floor_plan_path">Upload Floor Plan</label>
+                                    <input type="file" name="floor_plan_path" id="floor_plan_path" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <!-- Upload Property PDF -->
+                                <div class="mb-3">
+                                    <label class="form-label" for="pdf_path">Upload Property Brochure (PDF)</label>
+                                    <input type="file" name="pdf_path" id="pdf_path" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        
+
                         <div class="mb-3">
-                            <label for="product_description">Property Description</label>
-                            <div id="product_description" class="snow-editor" style="height: 300px;">
+                            <label for="property_description">Property Description</label>
+                            <div id="property_description" class="snow-editor" style="height: 300px;">
                                 {!! old('description', $property->description ?? null) !!}
                             </div>
                             <input type="hidden" name="description" id="description" value="{{ old('description', $property->description ?? null) }}">
@@ -67,6 +133,140 @@
                     </div>
                 </div>
                 <!-- end card -->
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Property Address</Address></h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Property Status -->
+                        <div class="mb-3">
+                            <label class="form-label" for="property_status">Property Status</label>
+                            <select name="property_status" id="property_status" class="form-control" required>
+                                <option value="">Select Status</option>
+                                <option value="For Sale" {{ old('property_status', $propertyAddress->property_status ?? '') == 'For Sale' ? 'selected' : '' }}>For Sale</option>
+                                <option value="For Rent" {{ old('property_status', $propertyAddress->property_status ?? '') == 'For Rent' ? 'selected' : '' }}>For Rent</option>
+                            </select>
+                        </div>
+
+                        <!-- Property Type & Condition -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- Property Type Dropdown -->
+                                <div class="mb-3">
+                                    <label class="form-label" for="property_type">Property Type</label>
+                                    <select name="property_type" id="property_type" class="form-control form-select">
+                                        <option value="">Select Property Type</option>
+                                        <option value="Apartment" {{ old('property_type', $propertyAddress->property_type ?? '') == 'Apartment' ? 'selected' : '' }}>Apartment</option>
+                                        <option value="House" {{ old('property_type', $propertyAddress->property_type ?? '') == 'House' ? 'selected' : '' }}>House</option>
+                                        <option value="Condo" {{ old('property_type', $propertyAddress->property_type ?? '') == 'Condo' ? 'selected' : '' }}>Condo</option>
+                                        <option value="Villa" {{ old('property_type', $propertyAddress->property_type ?? '') == 'Villa' ? 'selected' : '' }}>Villa</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <!-- Property Condition Dropdown -->
+                                <div class="mb-3">
+                                    <label class="form-label" for="property_condition">Property Condition</label>
+                                    <select name="property_condition" id="property_condition" class="form-control form-select">
+                                        <option value="">Select Property Condition</option>
+                                        <option value="New" {{ old('property_condition', $propertyAddress->property_condition ?? '') == 'New' ? 'selected' : '' }}>New</option>
+                                        <option value="Good" {{ old('property_condition', $propertyAddress->property_condition ?? '') == 'Good' ? 'selected' : '' }}>Good</option>
+                                        <option value="Needs Renovation" {{ old('property_condition', $propertyAddress->property_condition ?? '') == 'Needs Renovation' ? 'selected' : '' }}>Needs Renovation</option>
+                                        <option value="Under Construction" {{ old('property_condition', $propertyAddress->property_condition ?? '') == 'Under Construction' ? 'selected' : '' }}>Under Construction</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Built Year & Dimension -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label" for="built_year">Built Year</label>
+                                    <input type="number" name="built_year" id="built_year" class="form-control" placeholder="Enter Built Year" value="{{ old('built_year', $propertyAddress->built_year ?? '') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label" for="dimension">Dimension</label>
+                                    <input type="text" name="dimension" id="dimension" class="form-control" placeholder="Enter Dimensions (e.g. 50x100 ft)" value="{{ old('dimension', $propertyAddress->dimension ?? '') }}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Country & City -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label" for="country">Country</label>
+                                    <input type="text" name="country" id="country" class="form-control" placeholder="Enter Country" value="{{ old('country', $propertyAddress->country ?? '') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label" for="city">City</label>
+                                    <input type="text" name="city" id="city" class="form-control" placeholder="Enter City" value="{{ old('city', $propertyAddress->city ?? '') }}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Location -->
+                        <div class="mb-3">
+                            <label class="form-label" for="location">Location</label>
+                            <textarea name="location" id="location" class="form-control" rows="2" placeholder="Enter Exact Location">{{ old('location', $propertyAddress->location ?? '') }}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-end mb-3">
+                    <button type="submit" id="product-submit" class="btn btn-success w-sm">Submit</button>
+                </div>
+            </div>
+            <!-- end col -->
+
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Publish</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="choices-publish-status-input" class="form-label">Status</label>
+                            <select name="status" class="form-select" id="choices-publish-status-input" data-choices data-choices-search-false>
+                                <option value="Published" {{ old('status', $property->status ?? null) == 'Published' ? 'selected' : '' }}>Published</option>
+                                <option value="Unpublished" {{ old('status', $property->status ?? null) == 'Unpublished' ? 'selected' : '' }}>Unpublished</option>
+                                <option value="Draft" {{ old('status', $property->status ?? null) == 'Draft' ? 'selected' : '' }}>Draft</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Phases & Agent -->
+                        <div class="mb-3">
+                            <label class="form-label" for="phases">Phases</label>
+                            <select name="phases" id="phases" class="form-control">
+                                <option value="">Select a Phase</option>
+                                <option value="On Going" {{ old('phases', $property->phases ?? '') == 'On Going' ? 'selected' : '' }}>On Going</option>
+                                <option value="Upcomming" {{ old('phases', $property->phases ?? '') == 'Upcomming' ? 'selected' : '' }}>Upcomming</option>
+                                <option value="Completed" {{ old('phases', $property->phases ?? '') == 'Completed' ? 'selected' : '' }}>Completed</option>
+                            </select>                                    
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="agent_id">Agent</label>
+                            <select name="agent_id" id="agent_id" class="form-control">
+                                <option value="">Select an Agent</option>
+                                @foreach($agents as $agent)
+                                    <option value="{{ $agent->id }}" {{ old('agent_id', $property->agent_id ?? '') == $agent->id ? 'selected' : '' }}>
+                                        {{ $agent->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                     
+                    </div>
+                    <!-- end card body -->
+                </div>
+                <!-- end card -->
+
 
                 <!-- Property Image -->
                 <div class="card">
@@ -81,22 +281,22 @@
                                 <div class="position-relative d-inline-block">
                                     <!-- Upload Icon & File Input -->
                                     <div class="position-absolute top-100 start-100 translate-middle">
-                                        <label for="product-image-input" class="mb-0" data-bs-toggle="tooltip" data-bs-placement="right" title="Select Image">
+                                        <label for="property-image-input" class="mb-0" data-bs-toggle="tooltip" data-bs-placement="right" title="Select Image">
                                             <div class="avatar-xs">
                                                 <div class="avatar-title bg-light border rounded-circle text-muted cursor-pointer">
                                                     <i class="ri-image-fill"></i>
                                                 </div>
                                             </div>
                                         </label>
-                                        <input type="file" name="main_image" class="form-control d-none @error('main_image') is-invalid @enderror" id="product-image-input" accept="image/png, image/gif, image/jpeg">
-                                        @error('main_image')
+                                        <input type="file" name="image_path" class="form-control d-none @error('image_path') is-invalid @enderror" id="property-image-input" accept="image/png, image/gif, image/jpeg">
+                                        @error('image_path')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <!-- Image Preview -->
                                     <div class="avatar-lg">
                                         <div class="avatar-title bg-light rounded">
-                                            <img src="{{ asset($property?->main_image ? 'public/' . $property->main_image : 'public/backend/images/product-img.png') }}" id="product-img" class="avatar-md h-auto" />
+                                            <img src="{{ asset($property?->image_path ? 'public/' . $property->image_path : 'public/backend/images/product-img.png') }}" id="product-img" class="avatar-md h-auto" />
                                         </div>
                                     </div>
                                 </div>
@@ -104,7 +304,7 @@
                         </div>
                         
                         <script>
-                            document.getElementById('product-image-input').addEventListener('change', function() {
+                            document.getElementById('property-image-input').addEventListener('change', function() {
                                 const [file] = this.files;
                                 if (file) {
                                     // Validate file type and size in JavaScript (optional)
@@ -133,24 +333,24 @@
                                 <i class="mdi mdi-cloud-upload"></i>
                                 <p>Drop files here to upload<br>or click to select files</p>
                             </div>
-                            <input type="file" id="file-input" name="product_images[]" multiple style="display: none;">
+                            <input type="file" id="file-input" name="property_images[]" multiple style="display: none;">
                             <div class="preview-area" id="preview-area">
                                 <!-- Preview items will be inserted here -->
                                 @if ($property && $property->images->isNotEmpty())
                                     @foreach ($property->images as $item)
                                         @php
-                                            $imagePath = public_path($item->image_path); // Full path to the image file
-                                            $imageName = basename($item->image_path); // Extract the image name
+                                            $imagePath = public_path($item->property_image); // Full path to the image file
+                                            $imageName = basename($item->property_image); // Extract the image name
                                             $imageSize = file_exists($imagePath) ? number_format(filesize($imagePath) / 1024, 2) : 'Unknown'; // Get file size in KB
                                         @endphp
                                     
                                         <div class="preview-item alert alert-success alert-dismissible fade show material-shadow" role="alert">
-                                            <img src="{{ asset('public/' . $item->image_path) }}" height="50">
+                                            <img src="{{ asset('public/' . $item->property_image) }}" height="50">
                                             <div>
                                                 <p class="m-0"><strong>Name: </strong> {{ $imageName }} </p>
                                                 <p class="m-0"><strong>Size: </strong> {{ $imageSize }} KB </p>
                                                 <!-- Button to handle deletion -->
-                                                <button type="button" id="delete-image" class="btn-close delete-item" data-id="{{ $item->id }}" data-url="{{ route('product-images.destroy', $item->id) }}" aria-label="Close"></button>
+                                                <button type="button" class="delete-image btn-close" data-id="{{ $item->id }}" data-url="{{ route('property-images.destroy', $item->id) }}" aria-label="Close"></button>
                                             </div>
                                         </div>
                                     @endforeach
@@ -161,53 +361,6 @@
                             <button type="button" id="clear-all" class="btn btn-danger" style="display: none">Clear All</button>
                         </div>
 
-                    </div>
-                </div>
-                <!-- end card -->
-
-                <div class="text-end mb-3">
-                    <button type="submit" id="product-submit" class="btn btn-success w-sm">Submit</button>
-                </div>
-            </div>
-            <!-- end col -->
-
-            <div class="col-lg-4">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Publish</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <label for="choices-publish-status-input" class="form-label">Status</label>
-                            <select name="status" class="form-select" id="choices-publish-status-input" data-choices data-choices-search-false>
-                                <option value="Published" {{ old('status', $property->status ?? null) == 'Published' ? 'selected' : '' }}>Published</option>
-                                <option value="Scheduled" {{ old('status', $property->status ?? null) == 'Scheduled' ? 'selected' : '' }}>Scheduled</option>
-                                <option value="Draft" {{ old('status', $property->status ?? null) == 'Draft' ? 'selected' : '' }}>Draft</option>
-                            </select>
-                        </div>                        
-
-                        <div class="mb-3">
-                            <label for="choices-publish-visibility-input" class="form-label">Visibility</label>
-                            <select name="visibility" class="form-select" id="choices-publish-visibility-input" data-choices data-choices-search-false>
-                                <option value="Public" {{ old('visibility', $property->visibility ?? null) == 'Public' ? 'selected' : '' }}>Public</option>
-                                <option value="Hidden" {{ old('visibility', $property->visibility ?? null) == 'Hidden' ? 'selected' : '' }}>Hidden</option>
-                            </select>
-                        </div>                        
-                    </div>
-                    <!-- end card body -->
-                </div>
-                <!-- end card -->
-
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Publish Schedule</h5>
-                    </div>
-                    <!-- end card body -->
-                    <div class="card-body">
-                        <div>
-                            <label for="datepicker-publish-input" class="form-label">Publish Date & Time</label>
-                            <input type="date" name="publish_schedule" class="form-control" value="{{old('publish_schedule')}}">
-                        </div>
                     </div>
                 </div>
                 <!-- end card -->
@@ -226,7 +379,7 @@
 
         <script>
             // Initialize Quill editor
-            var quill = new Quill('#product_description', {
+            var quill = new Quill('#property_description', {
                 theme: 'snow',
                 modules: {
                     toolbar: [
@@ -248,7 +401,7 @@
 
             // Update hidden field before form submission
             document.getElementById('product-submit').addEventListener('click', function (e) {
-                var description = document.querySelector('#product_description .ql-editor').innerHTML;
+                var description = document.querySelector('#property_description .ql-editor').innerHTML;
                 document.getElementById('description').value = description;
             });
         </script>
@@ -339,7 +492,7 @@
 
 
         <script>
-            $('.delete-item').on('click', function() {
+            $('.delete-image').on('click', function() {
                 const imageId = $(this).data('id');
                 const deleteUrl = $(this).data('url');
 
@@ -359,7 +512,6 @@
                             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                             success: (response) => {
                                 if (response.success) {
-                                    $(this).closest('tr').remove();
                                     $(`.preview-item:has(.delete-image[data-id="${imageId}"])`).remove();
                                     Swal.fire('Deleted!', 'Your image has been deleted.', 'success');
                                 } else {

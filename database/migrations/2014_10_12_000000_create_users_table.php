@@ -22,7 +22,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->string('provider')->nullable();
             $table->string('provider_id')->nullable();
-            $table->enum('type', ['Buyer', 'Agent'])->nullable();
+            $table->enum('user_type', ['Buyer', 'Agent'])->nullable();
             $table->string('profile_images')->nullable(); // Changed from text to JSON
             $table->boolean('is_admin')->default(false);
             $table->boolean('status')->default(true);

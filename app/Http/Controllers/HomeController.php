@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\View\View;
 use Illuminate\Validation\Rule;
-
+use App\Models\Property;
 
 class HomeController extends Controller
 {
@@ -18,11 +18,13 @@ class HomeController extends Controller
     }
     public function properties(Request $request)
     {
-        return view('pages.frontend.properties');
+        $collection = Property::with('propertyAddress', 'propertyImages')->where('status', 'Published')->get();
+        return view('pages.frontend.properties', compact('collection'));
     }
     public function propertiesDetails(Request $request, $id)
     {
-        return view('pages.frontend.properties-details');
+        $user = Property::with('propertyAddress', 'propertyImages')->findOrFail($id);
+        return view('pages.frontend.properties-details', compact('user'));
     }
     public function about(Request $request): View
     {

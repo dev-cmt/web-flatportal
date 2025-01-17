@@ -12,18 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('mortgages', function (Blueprint $table) {
-            Schema::create('mortgages', function (Blueprint $table) {
-                $table->id();
-                $table->decimal('home_value', 12, 2)->nullable();
-                $table->decimal('loan_amount', 12, 2)->nullable();
-                $table->integer('term_years')->nullable();
-                $table->decimal('interest_rate', 5, 2)->nullable();
-                $table->decimal('financed_amount', 12, 2)->default(0);
-                $table->decimal('mortgage_payments', 12, 2)->default(0);
-                $table->decimal('annual_cost_of_loan', 12, 2)->default(0);
-                $table->timestamps();
-            });
-        });
+            $table->id();
+            $table->decimal('home_value', 12, 2)->nullable();
+            $table->decimal('loan_amount', 12, 2)->nullable();
+            $table->integer('term_years')->nullable();
+            $table->decimal('interest_rate', 5, 2)->nullable();
+            $table->decimal('financed_amount', 12, 2)->default(0);
+            $table->decimal('mortgage_payments', 12, 2)->default(0);
+            $table->decimal('annual_cost_of_loan', 12, 2)->default(0);
+            $table->timestamps();
+        });        
     }
 
     /**

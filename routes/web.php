@@ -22,7 +22,7 @@ use App\Http\Controllers\PropertyController;
 */
 Route::get('/', [HomeController::class, 'welcome'])->name('home');
 Route::get('/properties', [HomeController::class, 'properties'])->name('properties');
-Route::get('/properties-details/{id}/{url_slug}', [HomeController::class, 'propertiesDetails'])->name('properties-details');
+Route::get('/properties-details/{id}', [HomeController::class, 'propertiesDetails'])->name('properties-details');
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
 Route::get('/blog-details', [HomeController::class, 'blogDetails'])->name('blog-details');
 Route::get('/agents', [HomeController::class, 'agents'])->name('agents');
@@ -86,7 +86,7 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     //--------------------PropertyController
     Route::resource('property', PropertyController::class);
     Route::post('property/{id}/add-image', [PropertyController::class, 'addImage'])->name('property.addImage');
-    Route::delete('property/{id}/remove-images', [PropertyController::class, 'productImagesDestroy'])->name('property-images.destroy');
+    Route::delete('property/{id}/remove-images', [PropertyController::class, 'propertyImagesDestroy'])->name('property-images.destroy');
 
     //--------------------PropertyCalculation
     Route::post('/mortgage-store', [PropertyController::class, 'storeMortgage'])->name('mortgage.store');

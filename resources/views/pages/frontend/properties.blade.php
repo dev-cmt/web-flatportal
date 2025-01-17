@@ -181,245 +181,36 @@
                     <div class="row row-30">
                         <div class="col-sm-12">
                             <div class="row row-50">
-                                <div class="col-md-6 col-lg-12 col-xl-6">
-                                    <!-- Product classic 2-->
-                                    <article class="product-classic product-classic-2">
-                                        <h4 class="product-classic-title"><a href="single-property.html">401
-                                                Biscayne Boulevard, Miami</a></h4>
-                                        <div class="product-classic-media">
-                                            <div class="owl-carousel" data-items="1" data-nav="true"
-                                                data-stage-padding="0" data-loop="true" data-margin="0"
-                                                data-mouse-drag="false"><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-01-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-02-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-03-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-04-480x287.jpg" alt=""
-                                                    width="480" height="287" />
+                                @foreach ($collection as $item)
+                                    <div class="col-md-6 col-lg-12 col-xl-6">
+                                        <!-- Product classic 2-->
+                                        <article class="product-classic product-classic-2">
+                                            <h4 class="product-classic-title"><a href="{{ route('properties-details', ['id' => $item->id]) }}">{{$item->property_name}}</a></h4>
+                                            <div class="product-classic-media">
+                                                <div class="owl-carousel" data-items="1" data-nav="true"
+                                                    data-stage-padding="0" data-loop="true" data-margin="0"
+                                                    data-mouse-drag="false"><img
+                                                        src="{{asset('public/frontend')}}/images/featured-properties-01-480x287.jpg" alt=""
+                                                        width="480" height="287" /><img
+                                                        src="{{asset('public/frontend')}}/images/featured-properties-02-480x287.jpg" alt=""
+                                                        width="480" height="287" /><img
+                                                        src="{{asset('public/frontend')}}/images/featured-properties-03-480x287.jpg" alt=""
+                                                        width="480" height="287" /><img
+                                                        src="{{asset('public/frontend')}}/images/featured-properties-04-480x287.jpg" alt=""
+                                                        width="480" height="287" />
+                                                </div>
+                                                <div class="product-classic-price"><span>৳{{$item->price}}\mo</span></div>
                                             </div>
-                                            <div class="product-classic-price"><span>$5000\mo</span></div>
-                                        </div>
-                                        <ul class="product-classic-list">
-                                            <li><span class="icon hotel-icon-10"></span><span>2 Bathrooms</span>
-                                            </li>
-                                            <li><span class="icon hotel-icon-05"></span><span>2 Bedrooms</span></li>
-                                            <li><span class="icon mdi mdi-vector-square"></span><span>480 Sq
-                                                    Ft</span></li>
-                                            <li><span class="icon hotel-icon-26"></span><span>1 Garage</span></li>
-                                        </ul>
-                                    </article>
-                                </div>
-                                <div class="col-md-6 col-lg-12 col-xl-6">
-                                    <!-- Product classic 2-->
-                                    <article class="product-classic product-classic-2">
-                                        <h4 class="product-classic-title"><a href="single-property.html">923 Folsom
-                                                St, San Francisco</a></h4>
-                                        <div class="product-classic-media">
-                                            <div class="owl-carousel" data-items="1" data-nav="true"
-                                                data-stage-padding="0" data-loop="true" data-margin="0"
-                                                data-mouse-drag="false"><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-05-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-06-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-07-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-08-480x287.jpg" alt=""
-                                                    width="480" height="287" />
-                                            </div>
-                                            <div class="product-classic-price"><span>$2500\mo</span></div>
-                                        </div>
-                                        <ul class="product-classic-list">
-                                            <li><span class="icon hotel-icon-10"></span><span>2 Bathrooms</span>
-                                            </li>
-                                            <li><span class="icon hotel-icon-05"></span><span>3 Bedrooms</span></li>
-                                            <li><span class="icon mdi mdi-vector-square"></span><span>535 Sq
-                                                    Ft</span></li>
-                                            <li><span class="icon hotel-icon-26"></span><span>1 Garage</span></li>
-                                        </ul>
-                                    </article>
-                                </div>
-                                <div class="col-md-6 col-lg-12 col-xl-6">
-                                    <!-- Product classic 2-->
-                                    <article class="product-classic product-classic-2">
-                                        <h4 class="product-classic-title"><a href="single-property.html">623 Willow
-                                                Rd, Dallas</a></h4>
-                                        <div class="product-classic-media">
-                                            <div class="owl-carousel" data-items="1" data-nav="true"
-                                                data-stage-padding="0" data-loop="true" data-margin="0"
-                                                data-mouse-drag="false"><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-09-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-10-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-11-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-12-480x287.jpg" alt=""
-                                                    width="480" height="287" />
-                                            </div>
-                                            <div class="product-classic-price"><span>$5000\mo</span></div>
-                                        </div>
-                                        <ul class="product-classic-list">
-                                            <li><span class="icon hotel-icon-10"></span><span>2 Bathrooms</span>
-                                            </li>
-                                            <li><span class="icon hotel-icon-05"></span><span>2 Bedrooms</span></li>
-                                            <li><span class="icon mdi mdi-vector-square"></span><span>530 Sq
-                                                    Ft</span></li>
-                                            <li><span class="icon hotel-icon-26"></span><span>2 Garages</span></li>
-                                        </ul>
-                                    </article>
-                                </div>
-                                <div class="col-md-6 col-lg-12 col-xl-6">
-                                    <!-- Product classic 2-->
-                                    <article class="product-classic product-classic-2">
-                                        <h4 class="product-classic-title"><a href="single-property.html">225 Maywood
-                                                Dr, San Francisco</a></h4>
-                                        <div class="product-classic-media">
-                                            <div class="owl-carousel" data-items="1" data-nav="true"
-                                                data-stage-padding="0" data-loop="true" data-margin="0"
-                                                data-mouse-drag="false"><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-13-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-14-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-15-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-16-480x287.jpg" alt=""
-                                                    width="480" height="287" />
-                                            </div>
-                                            <div class="product-classic-price"><span>$9340\mo</span></div>
-                                        </div>
-                                        <ul class="product-classic-list">
-                                            <li><span class="icon hotel-icon-10"></span><span>1 Bathroom</span></li>
-                                            <li><span class="icon hotel-icon-05"></span><span>1 Bedroom</span></li>
-                                            <li><span class="icon mdi mdi-vector-square"></span><span>430 Sq
-                                                    Ft</span></li>
-                                            <li><span class="icon hotel-icon-26"></span><span>1 Garage</span></li>
-                                        </ul>
-                                    </article>
-                                </div>
-                                <div class="col-md-6 col-lg-12 col-xl-6">
-                                    <!-- Product classic 2-->
-                                    <article class="product-classic product-classic-2">
-                                        <h4 class="product-classic-title"><a href="single-property.html">2888 Bush
-                                                St, San Francisco</a></h4>
-                                        <div class="product-classic-media">
-                                            <div class="owl-carousel" data-items="1" data-nav="true"
-                                                data-stage-padding="0" data-loop="true" data-margin="0"
-                                                data-mouse-drag="false"><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-17-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-18-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-19-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-20-480x287.jpg" alt=""
-                                                    width="480" height="287" />
-                                            </div>
-                                            <div class="product-classic-price"><span>$5000\mo</span></div>
-                                        </div>
-                                        <ul class="product-classic-list">
-                                            <li><span class="icon hotel-icon-10"></span><span>3 Bathrooms</span>
-                                            </li>
-                                            <li><span class="icon hotel-icon-05"></span><span>2 Bedrooms</span></li>
-                                            <li><span class="icon mdi mdi-vector-square"></span><span>570 Sq
-                                                    Ft</span></li>
-                                            <li><span class="icon hotel-icon-26"></span><span>1 Garage</span></li>
-                                        </ul>
-                                    </article>
-                                </div>
-                                <div class="col-md-6 col-lg-12 col-xl-6">
-                                    <!-- Product classic 2-->
-                                    <article class="product-classic product-classic-2">
-                                        <h4 class="product-classic-title"><a href="single-property.html">275 Lake
-                                                Ave, Chicago</a></h4>
-                                        <div class="product-classic-media">
-                                            <div class="owl-carousel" data-items="1" data-nav="true"
-                                                data-stage-padding="0" data-loop="true" data-margin="0"
-                                                data-mouse-drag="false"><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-21-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-22-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-23-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-24-480x287.jpg" alt=""
-                                                    width="480" height="287" />
-                                            </div>
-                                            <div class="product-classic-price"><span>$4563\mo</span></div>
-                                        </div>
-                                        <ul class="product-classic-list">
-                                            <li><span class="icon hotel-icon-10"></span><span>2 Bathrooms</span>
-                                            </li>
-                                            <li><span class="icon hotel-icon-05"></span><span>3 Bedrooms</span></li>
-                                            <li><span class="icon mdi mdi-vector-square"></span><span>630 Sq
-                                                    Ft</span></li>
-                                            <li><span class="icon hotel-icon-26"></span><span>2 Garages</span></li>
-                                        </ul>
-                                    </article>
-                                </div>
-                                <div class="col-md-6 col-lg-12 col-xl-6">
-                                    <!-- Product classic 2-->
-                                    <article class="product-classic product-classic-2">
-                                        <h4 class="product-classic-title"><a href="single-property.html">9021
-                                                Charter Oak Ln, San Diego</a></h4>
-                                        <div class="product-classic-media">
-                                            <div class="owl-carousel" data-items="1" data-nav="true"
-                                                data-stage-padding="0" data-loop="true" data-margin="0"
-                                                data-mouse-drag="false"><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-25-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-26-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-27-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-28-480x287.jpg" alt=""
-                                                    width="480" height="287" />
-                                            </div>
-                                            <div class="product-classic-price"><span>$5985\mo</span></div>
-                                        </div>
-                                        <ul class="product-classic-list">
-                                            <li><span class="icon hotel-icon-10"></span><span>3 Bathrooms</span>
-                                            </li>
-                                            <li><span class="icon hotel-icon-05"></span><span>2 Bedrooms</span></li>
-                                            <li><span class="icon mdi mdi-vector-square"></span><span>485 Sq
-                                                    Ft</span></li>
-                                            <li><span class="icon hotel-icon-26"></span><span>2 Garages</span></li>
-                                        </ul>
-                                    </article>
-                                </div>
-                                <div class="col-md-6 col-lg-12 col-xl-6">
-                                    <!-- Product classic 2-->
-                                    <article class="product-classic product-classic-2">
-                                        <h4 class="product-classic-title"><a href="single-property.html">3782
-                                                Broadway St, San Francisco</a></h4>
-                                        <div class="product-classic-media">
-                                            <div class="owl-carousel" data-items="1" data-nav="true"
-                                                data-stage-padding="0" data-loop="true" data-margin="0"
-                                                data-mouse-drag="false"><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-29-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-30-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-31-480x287.jpg" alt=""
-                                                    width="480" height="287" /><img
-                                                    src="{{asset('public/frontend')}}/images/featured-properties-32-480x287.jpg" alt=""
-                                                    width="480" height="287" />
-                                            </div>
-                                            <div class="product-classic-price"><span>$3045\mo</span></div>
-                                        </div>
-                                        <ul class="product-classic-list">
-                                            <li><span class="icon hotel-icon-10"></span><span>2 Bathrooms</span>
-                                            </li>
-                                            <li><span class="icon hotel-icon-05"></span><span>1 Bedroom</span></li>
-                                            <li><span class="icon mdi mdi-vector-square"></span><span>564 Sq
-                                                    Ft</span></li>
-                                            <li><span class="icon hotel-icon-26"></span><span>1 Garage</span></li>
-                                        </ul>
-                                    </article>
-                                </div>
+                                            <ul class="product-classic-list">
+                                                <li><span class="icon hotel-icon-05"></span><span>{{$item->bedroom_count}} Bedrooms</span></li>
+                                                <li><span class="icon hotel-icon-05"></span><span>{{$item->dining_room_count}} Diningooms</span></li>
+                                                <li><span class="icon hotel-icon-10"></span><span>{{$item->bathroom_count}} Bathrooms</span></li>
+                                                <li><span class="icon mdi mdi-vector-square"></span><span>{{$item->area_size}} Sq Ft</span></li>
+                                                {{-- <li><span class="icon hotel-icon-26"></span><span>1 Garage</span></li> --}}
+                                            </ul>
+                                        </article>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                         <div class="col-sm-12">

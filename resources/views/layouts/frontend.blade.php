@@ -50,7 +50,7 @@
     </div>
 
 
-    @include('layouts.partial.frontend-theme-settings')
+    {{-- @include('layouts.partial.frontend-theme-settings') --}}
 
     <!-- Javascript-->
     <script src="{{asset('public/frontend')}}/js/core.min.js"></script>

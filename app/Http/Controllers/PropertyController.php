@@ -12,143 +12,108 @@ use App\Models\PropertyAddress;
 use App\Models\PropertyImage;
 use App\Models\Category;
 use App\Models\Mortgage;
+use App\Models\User;
 
 class PropertyController extends Controller
 {
     public function index()
     {
-        $property = Property::with('category', 'brand')->paginate(10);
+        $property = Property::paginate(10);
         return view('pages.backend.property.index', compact('property'));
     }
 
     public function create()
     {
         $property = null;
-        return view('pages.backend.property.create-edit', compact('property'));
+        $agents = User::where('status', 1)->get();
+        return view('pages.backend.property.create-edit', compact('property', 'agents'));
     }
 
     public function store(Request $request) 
     {
         // Determine if this is an update
-        $PropertyId = $request->input('Property_id');
+        $propertyId = $request->input('property_id');
 
         // Validate the request
         $validatedData = $request->validate([
-            'Property_name' => [
+            'property_name' => [
                 'required',
                 'string',
                 'max:255',
                 // Ensure uniqueness excluding the current Property ID
-                Rule::unique('Propertys', 'Property_name')->ignore($PropertyId, 'id'),
+                Rule::unique('properties', 'property_name')->ignore($propertyId, 'id'),
             ],
             'description' => 'nullable|string',
+            // Add other fields to validation as needed, like area_size, price, etc.
         ]);
 
         // Determine Property to update or create
-        $Property = $PropertyId ? Property::findOrFail($PropertyId) : new Property();
+        $Property = $propertyId ? Property::findOrFail($propertyId) : new Property();
 
-        // Assign Property attributes
-        $Property->Property_name = $request->input('Property_name');
-        $Property->main_image = ImageHelper::uploadImage($request->file('main_image'), 'images/Property', $Property->main_image);
-        $Property->category_id = $request->input('category_id');
-        $Property->brand_id = $request->input('brand_id');
-        $Property->description = $request->input('description');
-        $Property->short_description = $request->input('short_description');
-        $Property->manufacturer_name = $request->input('manufacturer_name');
-        $Property->price = $request->input('price');
-        $Property->discount = $request->input('discount');
-        $Property->tags = json_encode(explode(',', $request->input('tags'))) ?? null;
-        $Property->publish_schedule = $request->input('publish_schedule');
-        $Property->visibility = $request->input('visibility');
-        $Property->status = $request->input('status');
-        $Property->meta_title = $request->input('meta_title');
-        $Property->meta_keywords = $request->input('meta_keywords');
-        $Property->meta_description = $request->input('meta_description');
-        $Property->user_id = Auth::user()->id;
+        // Update or create property fields
+        $Property->property_name = $request->property_name;
+        $Property->area_size = $request->area_size;
+        $Property->price = $request->price;
+        $Property->bedroom_count = $request->bedroom_count;
+        $Property->bathroom_count = $request->bathroom_count;
+        $Property->dining_room_count = $request->dining_room_count;
+        $Property->balcony_count = $request->balcony_count;
+        $Property->phases = $request->phases;
+        $Property->status = $request->status;
+        $Property->agent_id = $request->agent_id;
+        $Property->description = $request->description;
+        $Property->image_path = ImageHelper::uploadImage($request->file('image_path'), 'images/Property', $Property->image_path);;
+        $Property->video_path = ImageHelper::uploadImage($request->file('video_path'), 'images/Property', $Property->video_path);;
+        $Property->floor_plan_path = ImageHelper::uploadImage($request->file('floor_plan_path'), 'images/Property', $Property->floor_plan_path);;
+        $Property->pdf_path = ImageHelper::uploadImage($request->file('pdf_path'), 'images/Property', $Property->pdf_path);;
 
-        // Save the Property
+        // Save the property
         $Property->save();
-    
-        // Handle Images file uploads
-        if ($request->hasFile('Property_images')) {
-            foreach ($request->file('Property_images') as $file) {
+
+        // After saving the property, handle the property address
+        $PropertyAddress = $Property->propertyAddress ?? new PropertyAddress();
+        $PropertyAddress->property_id = $Property->id;
+        $PropertyAddress->property_status = $request->property_status;
+        $PropertyAddress->property_type = $request->property_type;
+        $PropertyAddress->property_condition = $request->property_condition;
+        $PropertyAddress->built_year = $request->built_year;
+        $PropertyAddress->dimension = $request->dimension;
+        $PropertyAddress->country = $request->country;
+        $PropertyAddress->city = $request->city;
+        $PropertyAddress->location = $request->location;
+
+        // Save or update property address
+        $PropertyAddress->save();
+        
+        // Handle images file uploads
+        if ($request->hasFile('property_images')) {
+            foreach ($request->file('property_images') as $file) {
                 PropertyImage::create([
-                    'Property_id' => $Property->id,
-                    'image_path' => ImageHelper::uploadImage($file, 'images/Property/gallery', null),
+                    'property_id' => $Property->id,
+                    'property_image' => ImageHelper::uploadImage($file, 'images/property/gallery', null),
                 ]);
             }
         }
 
-        foreach ($request->input('variants') as $key => $variant) {
-            // Safely extract the id from the variant array
-            $variantId = $variant['id'] ?? null;
-        
-            // Find the existing variant by ID, if ID is provided
-            $currentVariant = $variantId ? PropertyAddress::find($variantId) : null;
-            $currentImagePath = $currentVariant ? $currentVariant->img_path : null;
-        
-            // Retrieve the new image file from the request, if available
-            $requestImg = $request->file("variants.{$key}.img_path");
-        
-            // Prepare the Property variant data
-            $PropertyVariant = [
-                'Property_id' => $Property->id,
-                'img_path' => ImageHelper::uploadImage($requestImg, 'images/Property/variant', $currentImagePath),
-                'color_id' => $variant['color_id'] ?? null,
-                'size' => $variant['size'] ?? null,
-                'price' => $variant['price'] ?? null,
-                'quantity' => $variant['quantity'] ?? null,
-            ];
-        
-            // Update or create the Property variant
-            PropertyAddress::updateOrCreate(['id' => $variantId], $PropertyVariant);
-        }
-        
-        
-
-        // Store Property specifications
-        if ($request->has('specifications')) {
-            foreach ($request->input('specifications') as $specification) {
-                $PropertySpecification = [
-                    'Property_id' => $Property->id,
-                    'specification_name' => $specification['specification_name'] ?? null,
-                    'specification_value' => $specification['specification_value'] ?? null,
-                ];
-
-                // Update or create the Property specification
-                PropertyAddress::updateOrCreate(['id' => $specification['id'] ?? null], $PropertySpecification);
-            }
-        }
-
-        // Store Property details
-        if ($request->has('details')) {
-            foreach ($request->input('details') as $detail) {
-                $PropertyDetail = [
-                    'Property_id' => $Property->id,
-                    'detail_name' => $detail['detail_name'] ?? null,
-                    'detail_value' => $detail['detail_value'] ?? null,
-                ];
-                // Update or create the Property specification
-                PropertyAddress::updateOrCreate(['id' => $detail['id'] ?? null], $PropertyDetail);
-            }
-        }
-
-        return redirect()->back()->with('success', 'Property created successfully.');
-        // return redirect()->route("Propertys.index")->with('success', 'Property created successfully.');
+        // return redirect()->back()->with('success', 'Property saved successfully.');
+        // or
+        return redirect()->route("property.index")->with('success', 'Property saved successfully.');
     }
+
     
     public function show($id)
     {
         // Fetch the Property with its related data
-        $Property = Property::with(['variants', 'specifications', 'details'])->findOrFail($id);
-        return view('ecommerce.backend.Propertys.show', compact('Property'));
+        $property = Property::with('propertyAddress', 'propertyImages')->findOrFail($id);
+        return view('pages.backend.property.show', compact('property'));
     }
     
     public function edit($id)
     {
-        $Property = Property::findOrFail($id);
-        $categories = Category::all();
-        return view('ecommerce.backend.Propertys.create', compact('Property', 'categories', 'brands', 'colors'));
+        $property = Property::findOrFail($id);
+        $propertyAddress = $property->propertyAddress;
+        $agents = User::where('status', 1)->get();
+        return view('pages.backend.property.create-edit', compact('property', 'propertyAddress', 'agents'));
     }
 
     public function destroy($id)
@@ -156,17 +121,17 @@ class PropertyController extends Controller
         $Property = Property::findOrFail($id);
         $Property->delete();
 
-        return redirect()->route('Propertys.index')->with('success', 'Property deleted successfully.');
+        return redirect()->route('property.index')->with('success', 'Property deleted successfully.');
     }
 
 
-    public function PropertyImagesDestroy($id)
+    public function propertyImagesDestroy($id)
     {
         $data = PropertyImage::findOrFail($id);
 
         // Delete the image file from storage if it exists
-        if (File::exists(public_path($data->image_path))) {
-            File::delete(public_path($data->image_path));
+        if (File::exists(public_path($data->property_image))) {
+            File::delete(public_path($data->property_image));
         }
         $data->delete();
         return response()->json(['success' => true]);

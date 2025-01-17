@@ -35,7 +35,7 @@
                 <div class="card-header align-items-center d-flex">
                     <h4 class="card-title mb-0 flex-grow-1">Products</h4>
                     <div class="flex-shrink-0">
-                        <a href="{{ route('products.create') }}" class="btn btn-sm btn-success edit-item-btn">Add New Category</a>
+                        <a href="{{ route('property.create') }}" class="btn btn-sm btn-success edit-item-btn">Add New Propertys</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -44,32 +44,32 @@
                             <thead class="table-light">
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">SKU Code</th>
-                                    <th scope="col">Category</th>
-                                    <th scope="col">Brand</th>
+                                    <th scope="col">Property Title</th>
+                                    <th scope="col">Area Size</th>
                                     <th scope="col">Price</th>
+                                    <th scope="col">Bedrooms</th>
+                                    <th scope="col">Bathrooms</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="product-list">
                                 @foreach ($property as $item)
-                                    <tr data-id="{{ $product->id }}">
+                                    <tr data-id="{{ $item->id }}">
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->product_name }}</td>
-                                        <td>{{ $item->sku_code }}</td>
-                                        <td>{{ $item->category->category_name }}</td>
-                                        <td>{{ $item->brand->brand_name ?? 'No Brand'}}</td>
-                                        <td>{{ $item->price }}</td>
-                                        <td>{{ $item->status === 'active' ? 'Active' : 'Inactive' }}</td>
+                                        <td>{{ $item->property_name }}</td> <!-- Changed to property_name -->
+                                        <td>{{ $item->area_size }}</td> <!-- Changed to area_size -->
+                                        <td>{{ $item->price }}</td> <!-- Changed to price -->
+                                        <td>{{ $item->bedroom_count }}</td> <!-- Changed to bedroom_count -->
+                                        <td>{{ $item->bathroom_count }}</td> <!-- Changed to bathroom_count -->
+                                        <td>{{ $item->status === 'Published' ? 'Published' : ($item->status === 'Unpublished' ? 'Unpublished' : 'Draft') }}</td>
                                         <td>
-                                            <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-primary edit-category">Edit</a>
-                                            <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm btn-info show-category">Show</a>
-                                            <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline-block;">
+                                            <a href="{{ route('property.edit', $item->id) }}" class="btn btn-sm btn-primary edit-category">Edit</a> <!-- Changed to property.edit -->
+                                            <a href="{{ route('property.show', $item->id) }}" class="btn btn-sm btn-info show-category">Show</a> <!-- Changed to property.show -->
+                                            <form action="{{ route('property.destroy', $item->id) }}" method="POST" style="display:inline-block;"> <!-- Changed to property.destroy -->
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger edit-item-btn" onclick="return confirm('Are you sure you want to delete this product?');">Delete</button>
+                                                <button type="submit" class="btn btn-sm btn-danger edit-item-btn" onclick="return confirm('Are you sure you want to delete this property?');">Delete</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -78,6 +78,7 @@
                         </table>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>

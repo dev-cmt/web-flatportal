@@ -29,7 +29,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'provider', 
         'provider_id',
 
-        'type',
+        'user_type',
         'profile_images',
         'is_admin',
         'status',
