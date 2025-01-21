@@ -18,13 +18,13 @@ class HomeController extends Controller
     }
     public function properties(Request $request)
     {
-        $collection = Property::with('propertyAddress', 'propertyImages')->where('status', 'Published')->get();
+        $collection = Property::with('propertyAddress', 'propertyImages')->where('status', 'Published')->paginate(3);
         return view('pages.frontend.properties', compact('collection'));
     }
     public function propertiesDetails(Request $request, $id)
     {
-        $user = Property::with('propertyAddress', 'propertyImages')->findOrFail($id);
-        return view('pages.frontend.properties-details', compact('user'));
+        $data = Property::with('propertyAddress', 'propertyImages')->findOrFail($id);
+        return view('pages.frontend.properties-details', compact('data'));
     }
     public function about(Request $request): View
     {

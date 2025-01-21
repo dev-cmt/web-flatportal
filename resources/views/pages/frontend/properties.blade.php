@@ -187,17 +187,11 @@
                                         <article class="product-classic product-classic-2">
                                             <h4 class="product-classic-title"><a href="{{ route('properties-details', ['id' => $item->id]) }}">{{$item->property_name}}</a></h4>
                                             <div class="product-classic-media">
-                                                <div class="owl-carousel" data-items="1" data-nav="true"
-                                                    data-stage-padding="0" data-loop="true" data-margin="0"
-                                                    data-mouse-drag="false"><img
-                                                        src="{{asset('public/frontend')}}/images/featured-properties-01-480x287.jpg" alt=""
-                                                        width="480" height="287" /><img
-                                                        src="{{asset('public/frontend')}}/images/featured-properties-02-480x287.jpg" alt=""
-                                                        width="480" height="287" /><img
-                                                        src="{{asset('public/frontend')}}/images/featured-properties-03-480x287.jpg" alt=""
-                                                        width="480" height="287" /><img
-                                                        src="{{asset('public/frontend')}}/images/featured-properties-04-480x287.jpg" alt=""
-                                                        width="480" height="287" />
+                                                <div class="owl-carousel" data-items="1" data-nav="true" data-stage-padding="0" data-loop="true" data-margin="0" data-mouse-drag="false">
+                                                    <img src="{{asset('public')}}/{{$item->image_path}}" alt="" width="480" height="287" />
+                                                    @foreach ($item->propertyImages as $image)
+                                                         <img src="{{asset('public')}}/{{$image->property_image}}" alt="" width="480" height="287"/>
+                                                    @endforeach
                                                 </div>
                                                 <div class="product-classic-price"><span>৳{{$item->price}}\mo</span></div>
                                             </div>
@@ -214,11 +208,34 @@
                             </div>
                         </div>
                         <div class="col-sm-12">
-                            <ul class="pagination-custom">
-                                <li><a class="active" href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                            </ul>
+                            @if ($collection->hasPages())
+                                <ul class="pagination-custom">
+                                    {{-- Previous Page Link --}}
+                                    @if ($collection->onFirstPage())
+                                        <li class="disabled"><a>&laquo;</a></li>
+                                    @else
+                                        <li><a href="{{ $collection->previousPageUrl() }}">&laquo;</a></li>
+                                    @endif
+                        
+                                    {{-- Pagination Elements --}}
+                                    @foreach ($collection->getUrlRange(1, $collection->lastPage()) as $page => $url)
+                                        @if ($page == $collection->currentPage())
+                                            <li><a class="active" href="#">{{ $page }}</a></li>
+                                        @else
+                                            <li><a href="{{ $url }}">{{ $page }}</a></li>
+                                        @endif
+                                    @endforeach
+                        
+                                    {{-- Next Page Link --}}
+                                    @if ($collection->hasMorePages())
+                                        <li><a href="{{ $collection->nextPageUrl() }}">&raquo;</a></li>
+                                    @else
+                                        <li class="disabled"><a>&raquo;</a></li>
+                                    @endif
+                                </ul>
+                            @endif
                         </div>
+                        
                     </div>
                 </div>
                 <div class="col-lg-5 col-xl-4">

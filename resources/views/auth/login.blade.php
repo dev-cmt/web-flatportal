@@ -45,15 +45,14 @@
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <div class="form-wrap">
-                                <input type="email" name="email" value="{{old('email')}}" class="form-input form-control-has-validation" id="login-email" required autofocus autocomplete="username" id="username" placeholder="Enter username">
-                                <span class="form-validation"></span>
+                                <input type="email" name="email" value="{{old('email')}}" class="form-input" id="login-email" autofocus required id="login-email">
                                 <label class="form-label rd-input-label" for="login-email">E-mail</label>
                                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
                             </div>
                             <div class="form-wrap">
-                                <input type="password" name="password" required autocomplete="current-password" class="form-input form-control-has-validation" id="login-password">
-                                <span class="form-validation"></span>
+                                <input type="password" name="password" required autocomplete="current-password" class="form-input" id="login-password">
                                 <label class="form-label rd-input-label" for="login-password">Password</label>
+                                <x-input-error :messages="$errors->get('password')" class="mt-2" />
                             </div>
                             <div class="tp-login-suggetions d-sm-flex align-items-center justify-content-between mb-20">
                                 <div class="tp-login-remeber">

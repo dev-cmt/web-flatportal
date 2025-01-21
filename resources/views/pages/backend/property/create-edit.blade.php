@@ -219,9 +219,6 @@
                     </div>
                 </div>
 
-                <div class="text-end mb-3">
-                    <button type="submit" id="product-submit" class="btn btn-success w-sm">Submit</button>
-                </div>
             </div>
             <!-- end col -->
 
@@ -271,7 +268,7 @@
                 <!-- Property Image -->
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title mb-0">Property Gallery</h5>
+                        <h5 class="card-title mb-0">Property Gallery (W:480px * H:287px)</h5>
                     </div>
                     <div class="card-body">
                         <div class="mb-4">
@@ -335,9 +332,8 @@
                             </div>
                             <input type="file" id="file-input" name="property_images[]" multiple style="display: none;">
                             <div class="preview-area" id="preview-area">
-                                <!-- Preview items will be inserted here -->
-                                @if ($property && $property->images->isNotEmpty())
-                                    @foreach ($property->images as $item)
+                                @if ($property && $property->propertyImages && $property->propertyImages->isNotEmpty())
+                                    @foreach ($property->propertyImages as $item)
                                         @php
                                             $imagePath = public_path($item->property_image); // Full path to the image file
                                             $imageName = basename($item->property_image); // Extract the image name
@@ -354,9 +350,8 @@
                                             </div>
                                         </div>
                                     @endforeach
-                            
-                            
                                 @endif
+
                             </div>
                             <button type="button" id="clear-all" class="btn btn-danger" style="display: none">Clear All</button>
                         </div>
@@ -364,6 +359,12 @@
                     </div>
                 </div>
                 <!-- end card -->
+
+                
+                <div class="text-end mb-3 text-center">
+                    <a href="{{ url()->previous() }}" class="btn btn-info">Go Back</a>
+                    <button type="submit" id="product-submit" class="btn btn-success">Submit</button>
+                </div>
 
             </div>
             <!-- end col -->
