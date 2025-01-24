@@ -26,48 +26,27 @@
                         <div class="slick-slider carousel-parent" id="parent-carousel" data-arrows="true"
                             data-loop="true" data-dots="false" data-swipe="true" data-fade="true" data-items="1"
                             data-child="#child-carousel" data-for="#child-carousel">
-                            <div class="item"><img src="{{asset('public')}}/images/single-property-1-763x443.jpg" alt="" width="763"
-                                    height="443" />
+                            <div class="item"><img src="{{asset('public')}}/{{$data->image_path}}" alt="" width="763" height="443" />
                             </div>
                         </div>
                         <div class="slick-slider carousel-child" id="child-carousel" data-arrows="true"
                             data-loop="true" data-dots="false" data-swipe="true" data-items="1" data-sm-items="3"
                             data-md-items="4" data-lg-items="4" data-xl-items="5" data-slide-to-scroll="1"
                             data-for="#parent-carousel">
-                            <div>
-                                <div class="slick-slide-inner"
-                                    style="background-image: url({{asset('public/frontend')}}/images/single-property-1-763x443.jpg);"></div>
-                            </div>
-                            <div>
-                                <div class="slick-slide-inner"
-                                    style="background-image: url({{asset('public/frontend')}}/images/single-property-2-763x443.jpg);"></div>
-                            </div>
-                            <div>
-                                <div class="slick-slide-inner"
-                                    style="background-image: url({{asset('public/frontend')}}/images/single-property-3-763x443.jpg);"></div>
-                            </div>
-                            <div>
-                                <div class="slick-slide-inner"
-                                    style="background-image: url({{asset('public/frontend')}}/images/single-property-4-763x443.jpg);"></div>
-                            </div>
-                            <div>
-                                <div class="slick-slide-inner"
-                                    style="background-image: url({{asset('public/frontend')}}/images/single-property-5-763x443.jpg);"></div>
-                            </div>
-                            <div>
-                                <div class="slick-slide-inner"
-                                    style="background-image: url({{asset('public/frontend')}}/images/single-property-6-763x443.jpg);"></div>
-                            </div>
+                            @foreach ($data->propertyImages as $image)
+                                <img class="slick-slide-inner"  style="background-image: url({{asset('public')}}/{{$image->property_image}});" alt="" width="480" height="287"/>
+                            @endforeach
+                            
                         </div>
                     </div>
                     <div class="features-block">
                         <div class="features-block-inner">
                             <div class="features-block-item">
                                 <ul class="features-block-list">
-                                    <li><span class="icon hotel-icon-10"></span><span>2 Bathrooms</span></li>
-                                    <li><span class="icon hotel-icon-05"></span><span>2 Bedrooms</span></li>
-                                    <li><span class="icon mdi mdi-vector-square"></span><span>480 Sq Ft</span></li>
-                                    <li><span class="icon hotel-icon-26"></span><span>1 Garage</span></li>
+                                    <li><span class="icon hotel-icon-10"></span><span>{{$data->bedroom_count}} Bedrooms</span></li>
+                                    <li><span class="icon hotel-icon-05"></span><span>{{$data->dining_room_count}} Diningooms</span></li>
+                                    <li><span class="icon mdi mdi-vector-square"></span><span>{{$data->area_size}} Sq Ft</span></li>
+                                    <li><span class="icon hotel-icon-26"></span><span>{{$data->bathroom_count}} Bathrooms</span></li>
                                 </ul>
                             </div>
                             <div class="features-block-item"><a class="link link-1" href="#"><span
