@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 15, 2024 at 11:14 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: Aug 16, 2025 at 05:33 PM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `laravel_ecommerce`
+-- Database: `flatbuysalebd.com`
 --
 
 -- --------------------------------------------------------
@@ -31,7 +31,7 @@ CREATE TABLE `blog_comments` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `blog_post_id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
-  `comment` text NOT NULL,
+  `comment` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -44,13 +44,14 @@ CREATE TABLE `blog_comments` (
 
 CREATE TABLE `blog_posts` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `slug` text NOT NULL,
-  `content` text NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `url_slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `author_id` bigint(20) UNSIGNED NOT NULL,
-  `status` enum('published','draft') NOT NULL,
+  `status` enum('published','draft') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'draft',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -63,7 +64,7 @@ CREATE TABLE `blog_shares` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `blog_post_id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `shared_to` varchar(255) NOT NULL,
+  `shared_to` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `shared_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -88,255 +89,64 @@ CREATE TABLE `blog_views` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `brands`
---
-
-CREATE TABLE `brands` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `brand_name` varchar(255) NOT NULL,
-  `url_slug` text NOT NULL,
-  `img_path` varchar(255) DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `status` enum('active','inactive') NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `brands`
---
-
-INSERT INTO `brands` (`id`, `brand_name`, `url_slug`, `img_path`, `description`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'Crist-Kub', 'vitae-quo-consectetur-consequuntur-iure-tenetur-possimus-ad', 'https://via.placeholder.com/640x480.png/000011?text=business+brand+logo+sed', 'Voluptatem qui dicta voluptates ipsam consequatur iusto vero. Dolor voluptatem eum deserunt consectetur est dolor quidem praesentium. Sunt consectetur sit rem quis.', 'inactive', 9, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(2, 'Lehner, Ankunding and Goldner', 'quas-non-placeat-et-optio-repellendus-cupiditate', 'https://via.placeholder.com/640x480.png/00bb22?text=business+brand+logo+culpa', 'Et pariatur voluptatem voluptatibus optio ea aut. Expedita voluptate consectetur dolore porro minus sit ut. Vitae quam et qui voluptas rerum consequatur est. Animi consectetur suscipit reiciendis quia ratione rem non qui. Accusamus asperiores occaecati quasi et et distinctio.', 'active', 10, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(3, 'Bauch-Littel', 'quasi-molestiae-voluptate-iusto-dolor-occaecati-repellendus-fuga', 'https://via.placeholder.com/640x480.png/003355?text=business+brand+logo+nobis', NULL, 'active', 11, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(4, 'Beahan LLC', 'libero-id-provident-eius-aut', 'https://via.placeholder.com/640x480.png/00aadd?text=business+brand+logo+ab', 'Saepe consequatur similique mollitia rerum est voluptatem. Nemo dolorem sit saepe voluptas sit molestias. Voluptas possimus tempora mollitia blanditiis natus in. Voluptatibus ea qui aliquid earum repellat eum nulla culpa.', 'active', 9, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(5, 'Bahringer, Lueilwitz and Kassulke', 'reprehenderit-pariatur-voluptatem-ut-reiciendis-sit-non', 'https://via.placeholder.com/640x480.png/004499?text=business+brand+logo+ut', NULL, 'inactive', 6, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(6, 'Anderson-Barton', 'voluptates-quasi-adipisci-accusantium-et-doloremque-suscipit', 'https://via.placeholder.com/640x480.png/00cc77?text=business+brand+logo+aut', NULL, 'inactive', 8, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(7, 'Haag-Monahan', 'odio-sunt-et-omnis-cupiditate', 'https://via.placeholder.com/640x480.png/00ee66?text=business+brand+logo+quasi', NULL, 'active', 2, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(8, 'Purdy-Grant', 'ea-blanditiis-doloremque-et-ut-rerum-voluptatem', 'https://via.placeholder.com/640x480.png/006600?text=business+brand+logo+aut', NULL, 'active', 5, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(9, 'Ruecker and Sons', 'eum-nesciunt-assumenda-impedit-eum-reprehenderit', 'https://via.placeholder.com/640x480.png/00ffff?text=business+brand+logo+vitae', NULL, 'active', 10, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(10, 'Wintheiser, Hane and Monahan', 'laudantium-suscipit-explicabo-est-necessitatibus-et-quae', 'https://via.placeholder.com/640x480.png/0077cc?text=business+brand+logo+dolor', NULL, 'inactive', 8, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(11, 'Rosenbaum Inc', 'culpa-quia-perferendis-distinctio-voluptatibus-laudantium-ut', 'https://via.placeholder.com/640x480.png/00dd88?text=business+brand+logo+exercitationem', 'Et cupiditate iure et sunt aut qui fugiat aut. Sint sapiente rem atque quis qui maiores. Quaerat debitis sit rerum aspernatur. Minima quas modi possimus a doloremque mollitia.', 'active', 11, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(12, 'Greenfelder Inc', 'molestiae-corrupti-necessitatibus-dolore-aperiam-sed-nihil-eligendi', 'https://via.placeholder.com/640x480.png/0033bb?text=business+brand+logo+doloribus', 'Sit sit ut error omnis eos qui quia. Et aperiam facilis culpa sed ut est.', 'active', 3, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(13, 'Sanford Group', 'sapiente-sint-autem-minus-ex', 'https://via.placeholder.com/640x480.png/0044ee?text=business+brand+logo+commodi', 'Id magnam quod cum et. Fugit et ut pariatur et expedita. Modi a possimus est praesentium. Repellat minima harum dicta rerum quae tempora.', 'inactive', 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(14, 'Bode, Kris and Ferry', 'culpa-officiis-ratione-dignissimos-soluta-magni', 'https://via.placeholder.com/640x480.png/003377?text=business+brand+logo+iusto', NULL, 'inactive', 2, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(15, 'Kris-Bernhard', 'ex-eligendi-sit-sunt-unde-sint-similique-inventore', 'https://via.placeholder.com/640x480.png/006699?text=business+brand+logo+corrupti', 'Aliquam quae totam rem pariatur asperiores consequatur officia. Quaerat recusandae soluta cum qui ullam repudiandae ipsum ratione. Reprehenderit ut esse vel odit sint omnis voluptatem.', 'active', 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(16, 'Schiller and Sons', 'voluptatum-in-et-repudiandae-enim-hic-officia-cum', 'https://via.placeholder.com/640x480.png/0055ee?text=business+brand+logo+tempora', 'Aspernatur possimus natus nihil minima. Voluptates ea sunt praesentium. Id voluptatem odio facilis repellendus.', 'active', 9, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(17, 'Mosciski Ltd', 'ut-dolorem-ex-fugit-adipisci', 'https://via.placeholder.com/640x480.png/0044cc?text=business+brand+logo+ad', NULL, 'active', 5, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(18, 'Abernathy Group', 'numquam-provident-sed-nihil-eius', 'https://via.placeholder.com/640x480.png/006633?text=business+brand+logo+non', NULL, 'active', 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(19, 'Kihn Group', 'ut-nemo-omnis-est-quas-ea-consectetur', 'https://via.placeholder.com/640x480.png/0088dd?text=business+brand+logo+modi', 'A nisi a eligendi officia. Explicabo dolore molestiae fugit eligendi veniam. Dolores quasi et dolor deserunt error dolorem.', 'active', 8, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(20, 'Wiza-Schaden', 'sit-ut-officiis-soluta', 'https://via.placeholder.com/640x480.png/0055aa?text=business+brand+logo+molestiae', NULL, 'inactive', 4, '2024-09-29 02:49:39', '2024-09-29 02:49:39');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `carts`
---
-
-CREATE TABLE `carts` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `product_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `product_variant_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `quantity` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `categories`
 --
 
 CREATE TABLE `categories` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `category_name` varchar(255) NOT NULL,
-  `url_slug` text NOT NULL,
+  `category_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `url_slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `parent_cat_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `img_path` varchar(255) DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `status` enum('active','inactive') NOT NULL,
+  `img_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` enum('active','inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `category_name`, `url_slug`, `parent_cat_id`, `img_path`, `description`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'excepturi', 'excepturi', NULL, 'https://via.placeholder.com/640x480.png/00dd88?text=nature+category+image+assumenda', 'Consectetur molestiae quia nihil architecto sunt.', 'active', 8, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(2, 'aut', 'aut', NULL, 'https://via.placeholder.com/640x480.png/00aaff?text=nature+category+image+expedita', 'Eligendi distinctio eos laborum vitae.', 'inactive', 2, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(3, 'sunt', 'sunt', NULL, 'https://via.placeholder.com/640x480.png/0099ff?text=nature+category+image+dolor', 'Optio placeat sit autem.', 'inactive', 6, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(4, 'quia', 'quia', NULL, 'https://via.placeholder.com/640x480.png/00eeaa?text=nature+category+image+facere', 'Et atque sunt expedita sunt aliquid.', 'inactive', 4, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(5, 'commodi', 'commodi', NULL, 'https://via.placeholder.com/640x480.png/00ee66?text=nature+category+image+officia', 'Quia beatae ex consequuntur consectetur quia ut tenetur.', 'active', 2, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(6, 'et', 'et', NULL, 'https://via.placeholder.com/640x480.png/008855?text=nature+category+image+quia', 'Quisquam sapiente et cumque et sed vero eius.', 'active', 9, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(7, 'id', 'id', NULL, 'https://via.placeholder.com/640x480.png/00eedd?text=nature+category+image+et', 'Consectetur ut sit natus nobis cupiditate.', 'inactive', 6, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(8, 'nisi', 'nisi', NULL, 'https://via.placeholder.com/640x480.png/0044dd?text=nature+category+image+id', 'Sunt culpa tenetur neque minima et nisi.', 'active', 2, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(9, 'rerum', 'rerum', NULL, 'https://via.placeholder.com/640x480.png/00dd22?text=nature+category+image+est', 'Nam fugit ut iusto sit.', 'inactive', 3, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(10, 'numquam', 'numquam', NULL, 'https://via.placeholder.com/640x480.png/0033bb?text=nature+category+image+labore', 'Accusamus quibusdam aut eligendi qui.', 'active', 7, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(11, 'modi', 'modi', NULL, 'https://via.placeholder.com/640x480.png/002299?text=nature+category+image+sint', 'Sapiente atque facere vero omnis corporis nisi enim.', 'active', 5, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(12, 'porro', 'porro', NULL, 'https://via.placeholder.com/640x480.png/00ee88?text=nature+category+image+et', 'Sed molestias sit consequatur similique reprehenderit occaecati.', 'inactive', 6, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(13, 'odit', 'odit', NULL, 'https://via.placeholder.com/640x480.png/0055bb?text=nature+category+image+et', 'Enim fuga non assumenda quis minus assumenda consequatur dolorum.', 'active', 4, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(14, 'voluptatem', 'voluptatem', NULL, 'https://via.placeholder.com/640x480.png/004444?text=nature+category+image+et', 'Sit non est ab velit.', 'inactive', 7, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(15, 'fugit', 'fugit', NULL, 'https://via.placeholder.com/640x480.png/008844?text=nature+category+image+deleniti', 'Eaque similique est soluta consectetur nihil.', 'active', 6, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(16, 'ut', 'ut', NULL, 'https://via.placeholder.com/640x480.png/006622?text=nature+category+image+non', 'Fuga enim cupiditate qui aut sapiente officiis.', 'inactive', 7, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(17, 'provident', 'provident', NULL, 'https://via.placeholder.com/640x480.png/0044bb?text=nature+category+image+rerum', 'Esse et quia minima voluptas suscipit.', 'active', 10, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(18, 'labore', 'labore', NULL, 'https://via.placeholder.com/640x480.png/0066ee?text=nature+category+image+ut', 'Et molestiae dolor magnam eaque ipsum minima ut.', 'active', 5, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(19, 'beatae', 'beatae', NULL, 'https://via.placeholder.com/640x480.png/00ff77?text=nature+category+image+quo', 'Accusantium dolorem exercitationem error ipsam in laborum non.', 'active', 9, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(20, 'sint', 'sint', NULL, 'https://via.placeholder.com/640x480.png/00dd77?text=nature+category+image+pariatur', 'Dignissimos quibusdam id at sunt velit autem omnis nulla.', 'active', 9, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(21, 'molestias', 'molestias', 13, 'https://via.placeholder.com/640x480.png/003399?text=nature+category+image+quo', 'Sed cupiditate molestiae dolores qui ea.', 'active', 3, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(22, 'recusandae', 'recusandae', 6, 'https://via.placeholder.com/640x480.png/009977?text=nature+category+image+soluta', 'Praesentium provident qui autem exercitationem.', 'active', 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(23, 'dolore', 'dolore', NULL, 'https://via.placeholder.com/640x480.png/0077bb?text=nature+category+image+qui', 'Tenetur molestiae provident rerum id quia vitae.', 'active', 8, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(24, 'dolorem', 'dolorem', 3, 'https://via.placeholder.com/640x480.png/0022ee?text=nature+category+image+aut', 'Iusto ab maiores sed omnis dicta exercitationem.', 'inactive', 6, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(25, 'animi', 'animi', NULL, 'https://via.placeholder.com/640x480.png/00eebb?text=nature+category+image+nam', 'Ut aspernatur in corrupti repellendus.', 'inactive', 3, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(26, 'dolor', 'dolor', 12, 'https://via.placeholder.com/640x480.png/00ee33?text=nature+category+image+voluptatem', 'Voluptas numquam accusantium est veritatis iste.', 'active', 3, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(27, 'perspiciatis', 'perspiciatis', NULL, 'https://via.placeholder.com/640x480.png/0099dd?text=nature+category+image+rem', 'Suscipit porro quo dolor est sint.', 'active', 7, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(28, 'reiciendis', 'reiciendis', NULL, 'https://via.placeholder.com/640x480.png/00ffbb?text=nature+category+image+possimus', 'Dolores laboriosam enim ratione ut esse.', 'active', 8, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(29, 'laudantium', 'laudantium', NULL, 'https://via.placeholder.com/640x480.png/001177?text=nature+category+image+quia', 'Numquam voluptatem similique est non voluptatum ipsum sint.', 'active', 3, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(30, 'velit', 'velit', NULL, 'https://via.placeholder.com/640x480.png/0022cc?text=nature+category+image+ipsa', 'Dolor veritatis molestias doloribus minima et ducimus voluptatem.', 'inactive', 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(31, 'sed', 'sed', NULL, 'https://via.placeholder.com/640x480.png/00ccee?text=nature+category+image+et', 'Iste quis architecto repudiandae ratione.', 'inactive', 5, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(32, 'eos', 'eos', NULL, 'https://via.placeholder.com/640x480.png/00ff77?text=nature+category+image+earum', 'Praesentium sed occaecati eligendi.', 'active', 10, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(33, 'voluptates', 'voluptates', 15, 'https://via.placeholder.com/640x480.png/00cc22?text=nature+category+image+alias', 'Maiores aspernatur ut blanditiis pariatur provident numquam delectus ipsa.', 'active', 4, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(34, 'hic', 'hic', 1, 'https://via.placeholder.com/640x480.png/00ff00?text=nature+category+image+minima', 'Et similique dolorem ea beatae.', 'inactive', 6, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(35, 'dolores', 'dolores', NULL, 'https://via.placeholder.com/640x480.png/006688?text=nature+category+image+fuga', 'Recusandae id ex sapiente nesciunt omnis iusto.', 'active', 7, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(36, 'ipsam', 'ipsam', 4, 'https://via.placeholder.com/640x480.png/00aaee?text=nature+category+image+sunt', 'Commodi rerum et consequatur vitae ratione beatae.', 'active', 4, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(37, 'eligendi', 'eligendi', NULL, 'https://via.placeholder.com/640x480.png/000077?text=nature+category+image+quibusdam', 'Quo architecto magni sed unde sed quasi fugit.', 'active', 2, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(38, 'repellendus', 'repellendus', 31, 'https://via.placeholder.com/640x480.png/00bb44?text=nature+category+image+voluptates', 'Illo sint voluptatem in dignissimos.', 'active', 2, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(39, 'doloremque', 'doloremque', 29, 'https://via.placeholder.com/640x480.png/00ee77?text=nature+category+image+ea', 'Incidunt nemo et voluptas fuga atque qui.', 'active', 3, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(40, 'quam', 'quam', NULL, 'https://via.placeholder.com/640x480.png/0099cc?text=nature+category+image+ut', 'Nisi cumque ullam molestiae iusto voluptatem.', 'inactive', 2, '2024-09-29 02:49:39', '2024-09-29 02:49:39');
+INSERT INTO `categories` (`id`, `category_name`, `url_slug`, `parent_cat_id`, `img_path`, `description`, `status`, `user_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'minima', 'minima', NULL, 'https://via.placeholder.com/640x480.png/006633?text=nature+category+image+molestiae', 'Beatae ullam neque perferendis facilis aperiam.', 'active', 5, '2025-08-16 09:33:41', '2025-08-16 09:33:41', NULL),
+(2, 'ea', 'ea', NULL, 'https://via.placeholder.com/640x480.png/007711?text=nature+category+image+voluptatem', 'Fuga blanditiis quia ipsa est illo.', 'active', 10, '2025-08-16 09:33:42', '2025-08-16 09:33:42', NULL),
+(3, 'aperiam', 'aperiam', NULL, 'https://via.placeholder.com/640x480.png/0077ee?text=nature+category+image+blanditiis', 'Et aut enim aperiam consequatur dolor minus nihil.', 'inactive', 2, '2025-08-16 09:33:42', '2025-08-16 09:33:42', NULL),
+(4, 'eveniet', 'eveniet', NULL, 'https://via.placeholder.com/640x480.png/0000ee?text=nature+category+image+minus', 'Unde est sed a molestiae consectetur.', 'active', 2, '2025-08-16 09:33:42', '2025-08-16 09:33:42', NULL),
+(5, 'amet', 'amet', NULL, 'https://via.placeholder.com/640x480.png/00ff66?text=nature+category+image+placeat', 'Quo maxime veritatis expedita eveniet explicabo esse ea.', 'inactive', 9, '2025-08-16 09:33:42', '2025-08-16 09:33:42', NULL),
+(6, 'inventore', 'inventore', NULL, 'https://via.placeholder.com/640x480.png/00ff88?text=nature+category+image+consequatur', 'Eius error atque blanditiis et aut laboriosam voluptates.', 'active', 1, '2025-08-16 09:33:42', '2025-08-16 09:33:42', NULL),
+(7, 'officia', 'officia', NULL, 'https://via.placeholder.com/640x480.png/0055ee?text=nature+category+image+perspiciatis', 'Fugiat saepe qui voluptatem modi ipsum unde.', 'inactive', 10, '2025-08-16 09:33:42', '2025-08-16 09:33:42', NULL),
+(8, 'fugiat', 'fugiat', NULL, 'https://via.placeholder.com/640x480.png/0033ff?text=nature+category+image+nulla', 'Porro eum non aperiam porro possimus et cumque voluptas.', 'active', 1, '2025-08-16 09:33:42', '2025-08-16 09:33:42', NULL),
+(9, 'autem', 'autem', NULL, 'https://via.placeholder.com/640x480.png/0033ee?text=nature+category+image+sunt', 'Inventore libero consequatur ea quasi dicta.', 'inactive', 9, '2025-08-16 09:33:42', '2025-08-16 09:33:42', NULL),
+(10, 'rem', 'rem', NULL, 'https://via.placeholder.com/640x480.png/002266?text=nature+category+image+recusandae', 'Sit laborum praesentium laboriosam minus voluptatum enim.', 'active', 5, '2025-08-16 09:33:42', '2025-08-16 09:33:42', NULL),
+(11, 'veniam', 'veniam', NULL, 'https://via.placeholder.com/640x480.png/0099ee?text=nature+category+image+id', 'Et saepe sed sit velit non quas.', 'inactive', 3, '2025-08-16 09:33:42', '2025-08-16 09:33:42', NULL),
+(12, 'aut', 'aut', NULL, 'https://via.placeholder.com/640x480.png/004466?text=nature+category+image+aut', 'Consequatur voluptatem molestiae quae necessitatibus.', 'active', 4, '2025-08-16 09:33:42', '2025-08-16 09:33:42', NULL),
+(13, 'qui', 'qui', NULL, 'https://via.placeholder.com/640x480.png/00bbee?text=nature+category+image+voluptatibus', 'Eos ea et assumenda autem qui.', 'inactive', 3, '2025-08-16 09:33:42', '2025-08-16 09:33:42', NULL),
+(14, 'omnis', 'omnis', NULL, 'https://via.placeholder.com/640x480.png/006600?text=nature+category+image+impedit', 'Expedita omnis a repudiandae quaerat.', 'active', 8, '2025-08-16 09:33:42', '2025-08-16 09:33:42', NULL),
+(15, 'harum', 'harum', NULL, 'https://via.placeholder.com/640x480.png/000000?text=nature+category+image+recusandae', 'Qui est iusto doloribus maxime officiis pariatur.', 'inactive', 1, '2025-08-16 09:33:42', '2025-08-16 09:33:42', NULL),
+(16, 'est', 'est', NULL, 'https://via.placeholder.com/640x480.png/00dd00?text=nature+category+image+perspiciatis', 'Id vel et ut voluptatem assumenda necessitatibus.', 'inactive', 3, '2025-08-16 09:33:42', '2025-08-16 09:33:42', NULL),
+(17, 'doloribus', 'doloribus', NULL, 'https://via.placeholder.com/640x480.png/008800?text=nature+category+image+cupiditate', 'Architecto facere est consectetur et.', 'inactive', 2, '2025-08-16 09:33:42', '2025-08-16 09:33:42', NULL),
+(18, 'accusamus', 'accusamus', NULL, 'https://via.placeholder.com/640x480.png/0022bb?text=nature+category+image+et', 'Non doloribus rem rerum et qui vero.', 'inactive', 10, '2025-08-16 09:33:42', '2025-08-16 09:33:42', NULL),
+(19, 'placeat', 'placeat', NULL, 'https://via.placeholder.com/640x480.png/00cc77?text=nature+category+image+qui', 'Velit eius laboriosam exercitationem eum quam incidunt voluptatem.', 'active', 8, '2025-08-16 09:33:42', '2025-08-16 09:33:42', NULL),
+(20, 'aliquid', 'aliquid', NULL, 'https://via.placeholder.com/640x480.png/00cc33?text=nature+category+image+quia', 'Sunt quis consequatur id nihil enim.', 'inactive', 9, '2025-08-16 09:33:42', '2025-08-16 09:33:42', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `colors`
+-- Table structure for table `contacts`
 --
 
-CREATE TABLE `colors` (
+CREATE TABLE `contacts` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `color_name` varchar(255) NOT NULL,
-  `hex_value` varchar(7) NOT NULL,
-  `status` enum('active','inactive') NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `colors`
---
-
-INSERT INTO `colors` (`id`, `color_name`, `hex_value`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'aqua', '#479a9c', 'inactive', 10, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(2, 'green', '#e24fb7', 'inactive', 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(3, 'blue', '#34bca2', 'active', 5, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(4, 'black', '#88013e', 'active', 6, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(5, 'olive', '#7e0d4d', 'active', 8, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(6, 'lime', '#6953b8', 'active', 10, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(7, 'black', '#17375e', 'active', 4, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(8, 'gray', '#ef9413', 'inactive', 6, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(9, 'gray', '#c7cb20', 'active', 8, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(10, 'fuchsia', '#de3c2e', 'inactive', 9, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(11, 'silver', '#11d038', 'active', 7, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(12, 'fuchsia', '#fc46a6', 'active', 9, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(13, 'green', '#82be3a', 'active', 6, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(14, 'teal', '#4bd101', 'inactive', 9, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(15, 'yellow', '#5982f1', 'inactive', 8, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(16, 'teal', '#6a1412', 'inactive', 7, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(17, 'green', '#2861c2', 'active', 8, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(18, 'navy', '#d9efe4', 'inactive', 4, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(19, 'teal', '#b084f6', 'active', 3, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(20, 'lime', '#e0dffc', 'inactive', 11, '2024-09-29 02:49:39', '2024-09-29 02:49:39');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `compares`
---
-
-CREATE TABLE `compares` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `product_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `coupons`
---
-
-CREATE TABLE `coupons` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `coupon_code` varchar(255) NOT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `discount_type` enum('percentage','amount','quantity') NOT NULL DEFAULT 'amount',
-  `discount_value` decimal(10,2) DEFAULT NULL,
-  `free_shipping` tinyint(1) NOT NULL DEFAULT 0,
-  `individual_use_only` tinyint(1) NOT NULL DEFAULT 0,
-  `usage_limit_per_coupon` int(11) DEFAULT NULL,
-  `usage_limit_per_user` int(11) DEFAULT NULL,
-  `start_date` date DEFAULT NULL,
-  `expiry_date` date DEFAULT NULL,
-  `min_purchase_amount` decimal(10,2) DEFAULT NULL,
-  `max_discount_amount` decimal(10,2) DEFAULT NULL,
-  `status` enum('active','inactive','expired') NOT NULL DEFAULT 'active',
-  `eligible_categories` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`eligible_categories`)),
-  `excluded_categories` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`excluded_categories`)),
-  `eligible_products` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`eligible_products`)),
-  `excluded_products` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`excluded_products`)),
-  `auto_apply` tinyint(1) NOT NULL DEFAULT 0,
-  `customer_group_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `store_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `used_count` int(11) NOT NULL DEFAULT 0,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `currency_conversion_rates`
---
-
-CREATE TABLE `currency_conversion_rates` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `source_currency` varchar(255) NOT NULL,
-  `source_amount` decimal(10,2) NOT NULL,
-  `target_currency` varchar(255) NOT NULL,
-  `target_amount` decimal(10,2) NOT NULL,
-  `exchange_rate` decimal(10,2) NOT NULL,
-  `last_updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `customer_groups`
---
-
-CREATE TABLE `customer_groups` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `description` text DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `customer_groups`
---
-
-INSERT INTO `customer_groups` (`id`, `name`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'VIP', 'Admin Setup', NULL, NULL),
-(2, 'Regular', 'Admin Setup', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -347,11 +157,11 @@ INSERT INTO `customer_groups` (`id`, `name`, `description`, `created_at`, `updat
 CREATE TABLE `districts` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `division_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `bn_name` varchar(255) DEFAULT NULL,
-  `lat` varchar(255) DEFAULT NULL,
-  `lon` varchar(255) DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bn_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lat` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -434,9 +244,9 @@ INSERT INTO `districts` (`id`, `division_id`, `name`, `bn_name`, `lat`, `lon`, `
 
 CREATE TABLE `divisions` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `bn_name` varchar(255) DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bn_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -463,87 +273,12 @@ INSERT INTO `divisions` (`id`, `name`, `bn_name`, `url`, `created_at`, `updated_
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) NOT NULL,
-  `connection` text NOT NULL,
-  `queue` text NOT NULL,
-  `payload` longtext NOT NULL,
-  `exception` longtext NOT NULL,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `gift_cards`
---
-
-CREATE TABLE `gift_cards` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `code` varchar(255) NOT NULL,
-  `amount` decimal(10,2) NOT NULL,
-  `balance` decimal(10,2) NOT NULL,
-  `expiry_date` date NOT NULL,
-  `status` enum('active','inactive') NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `inventory_management`
---
-
-CREATE TABLE `inventory_management` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `product_id` bigint(20) UNSIGNED NOT NULL,
-  `product_variant_id` bigint(20) UNSIGNED NOT NULL,
-  `store_id` bigint(20) UNSIGNED NOT NULL,
-  `stock_in` int(11) DEFAULT NULL,
-  `stock_out` int(11) DEFAULT NULL,
-  `stock_balance` int(11) DEFAULT NULL,
-  `last_updated` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `inventory_movements`
---
-
-CREATE TABLE `inventory_movements` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `product_id` bigint(20) UNSIGNED NOT NULL,
-  `product_variant_id` bigint(20) UNSIGNED NOT NULL,
-  `store_id` bigint(20) UNSIGNED NOT NULL,
-  `movement_type` enum('stock_in','stock_out','adjustment','return','transfer') NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `movement_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `reference_id` varchar(255) DEFAULT NULL,
-  `comments` text DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `item_returns`
---
-
-CREATE TABLE `item_returns` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `order_id` bigint(20) UNSIGNED NOT NULL,
-  `product_id` bigint(20) UNSIGNED NOT NULL,
-  `product_variant_id` bigint(20) UNSIGNED NOT NULL,
-  `store_id` bigint(20) UNSIGNED NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `return_reason` text DEFAULT NULL,
-  `return_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -554,7 +289,7 @@ CREATE TABLE `item_returns` (
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -572,38 +307,18 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (7, '2024_08_13_055311_create_districts_table', 1),
 (8, '2024_08_13_055312_create_upazilas_table', 1),
 (9, '2024_08_13_055313_create_unions_table', 1),
-(10, '2024_08_13_055322_create_stores_table', 1),
-(11, '2024_08_13_055330_create_customer_groups_table', 1),
-(12, '2024_08_13_055341_create_categories_table', 1),
-(13, '2024_08_13_055404_create_brands_table', 1),
-(14, '2024_08_13_055404_create_colors_table', 1),
-(15, '2024_08_13_055529_create_products_table', 1),
-(16, '2024_08_13_055618_create_product_variants_table', 1),
-(17, '2024_08_13_055715_create_product_images_table', 1),
-(18, '2024_08_13_055759_create_product_details_table', 1),
-(19, '2024_08_13_055857_create_product_specifications_table', 1),
-(20, '2024_08_13_055935_create_product_reviews_table', 1),
-(21, '2024_08_13_060054_create_currency_conversion_rates_table', 1),
-(22, '2024_08_13_060211_create_carts_table', 1),
-(23, '2024_08_13_060212_create_wishlists_table', 1),
-(24, '2024_08_13_060213_create_compares_table', 1),
-(25, '2024_08_13_060254_create_shipping_addresses_table', 1),
-(26, '2024_08_13_060293_create_coupons_table', 1),
-(27, '2024_08_13_060323_create_orders_table', 1),
-(28, '2024_08_13_060415_create_order_items_table', 1),
-(29, '2024_08_13_061523_create_order_shipping_addresses_table', 1),
-(30, '2024_08_13_061726_create_vouchers_table', 1),
-(31, '2024_08_13_061925_create_offers_table', 1),
-(32, '2024_08_13_062000_create_gift_cards_table', 1),
-(33, '2024_08_13_062049_create_blog_posts_table', 1),
-(34, '2024_08_13_062126_create_blog_comments_table', 1),
-(35, '2024_08_13_062211_create_blog_views_table', 1),
-(36, '2024_08_13_062245_create_blog_shares_table', 1),
-(37, '2024_08_13_062401_create_inventory_management_table', 1),
-(38, '2024_08_13_062514_create_inventory_movements_table', 1),
-(39, '2024_08_13_064228_create_item_returns_table', 1),
-(40, '2024_09_29_060327_create_shipping_methods_table', 1),
-(41, '2024_09_29_063028_create_shipping_zones_table', 1);
+(10, '2024_08_13_055314_create_contacts_table', 1),
+(11, '2024_08_13_055341_create_categories_table', 1),
+(12, '2024_08_13_060210_create_properties_table', 1),
+(13, '2024_08_13_060211_create_property_address_table', 1),
+(14, '2024_08_13_060212_create_property_images_table', 1),
+(15, '2024_08_13_060222_create_wishlists_table', 1),
+(16, '2024_08_13_062049_create_blog_posts_table', 1),
+(17, '2024_08_13_062126_create_blog_comments_table', 1),
+(18, '2024_08_13_062211_create_blog_views_table', 1),
+(19, '2024_08_13_062245_create_blog_shares_table', 1),
+(20, '2025_01_17_171648_create_mortgages_table', 1),
+(21, '2025_01_17_184455_create_other_information_table', 1);
 
 -- --------------------------------------------------------
 
@@ -613,7 +328,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `model_has_permissions` (
   `permission_id` bigint(20) UNSIGNED NOT NULL,
-  `model_type` varchar(255) NOT NULL,
+  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `model_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -625,7 +340,7 @@ CREATE TABLE `model_has_permissions` (
 
 CREATE TABLE `model_has_roles` (
   `role_id` bigint(20) UNSIGNED NOT NULL,
-  `model_type` varchar(255) NOT NULL,
+  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `model_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -639,18 +354,18 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `offers`
+-- Table structure for table `mortgages`
 --
 
-CREATE TABLE `offers` (
+CREATE TABLE `mortgages` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `offer_name` varchar(255) NOT NULL,
-  `discount_type` enum('fixed','rate') NOT NULL,
-  `discount_value` decimal(10,2) NOT NULL,
-  `start_date` date NOT NULL,
-  `end_date` date NOT NULL,
-  `description` text DEFAULT NULL,
-  `status` enum('active','inactive') NOT NULL,
+  `home_value` decimal(12,2) DEFAULT NULL,
+  `loan_amount` decimal(12,2) DEFAULT NULL,
+  `term_years` int(11) DEFAULT NULL,
+  `interest_rate` decimal(5,2) DEFAULT NULL,
+  `financed_amount` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `mortgage_payments` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `annual_cost_of_loan` decimal(12,2) NOT NULL DEFAULT 0.00,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -658,62 +373,22 @@ CREATE TABLE `offers` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orders`
+-- Table structure for table `other_information`
 --
 
-CREATE TABLE `orders` (
+CREATE TABLE `other_information` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `order_number` varchar(255) NOT NULL,
+  `identification_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `hashed_nid` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `hashed_passport` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url_facebook` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url_instagram` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url_youtube` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url_website` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url_linkedin` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
-  `total_amount` decimal(10,2) NOT NULL,
-  `discount_amount` decimal(10,2) DEFAULT NULL,
-  `gross_amount` decimal(10,2) NOT NULL,
-  `shipping_amount` decimal(10,2) DEFAULT NULL,
-  `net_amount` decimal(10,2) NOT NULL,
-  `status` enum('placed','processing','shipping','delivered') NOT NULL,
-  `payment_status` enum('paid','not_paid') NOT NULL,
-  `payment_type` enum('net-banking','UPI','cod') NOT NULL,
-  `payment_transaction_id` varchar(255) DEFAULT NULL,
-  `coupon_code` bigint(20) UNSIGNED DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `order_items`
---
-
-CREATE TABLE `order_items` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `order_id` bigint(20) UNSIGNED NOT NULL,
-  `product_id` bigint(20) UNSIGNED NOT NULL,
-  `product_variant_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `product_name` varchar(255) NOT NULL,
-  `color` varchar(255) DEFAULT NULL,
-  `size` varchar(255) DEFAULT NULL,
-  `price` decimal(10,2) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `total_amount` decimal(10,2) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `order_shipping_addresses`
---
-
-CREATE TABLE `order_shipping_addresses` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `order_id` bigint(20) UNSIGNED NOT NULL,
-  `shipping_address_id` bigint(20) UNSIGNED NOT NULL,
-  `full_address` text NOT NULL,
-  `state` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
-  `zip_code` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -725,8 +400,8 @@ CREATE TABLE `order_shipping_addresses` (
 --
 
 CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) NOT NULL,
-  `token` varchar(255) NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -738,8 +413,8 @@ CREATE TABLE `password_reset_tokens` (
 
 CREATE TABLE `permissions` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `guard_name` varchar(255) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -749,36 +424,36 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'user-list', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(2, 'user-create', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(3, 'user-edit', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(4, 'user-show', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(5, 'user-delete', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(6, 'role-list', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(7, 'role-create', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(8, 'role-edit', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(9, 'role-show', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(10, 'role-delete', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(11, 'category-list', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(12, 'category-create', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(13, 'category-edit', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(14, 'category-delete', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(15, 'category-show', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(16, 'subcategory-list', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(17, 'subcategory-create', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(18, 'subcategory-edit', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(19, 'subcategory-delete', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(20, 'subcategory-show', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(21, 'product-list', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(22, 'product-create', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(23, 'product-edit', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(24, 'product-show', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(25, 'product-delete', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(26, 'order-list', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(27, 'order-create', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(28, 'order-edit', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(29, 'order-delete', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(30, 'order-show', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38');
+(1, 'user-list', 'web', '2025-08-16 09:33:35', '2025-08-16 09:33:35'),
+(2, 'user-create', 'web', '2025-08-16 09:33:35', '2025-08-16 09:33:35'),
+(3, 'user-edit', 'web', '2025-08-16 09:33:35', '2025-08-16 09:33:35'),
+(4, 'user-show', 'web', '2025-08-16 09:33:35', '2025-08-16 09:33:35'),
+(5, 'user-delete', 'web', '2025-08-16 09:33:35', '2025-08-16 09:33:35'),
+(6, 'role-list', 'web', '2025-08-16 09:33:36', '2025-08-16 09:33:36'),
+(7, 'role-create', 'web', '2025-08-16 09:33:36', '2025-08-16 09:33:36'),
+(8, 'role-edit', 'web', '2025-08-16 09:33:36', '2025-08-16 09:33:36'),
+(9, 'role-show', 'web', '2025-08-16 09:33:36', '2025-08-16 09:33:36'),
+(10, 'role-delete', 'web', '2025-08-16 09:33:36', '2025-08-16 09:33:36'),
+(11, 'category-list', 'web', '2025-08-16 09:33:36', '2025-08-16 09:33:36'),
+(12, 'category-create', 'web', '2025-08-16 09:33:36', '2025-08-16 09:33:36'),
+(13, 'category-edit', 'web', '2025-08-16 09:33:36', '2025-08-16 09:33:36'),
+(14, 'category-delete', 'web', '2025-08-16 09:33:36', '2025-08-16 09:33:36'),
+(15, 'category-show', 'web', '2025-08-16 09:33:36', '2025-08-16 09:33:36'),
+(16, 'subcategory-list', 'web', '2025-08-16 09:33:36', '2025-08-16 09:33:36'),
+(17, 'subcategory-create', 'web', '2025-08-16 09:33:36', '2025-08-16 09:33:36'),
+(18, 'subcategory-edit', 'web', '2025-08-16 09:33:36', '2025-08-16 09:33:36'),
+(19, 'subcategory-delete', 'web', '2025-08-16 09:33:36', '2025-08-16 09:33:36'),
+(20, 'subcategory-show', 'web', '2025-08-16 09:33:36', '2025-08-16 09:33:36'),
+(21, 'product-list', 'web', '2025-08-16 09:33:36', '2025-08-16 09:33:36'),
+(22, 'product-create', 'web', '2025-08-16 09:33:36', '2025-08-16 09:33:36'),
+(23, 'product-edit', 'web', '2025-08-16 09:33:36', '2025-08-16 09:33:36'),
+(24, 'product-show', 'web', '2025-08-16 09:33:36', '2025-08-16 09:33:36'),
+(25, 'product-delete', 'web', '2025-08-16 09:33:36', '2025-08-16 09:33:36'),
+(26, 'order-list', 'web', '2025-08-16 09:33:36', '2025-08-16 09:33:36'),
+(27, 'order-create', 'web', '2025-08-16 09:33:37', '2025-08-16 09:33:37'),
+(28, 'order-edit', 'web', '2025-08-16 09:33:37', '2025-08-16 09:33:37'),
+(29, 'order-delete', 'web', '2025-08-16 09:33:37', '2025-08-16 09:33:37'),
+(30, 'order-show', 'web', '2025-08-16 09:33:37', '2025-08-16 09:33:37');
 
 -- --------------------------------------------------------
 
@@ -788,11 +463,11 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) NOT NULL,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `token` varchar(64) NOT NULL,
-  `abilities` text DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -802,236 +477,27 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Table structure for table `properties`
 --
 
-CREATE TABLE `products` (
+CREATE TABLE `properties` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `product_name` varchar(255) DEFAULT NULL,
-  `sku_code` varchar(255) DEFAULT NULL,
-  `url_slug` text NOT NULL,
-  `main_image` varchar(255) DEFAULT NULL,
-  `category_id` bigint(20) UNSIGNED NOT NULL,
-  `brand_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `description` longtext DEFAULT NULL,
-  `short_description` text DEFAULT NULL,
-  `manufacturer_name` varchar(255) DEFAULT NULL,
+  `property_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `area_size` decimal(10,2) DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL,
-  `discount` decimal(5,2) DEFAULT NULL,
-  `tags` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`tags`)),
-  `publish_schedule` timestamp NULL DEFAULT NULL,
-  `visibility` enum('Public','Hidden') NOT NULL DEFAULT 'Public',
-  `status` enum('Published','Scheduled','Draft') NOT NULL DEFAULT 'Draft',
-  `meta_title` varchar(255) DEFAULT NULL,
-  `meta_keywords` varchar(255) DEFAULT NULL,
-  `meta_description` text DEFAULT NULL,
-  `sales_count` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `view_count` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `wishlist_count` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`id`, `product_name`, `sku_code`, `url_slug`, `main_image`, `category_id`, `brand_id`, `description`, `short_description`, `manufacturer_name`, `price`, `discount`, `tags`, `publish_schedule`, `visibility`, `status`, `meta_title`, `meta_keywords`, `meta_description`, `sales_count`, `view_count`, `wishlist_count`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'voluptate sint et', 'impedit', 'voluptate-sint-et', 'https://via.placeholder.com/640x480.png/0044dd?text=alias', 21, 4, 'Numquam velit quae quaerat. Doloribus laboriosam iste totam qui exercitationem sequi et.', 'Animi saepe vitae quo totam quos neque.', 'Purdy, Robel and Friesen', 91.20, 78.79, '[\"itaque\",\"sunt\",\"quae\"]', '2024-10-01 08:18:39', 'Hidden', 'Draft', 'Illo et rerum dolores voluptas.', 'qui exercitationem voluptas aut accusamus', 'Error mollitia ipsam est voluptas. Qui rerum voluptatibus officia aperiam et magnam. Et modi exercitationem labore ut fugiat. Ipsa quis eaque qui est quos ut.', 582, 3863, 448, 12, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(2, 'ad voluptas quaerat rerum', 'similique', 'ad-voluptas-quaerat-rerum', 'https://via.placeholder.com/640x480.png/007744?text=ex', 22, 2, 'Est assumenda quia adipisci voluptate ad rerum. Nihil debitis qui similique enim qui ipsa aliquid. Illo id iusto qui modi quis quod.', 'Dicta omnis autem sed suscipit sed ut.', 'Hyatt Group', 329.43, 32.58, '[\"consequuntur\",\"est\",\"saepe\"]', '2024-10-27 02:26:56', 'Public', 'Scheduled', 'Placeat soluta et et est dolor asperiores.', 'sunt qui in quisquam deserunt', 'Modi sint tempore consequatur quod quis. Tempora odit repellat culpa rem temporibus et. Id eveniet officia sed quo recusandae laudantium non.', 263, 5942, 390, 13, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(3, 'repellendus praesentium repudiandae tempore', 'sapiente', 'repellendus-praesentium-repudiandae-tempore', 'https://via.placeholder.com/640x480.png/00ee77?text=cum', 23, 3, 'Maxime est excepturi vitae beatae quod et sequi et. Temporibus odio animi facilis aspernatur tempora dolore delectus illo. Neque iusto nemo dolores modi. Ad consequatur et reprehenderit debitis.', 'Modi consequatur quia fuga suscipit.', 'Miller Inc', 808.31, 83.63, '[\"quod\",\"quas\",\"culpa\"]', '2024-10-25 01:06:28', 'Hidden', 'Published', 'Eum maxime doloribus consequuntur velit.', 'odit perspiciatis ut voluptatibus sit', 'Sunt dignissimos ut doloremque quisquam. Officiis voluptatem autem sed sit autem aut.', 38, 9064, 196, 14, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(4, 'totam aut quia', 'non', 'totam-aut-quia', 'https://via.placeholder.com/640x480.png/009933?text=dolore', 24, 8, 'Est sint consequatur enim pariatur nostrum. Libero facere blanditiis magnam est at accusantium quasi. Porro quia similique beatae velit voluptatem. Tenetur enim accusamus ut consequatur ut.', 'In quia mollitia tempora recusandae voluptatum non laboriosam.', 'Block, Mills and Huel', 436.99, 25.63, '[\"voluptatem\",\"quam\",\"neque\"]', '2024-10-19 23:23:43', 'Hidden', 'Published', 'Provident quae quia libero fugit.', 'inventore ut odit debitis sed', 'Nihil nobis eum beatae. Voluptatibus impedit praesentium rem quia sequi. Harum quia voluptatem qui atque quaerat.', 222, 3213, 1, 15, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(5, 'cum earum architecto id', 'qui', 'cum-earum-architecto-id', 'https://via.placeholder.com/640x480.png/00ffaa?text=quia', 25, 10, 'Vel distinctio aut molestias assumenda. Quod nulla commodi ad laudantium illo omnis. Dignissimos fugit officiis dolor dignissimos et cum. Neque debitis vitae consequatur dolorem illo sunt neque.', 'Odit quibusdam qui vero dolorem illum quam ipsam reiciendis.', 'Schulist-Bergnaum', 900.54, 60.98, '[\"quam\",\"omnis\",\"in\"]', '2024-10-28 10:36:11', 'Public', 'Scheduled', 'Cum nam delectus voluptate excepturi.', 'ipsam excepturi non excepturi veritatis', 'Consectetur repellendus amet quidem et sed. Et doloremque quisquam officiis voluptatem voluptatem. Quia temporibus optio eaque tempora temporibus.', 195, 539, 69, 16, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(6, 'id perferendis veritatis eius', 'sequi', 'id-perferendis-veritatis-eius', 'https://via.placeholder.com/640x480.png/00ff22?text=quibusdam', 26, 9, 'Harum voluptate quia quo ut voluptate dolorem tempore. Voluptas aut harum iure officiis culpa harum. Non explicabo praesentium hic qui voluptatem enim. Iusto aut recusandae qui sed.', 'Non quis inventore ut quam.', 'Doyle-Durgan', 382.23, 52.76, '[\"aut\",\"velit\",\"facere\"]', '2024-10-26 08:11:59', 'Hidden', 'Scheduled', 'Voluptatem aliquam sint rerum et voluptas at.', 'quod alias cupiditate qui expedita', 'Qui aperiam quia voluptatem voluptatibus. Quia repellat vitae iste et ipsam et aliquid id. Corrupti ratione ut quisquam. Et est error molestiae et sunt porro aut. Et provident expedita est quaerat quia quasi et sunt.', 850, 8737, 176, 17, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(7, 'voluptatibus assumenda', 'consectetur', 'voluptatibus-assumenda', 'https://via.placeholder.com/640x480.png/00ff22?text=id', 27, 8, 'Nulla beatae aut beatae vitae. Nesciunt accusantium quia ea exercitationem quos. Eaque possimus quia ea.', 'Eum provident amet molestiae qui asperiores ut.', 'Gottlieb-Pouros', 910.90, 10.29, '[\"sequi\",\"laudantium\",\"quos\"]', '2024-10-08 08:31:11', 'Public', 'Scheduled', 'Repudiandae amet quasi enim voluptatem.', 'voluptatem quo deleniti quis non', 'Iure aliquam eveniet saepe quo omnis. Ducimus sed ducimus unde magni enim. Labore necessitatibus facere harum fugiat. Doloribus aliquid quasi aspernatur porro voluptatem.', 728, 2091, 350, 18, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(8, 'optio facilis fuga consequatur', 'inventore', 'optio-facilis-fuga-consequatur', 'https://via.placeholder.com/640x480.png/005500?text=laboriosam', 28, 4, 'Ipsum nihil similique possimus maiores. Aut architecto distinctio corporis itaque doloribus minus omnis. Eos iure consequuntur cumque sunt. Molestiae porro culpa est debitis rerum deserunt ut maxime.', 'Vel laboriosam eveniet nesciunt sequi sed ut.', 'Lakin, Emard and Smith', 163.31, 82.34, '[\"qui\",\"odio\",\"officia\"]', '2024-10-22 02:48:38', 'Public', 'Published', 'Voluptatum autem quod quos qui.', 'voluptates consectetur enim ea sit', 'Nemo optio sit qui quaerat omnis at sit. Qui fugiat error natus tempora quos. Commodi aut et enim incidunt. Est quia iure eaque.', 679, 8713, 447, 19, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(9, 'ea unde', 'quis', 'ea-unde', 'https://via.placeholder.com/640x480.png/00cc55?text=ut', 29, 7, 'Quam doloremque error ut animi ut qui quia. Sed accusantium commodi aut. Aut iusto consequatur quo ex.', 'Neque tempora ut voluptatibus consectetur iste minus quia.', 'Adams Group', 35.70, 54.42, '[\"voluptas\",\"rerum\",\"alias\"]', '2024-10-04 14:51:01', 'Public', 'Scheduled', 'Dolores placeat eius ut tempora magni.', 'culpa eius aut accusantium nesciunt', 'Dolorum laudantium consequuntur qui eligendi sunt dolor fugiat. Dicta earum ipsum in cumque. Voluptas ut blanditiis sit quo. Reiciendis ea reprehenderit et est molestiae distinctio fugit. Alias sit rerum dicta itaque ipsam veritatis sed.', 789, 5052, 215, 20, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(10, 'eaque laboriosam dicta', 'maiores', 'eaque-laboriosam-dicta', 'https://via.placeholder.com/640x480.png/007711?text=quia', 30, 3, 'Sunt corporis non cum eos. Alias ipsam quae itaque reprehenderit quia unde atque. Tenetur ut et unde quasi.', 'Cum minus harum et repellendus atque corrupti.', 'Cummings, Cummings and Abernathy', 829.35, 69.74, '[\"accusantium\",\"eius\",\"hic\"]', '2024-09-30 19:56:13', 'Public', 'Draft', 'Nesciunt omnis ea voluptatem laborum.', 'sit laudantium tenetur doloremque aut', 'Magnam dolor aut dicta et voluptatem minus alias. Exercitationem qui molestias iusto consectetur voluptatem blanditiis blanditiis. Expedita eum qui aliquam et.', 737, 9957, 326, 21, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(11, 'veritatis non', 'libero', 'veritatis-non', 'https://via.placeholder.com/640x480.png/0055aa?text=qui', 31, 7, 'Ad cumque totam dicta ex quo totam ipsam. Minima molestiae quis nam deleniti est et.', 'Placeat in libero omnis nulla sed illo rerum eligendi.', 'McKenzie, Jaskolski and Thompson', 899.36, 91.80, '[\"quam\",\"non\",\"ratione\"]', '2024-10-20 16:37:37', 'Public', 'Draft', 'Soluta molestiae ea corrupti eum.', 'nostrum inventore qui alias nisi', 'Sunt et voluptas voluptates sed ut laborum. Sint voluptate qui rerum eaque. Totam quia et vitae sunt dolorem culpa distinctio quasi. Aut aut dolorem consequatur perferendis.', 400, 1825, 96, 22, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(12, 'quaerat consequatur ut', 'explicabo', 'quaerat-consequatur-ut', 'https://via.placeholder.com/640x480.png/007711?text=eum', 32, 6, 'Deleniti consectetur similique dolorem voluptatem at eum. Debitis dolor sed iure neque. Nam autem cupiditate nisi nulla. Minus nobis enim vel aut doloribus blanditiis consequatur.', 'Praesentium nihil modi voluptatibus aliquam quia sint rem.', 'Funk-Cassin', 764.75, 68.94, '[\"quasi\",\"odio\",\"corporis\"]', '2024-10-26 06:12:41', 'Hidden', 'Published', 'Excepturi qui recusandae ea eius cum rem.', 'quia a doloribus iure non', 'Quos enim est libero facilis illo sapiente iure. Quia in est in officiis consectetur. Voluptatibus facere corrupti ut totam at eum. Amet quasi natus eveniet et voluptas fuga cum amet.', 357, 850, 318, 23, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(13, 'minus dolores', 'earum', 'minus-dolores', 'https://via.placeholder.com/640x480.png/004488?text=voluptas', 33, 1, 'Voluptate labore nemo itaque. Voluptates eos est et enim aut officia odit. Aut vero hic omnis delectus.', 'Maiores saepe enim consectetur molestiae iusto nobis ut.', 'Goldner-Beahan', 54.69, 44.11, '[\"dolorum\",\"illo\",\"nemo\"]', '2024-10-01 13:16:47', 'Public', 'Published', 'In aut quia fuga velit omnis odit perspiciatis.', 'id unde sunt consequatur possimus', 'Et deserunt qui et amet vel necessitatibus. Est aut sequi asperiores sed voluptas numquam. Esse blanditiis optio velit nemo at ullam.', 272, 7531, 361, 24, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(14, 'hic commodi', 'pariatur', 'hic-commodi', 'https://via.placeholder.com/640x480.png/00ddaa?text=tenetur', 34, 5, 'Vel placeat dignissimos quos dolor ut illum fugiat accusantium. Vitae et explicabo qui molestias autem atque eos. Voluptatem sed harum aliquam quia doloremque molestiae. Eos et nulla aspernatur aut error earum.', 'Similique aliquid quia et et cumque molestiae.', 'Kuhn Inc', 650.86, 19.88, '[\"iure\",\"ut\",\"quidem\"]', '2024-10-19 17:13:30', 'Public', 'Published', 'Quis ipsum sequi occaecati laudantium.', 'doloremque adipisci rem officia in', 'Delectus tempora cum voluptas non natus et sed. Velit quia quibusdam doloremque itaque dolore similique vitae. Molestias alias accusamus officiis aut quasi.', 963, 8666, 200, 25, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(15, 'optio aspernatur voluptatibus voluptatem', 'unde', 'optio-aspernatur-voluptatibus-voluptatem', 'https://via.placeholder.com/640x480.png/00bb11?text=quam', 35, 4, 'Aliquam quis ut qui qui suscipit. Voluptatem consequatur nostrum officia eaque fuga. Omnis eos maiores sint officia hic eligendi.', 'Quia est aut nobis ut incidunt odio.', 'Buckridge-Raynor', 354.56, 62.43, '[\"nostrum\",\"omnis\",\"voluptas\"]', '2024-10-26 06:27:17', 'Public', 'Published', 'Voluptas fugit quia deserunt eaque.', 'velit reiciendis delectus nam nam', 'Cumque iste et assumenda voluptas quia eaque. Et aperiam libero eos dolor rem enim animi. Eum deserunt officia at in consequuntur est ea nobis. Eligendi dolor delectus consequatur itaque voluptatem. Et tenetur totam occaecati quis doloribus omnis doloremque.', 120, 6211, 380, 26, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(16, 'id excepturi voluptatum sed', 'natus', 'id-excepturi-voluptatum-sed', 'https://via.placeholder.com/640x480.png/002266?text=et', 36, 8, 'Quas consequatur voluptas quia officiis voluptatem molestias. Aut impedit consequatur quaerat quisquam ad similique. Ea nihil officiis ratione cupiditate quia laudantium minima maiores.', 'Quia odio quibusdam sit nesciunt.', 'Walker Ltd', 286.18, 46.88, '[\"perspiciatis\",\"eveniet\",\"nam\"]', '2024-10-19 09:47:34', 'Public', 'Published', 'Molestiae ipsa inventore expedita autem eveniet ut.', 'eos aut et voluptatibus ut', 'Numquam eaque et quia. Velit tempora nisi et et fuga veritatis. Natus laborum sed expedita fugit similique possimus.', 606, 4762, 434, 27, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(17, 'magni est', 'sit', 'magni-est', 'https://via.placeholder.com/640x480.png/006600?text=officiis', 37, 2, 'Alias libero necessitatibus doloribus voluptatem et voluptatem. Illum saepe quasi dolor. Labore et qui occaecati adipisci sit esse. Ratione voluptates quod est sit.', 'Expedita eos molestiae in tempora fuga cupiditate consequatur.', 'Cronin Inc', 967.11, 43.30, '[\"doloribus\",\"minus\",\"blanditiis\"]', '2024-10-06 08:49:56', 'Public', 'Draft', 'Est atque optio est voluptatum dolor velit ipsum.', 'eum facilis aperiam repellendus aut', 'Repudiandae possimus quos aut quia. Debitis esse voluptatem rem doloremque exercitationem. Aperiam id ut voluptatum ut accusamus consequuntur.', 246, 7857, 58, 28, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(18, 'illum eum consectetur eveniet', 'ratione', 'illum-eum-consectetur-eveniet', 'https://via.placeholder.com/640x480.png/000099?text=provident', 38, 9, 'Est ipsum atque eligendi qui ut. Et tenetur et blanditiis voluptatem eum. Non laudantium et id aut eum.', 'Quas ex sit veritatis quia est.', 'Marquardt-Hoppe', 667.76, 87.48, '[\"quo\",\"quam\",\"odit\"]', '2024-10-11 00:49:05', 'Hidden', 'Scheduled', 'Porro mollitia ea eos et illum distinctio enim.', 'quis dolor accusamus doloribus sit', 'Quo repellat vel quas voluptatem commodi ducimus culpa. Sit porro et consequatur nostrum sint exercitationem architecto distinctio.', 187, 6010, 372, 29, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(19, 'rem officiis', 'tenetur', 'rem-officiis', 'https://via.placeholder.com/640x480.png/00ccdd?text=illo', 39, 2, 'Odit doloremque qui dicta cum. Magnam facilis qui voluptatum sapiente voluptates aut. Consequatur tempora cumque quia dolor. Corporis expedita harum quo minima dolorem.', 'Amet illum iure sequi expedita qui vitae aut harum.', 'Hyatt, Daniel and Kub', 479.29, 16.98, '[\"aut\",\"tempore\",\"mollitia\"]', '2024-10-19 09:14:42', 'Public', 'Draft', 'Optio temporibus minima maxime.', 'odio eligendi blanditiis et maxime', 'Eaque non ea sapiente et molestiae nisi. Sit error assumenda eius et. Aliquid vel architecto qui molestiae deleniti. At et doloremque et sed autem consequatur iusto.', 589, 9785, 58, 30, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(20, 'et quia ipsum rerum', 'officia', 'et-quia-ipsum-rerum', 'https://via.placeholder.com/640x480.png/003377?text=magni', 40, 9, 'In quo sit quaerat molestiae non perspiciatis inventore. Ut et cum et laborum velit perspiciatis ut. Est sit sit asperiores consectetur aut vel.', 'Ex ab ut est maxime et reiciendis.', 'Moen, Wintheiser and Padberg', 725.55, 7.12, '[\"est\",\"quod\",\"quis\"]', '2024-10-02 20:02:23', 'Public', 'Scheduled', 'Consequatur sed minus et.', 'ducimus ut eos assumenda quasi', 'Et laborum nesciunt enim. Qui voluptas impedit cupiditate a culpa. Illum ad debitis eligendi molestiae necessitatibus pariatur. Quae eum quibusdam illum.', 143, 237, 21, 31, '2024-09-29 02:49:39', '2024-09-29 02:49:39');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `product_details`
---
-
-CREATE TABLE `product_details` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `product_id` bigint(20) UNSIGNED NOT NULL,
-  `detail_name` varchar(255) DEFAULT NULL,
-  `detail_value` text DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `product_details`
---
-
-INSERT INTO `product_details` (`id`, `product_id`, `detail_name`, `detail_value`, `created_at`, `updated_at`) VALUES
-(1, 1, 'rerum', 'Cumque eos molestiae et.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(2, 1, 'eum', 'Odit impedit dolorem sint nobis.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(3, 1, 'impedit', 'Neque ea optio cum veritatis et qui.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(4, 2, 'accusantium', 'Incidunt voluptatem sed nihil autem est doloremque saepe voluptas.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(5, 2, 'veniam', 'Perspiciatis omnis sed numquam possimus porro.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(6, 2, 'totam', 'Impedit eos voluptas eum.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(7, 3, 'optio', 'Mollitia enim repellat et.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(8, 3, 'quis', 'Modi adipisci nemo blanditiis repellat quis dolor expedita.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(9, 3, 'suscipit', 'Ab sit minus voluptas earum magnam minus.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(10, 4, 'quaerat', 'Ipsam autem qui dolores voluptates eius doloremque.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(11, 4, 'aliquid', 'Sed repudiandae et et omnis officia nihil et animi.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(12, 4, 'molestias', 'Dolores aliquam et necessitatibus fugit iure omnis aut.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(13, 5, 'architecto', 'Et magnam voluptatem recusandae eos nisi sequi veniam.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(14, 5, 'vel', 'Aut illum dignissimos error ea.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(15, 5, 'quis', 'Ab suscipit distinctio pariatur natus.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(16, 6, 'tempore', 'Optio quia voluptatem fugit illum aspernatur autem ad voluptate.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(17, 6, 'nobis', 'Harum dolor voluptatibus corporis unde qui sunt reprehenderit.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(18, 6, 'quae', 'Repudiandae illo consectetur aut nemo itaque quos quam laudantium.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(19, 7, 'voluptas', 'Tempora quia mollitia quae.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(20, 7, 'nostrum', 'Aspernatur fuga non totam sint porro repudiandae.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(21, 7, 'et', 'Aut quas ut incidunt quos voluptate.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(22, 8, 'corrupti', 'At sit qui omnis illum earum iusto.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(23, 8, 'molestiae', 'Qui fuga non labore nihil nostrum sint occaecati.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(24, 8, 'praesentium', 'Placeat pariatur et et praesentium placeat.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(25, 9, 'voluptas', 'Velit qui animi inventore voluptatibus.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(26, 9, 'nulla', 'Nihil iure iure dolore laudantium labore dolor.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(27, 9, 'distinctio', 'Eveniet rerum ratione porro fugit.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(28, 10, 'mollitia', 'Ea et perferendis et voluptate quaerat.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(29, 10, 'rerum', 'Sapiente itaque quis est.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(30, 10, 'nesciunt', 'Quo velit porro qui.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(31, 11, 'aspernatur', 'Minus animi ut et iusto est ut mollitia.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(32, 11, 'voluptatum', 'Quo officia quis occaecati voluptas quo ut omnis mollitia.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(33, 11, 'ut', 'Nulla dicta fugiat sit et.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(34, 12, 'sit', 'Officiis et laudantium enim fugit libero similique.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(35, 12, 'voluptatum', 'Illum enim et expedita assumenda omnis.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(36, 12, 'commodi', 'Odit minus similique minima amet inventore.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(37, 13, 'ea', 'Totam inventore dolores pariatur sint voluptatem quia est.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(38, 13, 'totam', 'Et ducimus id omnis voluptate fugit quis ipsa animi.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(39, 13, 'quis', 'Numquam quasi provident quam eveniet ea.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(40, 14, 'dolores', 'Maiores placeat neque sequi dolorum at.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(41, 14, 'ad', 'Voluptatem qui ut delectus dignissimos cumque.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(42, 14, 'facilis', 'Et molestiae eius harum dolores.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(43, 15, 'voluptatum', 'Ea qui id architecto perspiciatis.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(44, 15, 'cum', 'Quidem eum voluptas iure suscipit nostrum.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(45, 15, 'maxime', 'Expedita iste sequi dolorum sit fugit aperiam unde.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(46, 16, 'et', 'Eos delectus molestiae consequatur eos labore.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(47, 16, 'voluptatibus', 'Modi perspiciatis provident quaerat eos.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(48, 16, 'perspiciatis', 'Sit quidem dolorem aut quos ea vitae incidunt praesentium.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(49, 17, 'praesentium', 'Consequatur vitae est at quos quidem rerum.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(50, 17, 'dolores', 'Nihil at molestias delectus et omnis qui.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(51, 17, 'quia', 'Cupiditate omnis amet quo fugiat ut.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(52, 18, 'ut', 'Qui veritatis excepturi omnis quo sint.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(53, 18, 'rerum', 'Qui veniam aut omnis.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(54, 18, 'eos', 'Ad aut facere hic consequatur repellat non expedita.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(55, 19, 'molestiae', 'Aut ratione reiciendis illo ut.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(56, 19, 'tempore', 'Exercitationem deleniti necessitatibus suscipit excepturi enim aut aut.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(57, 19, 'consequuntur', 'Ullam dolores officia ipsa et non.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(58, 20, 'maxime', 'Voluptatem qui nam odio atque soluta omnis voluptates.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(59, 20, 'necessitatibus', 'Ab harum accusamus magni assumenda commodi.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(60, 20, 'incidunt', 'Eum voluptatibus modi blanditiis cupiditate id.', '2024-09-29 02:49:40', '2024-09-29 02:49:40');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `product_images`
---
-
-CREATE TABLE `product_images` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `product_id` bigint(20) UNSIGNED NOT NULL,
-  `image_path` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `product_images`
---
-
-INSERT INTO `product_images` (`id`, `product_id`, `image_path`, `created_at`, `updated_at`) VALUES
-(1, 1, 'https://via.placeholder.com/640x480.png/004433?text=ipsum', '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(2, 1, 'https://via.placeholder.com/640x480.png/00ffaa?text=perferendis', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(3, 1, 'https://via.placeholder.com/640x480.png/00aa88?text=porro', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(4, 2, 'https://via.placeholder.com/640x480.png/00bb88?text=et', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(5, 2, 'https://via.placeholder.com/640x480.png/008844?text=facere', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(6, 2, 'https://via.placeholder.com/640x480.png/00ff00?text=fugiat', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(7, 3, 'https://via.placeholder.com/640x480.png/001188?text=qui', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(8, 3, 'https://via.placeholder.com/640x480.png/005511?text=omnis', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(9, 3, 'https://via.placeholder.com/640x480.png/007777?text=et', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(10, 4, 'https://via.placeholder.com/640x480.png/007766?text=qui', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(11, 4, 'https://via.placeholder.com/640x480.png/009922?text=quas', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(12, 4, 'https://via.placeholder.com/640x480.png/001199?text=et', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(13, 5, 'https://via.placeholder.com/640x480.png/0044bb?text=ipsa', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(14, 5, 'https://via.placeholder.com/640x480.png/00ee00?text=ut', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(15, 5, 'https://via.placeholder.com/640x480.png/00cccc?text=excepturi', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(16, 6, 'https://via.placeholder.com/640x480.png/0011dd?text=accusamus', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(17, 6, 'https://via.placeholder.com/640x480.png/000011?text=pariatur', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(18, 6, 'https://via.placeholder.com/640x480.png/00ff77?text=alias', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(19, 7, 'https://via.placeholder.com/640x480.png/00aa22?text=consectetur', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(20, 7, 'https://via.placeholder.com/640x480.png/007744?text=tempora', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(21, 7, 'https://via.placeholder.com/640x480.png/000066?text=ut', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(22, 8, 'https://via.placeholder.com/640x480.png/00cc77?text=earum', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(23, 8, 'https://via.placeholder.com/640x480.png/0066ff?text=beatae', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(24, 8, 'https://via.placeholder.com/640x480.png/00ff77?text=sint', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(25, 9, 'https://via.placeholder.com/640x480.png/00ccdd?text=iusto', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(26, 9, 'https://via.placeholder.com/640x480.png/00ff11?text=itaque', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(27, 9, 'https://via.placeholder.com/640x480.png/00dddd?text=repudiandae', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(28, 10, 'https://via.placeholder.com/640x480.png/006655?text=dolorem', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(29, 10, 'https://via.placeholder.com/640x480.png/00aa33?text=voluptas', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(30, 10, 'https://via.placeholder.com/640x480.png/000055?text=maxime', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(31, 11, 'https://via.placeholder.com/640x480.png/0099ee?text=est', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(32, 11, 'https://via.placeholder.com/640x480.png/002200?text=est', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(33, 11, 'https://via.placeholder.com/640x480.png/002222?text=aut', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(34, 12, 'https://via.placeholder.com/640x480.png/004433?text=accusamus', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(35, 12, 'https://via.placeholder.com/640x480.png/0033ff?text=maxime', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(36, 12, 'https://via.placeholder.com/640x480.png/006611?text=aut', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(37, 13, 'https://via.placeholder.com/640x480.png/00cc33?text=deserunt', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(38, 13, 'https://via.placeholder.com/640x480.png/00bb00?text=fugit', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(39, 13, 'https://via.placeholder.com/640x480.png/006699?text=in', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(40, 14, 'https://via.placeholder.com/640x480.png/0033ff?text=cumque', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(41, 14, 'https://via.placeholder.com/640x480.png/008855?text=quia', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(42, 14, 'https://via.placeholder.com/640x480.png/00bbaa?text=reprehenderit', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(43, 15, 'https://via.placeholder.com/640x480.png/00dd55?text=reiciendis', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(44, 15, 'https://via.placeholder.com/640x480.png/003399?text=est', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(45, 15, 'https://via.placeholder.com/640x480.png/0000dd?text=ipsa', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(46, 16, 'https://via.placeholder.com/640x480.png/007744?text=ullam', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(47, 16, 'https://via.placeholder.com/640x480.png/001166?text=molestias', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(48, 16, 'https://via.placeholder.com/640x480.png/005522?text=qui', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(49, 17, 'https://via.placeholder.com/640x480.png/00bbff?text=corporis', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(50, 17, 'https://via.placeholder.com/640x480.png/006699?text=voluptatibus', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(51, 17, 'https://via.placeholder.com/640x480.png/003322?text=nam', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(52, 18, 'https://via.placeholder.com/640x480.png/00cc33?text=quisquam', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(53, 18, 'https://via.placeholder.com/640x480.png/000000?text=voluptatem', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(54, 18, 'https://via.placeholder.com/640x480.png/00bb22?text=sed', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(55, 19, 'https://via.placeholder.com/640x480.png/003388?text=vitae', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(56, 19, 'https://via.placeholder.com/640x480.png/00ff33?text=sint', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(57, 19, 'https://via.placeholder.com/640x480.png/00cc22?text=voluptas', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(58, 20, 'https://via.placeholder.com/640x480.png/003322?text=blanditiis', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(59, 20, 'https://via.placeholder.com/640x480.png/000055?text=itaque', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(60, 20, 'https://via.placeholder.com/640x480.png/004499?text=aut', '2024-09-29 02:49:40', '2024-09-29 02:49:40');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `product_reviews`
---
-
-CREATE TABLE `product_reviews` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `product_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `rating` int(10) UNSIGNED NOT NULL,
-  `review` text DEFAULT NULL,
+  `bedroom_count` int(11) DEFAULT NULL,
+  `dining_room_count` int(11) DEFAULT NULL,
+  `bathroom_count` int(11) DEFAULT NULL,
+  `balcony_count` int(11) DEFAULT NULL,
+  `other_features` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`other_features`)),
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `video_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `floor_plan_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pdf_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phases` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` enum('Published','Unpublished','Draft') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Draft',
+  `agent_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1039,167 +505,37 @@ CREATE TABLE `product_reviews` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_specifications`
+-- Table structure for table `property_addresses`
 --
 
-CREATE TABLE `product_specifications` (
+CREATE TABLE `property_addresses` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `product_id` bigint(20) UNSIGNED NOT NULL,
-  `specification_name` varchar(255) DEFAULT NULL,
-  `specification_value` text DEFAULT NULL,
+  `property_id` bigint(20) UNSIGNED NOT NULL,
+  `property_status` enum('For Sale','For Rent') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `property_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `property_condition` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `built_year` year(4) DEFAULT NULL,
+  `dimension` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `location` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `product_specifications`
---
-
-INSERT INTO `product_specifications` (`id`, `product_id`, `specification_name`, `specification_value`, `created_at`, `updated_at`) VALUES
-(1, 1, 'reiciendis', 'Repellat odit illo voluptas qui at sed.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(2, 1, 'ullam', 'Ut enim ipsa autem eum non.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(3, 1, 'et', 'Unde temporibus et qui numquam nulla.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(4, 2, 'dolor', 'Ut iusto error labore ea aut doloremque libero.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(5, 2, 'qui', 'Quam qui atque porro eos iure ipsum ratione.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(6, 2, 'et', 'Enim magni veniam est aspernatur voluptatum sit et beatae.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(7, 3, 'animi', 'In eum impedit ex perferendis maxime enim.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(8, 3, 'sit', 'Odit qui nam officia ut sed et.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(9, 3, 'laborum', 'Aut ad necessitatibus et nisi aliquid ducimus incidunt enim.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(10, 4, 'est', 'Cupiditate quia voluptate placeat rerum et esse reprehenderit eos.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(11, 4, 'ipsa', 'Corrupti consequuntur quidem vero molestiae exercitationem in.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(12, 4, 'expedita', 'Non deserunt tempora animi deserunt animi.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(13, 5, 'velit', 'Excepturi architecto cumque explicabo.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(14, 5, 'maxime', 'Id voluptas ipsum aut et.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(15, 5, 'voluptas', 'Occaecati id amet totam perferendis.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(16, 6, 'libero', 'Suscipit ducimus non asperiores facere aut placeat.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(17, 6, 'hic', 'Autem nostrum eos ipsum accusantium explicabo sed quas.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(18, 6, 'aut', 'Error aut dolore eum facilis.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(19, 7, 'a', 'Rerum nihil illum nam et accusantium in.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(20, 7, 'eius', 'Voluptas sit aspernatur quia atque.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(21, 7, 'explicabo', 'Quis voluptatem autem est fuga animi.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(22, 8, 'magnam', 'Voluptas fugit molestiae in voluptate.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(23, 8, 'repellendus', 'Sed minima dolore quaerat omnis pariatur officia non.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(24, 8, 'error', 'Aliquam quia quisquam sapiente provident quia et.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(25, 9, 'placeat', 'Animi nam libero maxime assumenda.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(26, 9, 'accusantium', 'Recusandae sint consectetur id aut corrupti commodi architecto.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(27, 9, 'quasi', 'Aut aut ut vel velit voluptas commodi.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(28, 10, 'aliquid', 'Sequi sint autem numquam consectetur dolores.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(29, 10, 'rem', 'Magnam velit repudiandae sint impedit occaecati aperiam.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(30, 10, 'pariatur', 'A est magnam possimus consequatur.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(31, 11, 'eveniet', 'Ut ad est magnam autem.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(32, 11, 'debitis', 'Vitae est voluptas voluptas id tenetur numquam.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(33, 11, 'quos', 'Non est nisi distinctio.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(34, 12, 'molestias', 'Voluptatem minima quia magnam maxime temporibus aut.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(35, 12, 'eligendi', 'Totam provident dolor iure et quia.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(36, 12, 'ea', 'Et ullam perferendis fuga perferendis corrupti.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(37, 13, 'amet', 'Modi tempore aperiam minus adipisci porro.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(38, 13, 'nostrum', 'Fuga sit ipsa possimus sed officia maxime provident.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(39, 13, 'reprehenderit', 'Saepe quaerat quaerat consequatur.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(40, 14, 'velit', 'In consequatur minus neque iste deserunt.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(41, 14, 'eligendi', 'Autem adipisci repudiandae reiciendis dolor sequi.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(42, 14, 'rerum', 'Beatae sit eos facilis sint officia ad illum sit.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(43, 15, 'neque', 'Ut esse numquam quod consectetur velit consequuntur vel.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(44, 15, 'omnis', 'Vitae sit sint accusamus doloremque.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(45, 15, 'et', 'Ratione quis nihil error sunt sit minus aut.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(46, 16, 'odit', 'Occaecati aut veniam quisquam.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(47, 16, 'cupiditate', 'Ipsam voluptas maiores reiciendis non eius voluptates.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(48, 16, 'provident', 'Suscipit ullam in quas cum aperiam doloribus.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(49, 17, 'commodi', 'Nemo sunt dignissimos qui praesentium nulla aut quasi.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(50, 17, 'incidunt', 'Culpa atque veniam debitis vero ea deserunt.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(51, 17, 'sapiente', 'Dolorem vel ut officia a eum sequi.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(52, 18, 'sit', 'Porro illo asperiores et provident debitis.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(53, 18, 'id', 'Aliquam quia modi eveniet saepe ducimus rerum aut.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(54, 18, 'recusandae', 'Qui et quis ut sunt.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(55, 19, 'voluptas', 'Tenetur delectus voluptatum itaque.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(56, 19, 'nulla', 'Ut voluptas perferendis quis magnam pariatur.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(57, 19, 'ad', 'Soluta ex ut et.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(58, 20, 'odio', 'Quia maxime amet repudiandae nesciunt.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(59, 20, 'consectetur', 'Neque vero maiores ut dolores animi dolor.', '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(60, 20, 'qui', 'Asperiores exercitationem facilis nihil a aut est dolores autem.', '2024-09-29 02:49:40', '2024-09-29 02:49:40');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_variants`
+-- Table structure for table `property_images`
 --
 
-CREATE TABLE `product_variants` (
+CREATE TABLE `property_images` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `product_id` bigint(20) UNSIGNED NOT NULL,
-  `img_path` varchar(255) DEFAULT NULL,
-  `color_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `size` varchar(255) DEFAULT NULL,
-  `price` decimal(10,2) DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL,
+  `property_id` bigint(20) UNSIGNED NOT NULL,
+  `property_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `product_variants`
---
-
-INSERT INTO `product_variants` (`id`, `product_id`, `img_path`, `color_id`, `size`, `price`, `quantity`, `created_at`, `updated_at`) VALUES
-(1, 1, 'https://via.placeholder.com/640x480.png/00ddee?text=perspiciatis', 9, 'M', 660.52, 63, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(2, 1, 'https://via.placeholder.com/640x480.png/008855?text=adipisci', 9, 'L', 258.82, 54, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(3, 1, 'https://via.placeholder.com/640x480.png/007755?text=aut', 9, 'XL', 35.47, 89, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(4, 2, 'https://via.placeholder.com/640x480.png/00cc11?text=quidem', 14, 'M', 688.57, 93, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(5, 2, 'https://via.placeholder.com/640x480.png/00aa44?text=occaecati', 14, 'L', 416.10, 30, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(6, 2, 'https://via.placeholder.com/640x480.png/001100?text=expedita', 14, 'S', 83.08, 26, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(7, 3, 'https://via.placeholder.com/640x480.png/001188?text=autem', 9, 'M', 926.33, 43, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(8, 3, 'https://via.placeholder.com/640x480.png/007722?text=porro', 9, 'M', 547.12, 52, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(9, 3, 'https://via.placeholder.com/640x480.png/00dd22?text=voluptatum', 9, 'L', 442.77, 11, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(10, 4, 'https://via.placeholder.com/640x480.png/005533?text=in', 7, 'S', 639.12, 56, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(11, 4, 'https://via.placeholder.com/640x480.png/009944?text=tempore', 7, 'L', 115.72, 42, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(12, 4, 'https://via.placeholder.com/640x480.png/00ffff?text=eligendi', 7, 'XL', 516.78, 41, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(13, 5, 'https://via.placeholder.com/640x480.png/00ff99?text=quam', 8, 'S', 101.08, 95, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(14, 5, 'https://via.placeholder.com/640x480.png/002222?text=vel', 8, 'L', 437.13, 95, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(15, 5, 'https://via.placeholder.com/640x480.png/001111?text=modi', 8, 'L', 593.28, 40, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(16, 6, 'https://via.placeholder.com/640x480.png/008800?text=odio', 7, 'M', 723.04, 85, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(17, 6, 'https://via.placeholder.com/640x480.png/0066dd?text=itaque', 7, 'L', 695.16, 72, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(18, 6, 'https://via.placeholder.com/640x480.png/0055ff?text=voluptatum', 7, 'L', 878.16, 40, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(19, 7, 'https://via.placeholder.com/640x480.png/004422?text=delectus', 19, 'L', 29.12, 14, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(20, 7, 'https://via.placeholder.com/640x480.png/005555?text=dolor', 19, 'S', 644.80, 4, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(21, 7, 'https://via.placeholder.com/640x480.png/00cc00?text=adipisci', 19, 'L', 119.59, 60, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(22, 8, 'https://via.placeholder.com/640x480.png/009922?text=perspiciatis', 9, 'XL', 307.66, 37, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(23, 8, 'https://via.placeholder.com/640x480.png/00dd33?text=in', 9, 'L', 393.16, 71, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(24, 8, 'https://via.placeholder.com/640x480.png/005588?text=nam', 9, 'L', 221.70, 11, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(25, 9, 'https://via.placeholder.com/640x480.png/00ee77?text=amet', 11, 'M', 858.95, 4, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(26, 9, 'https://via.placeholder.com/640x480.png/00ddee?text=et', 11, 'L', 198.26, 52, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(27, 9, 'https://via.placeholder.com/640x480.png/00ee99?text=mollitia', 11, 'M', 857.62, 30, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(28, 10, 'https://via.placeholder.com/640x480.png/0066ff?text=aut', 18, 'S', 116.87, 36, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(29, 10, 'https://via.placeholder.com/640x480.png/00eeee?text=et', 18, 'XL', 807.69, 23, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(30, 10, 'https://via.placeholder.com/640x480.png/000033?text=accusamus', 18, 'M', 179.02, 34, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(31, 11, 'https://via.placeholder.com/640x480.png/005544?text=placeat', 8, 'XL', 65.16, 86, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(32, 11, 'https://via.placeholder.com/640x480.png/0077aa?text=saepe', 8, 'M', 429.73, 68, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(33, 11, 'https://via.placeholder.com/640x480.png/001166?text=vero', 8, 'L', 710.84, 45, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(34, 12, 'https://via.placeholder.com/640x480.png/0000ff?text=cupiditate', 10, 'L', 80.33, 73, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(35, 12, 'https://via.placeholder.com/640x480.png/007766?text=voluptatum', 10, 'S', 205.17, 41, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(36, 12, 'https://via.placeholder.com/640x480.png/00aadd?text=quia', 10, 'M', 91.06, 70, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(37, 13, 'https://via.placeholder.com/640x480.png/0088ff?text=ut', 5, 'S', 741.54, 69, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(38, 13, 'https://via.placeholder.com/640x480.png/00cc88?text=natus', 5, 'L', 696.96, 19, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(39, 13, 'https://via.placeholder.com/640x480.png/00dd66?text=iure', 5, 'M', 285.89, 94, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(40, 14, 'https://via.placeholder.com/640x480.png/00cc33?text=deserunt', 9, 'XL', 718.94, 32, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(41, 14, 'https://via.placeholder.com/640x480.png/003333?text=incidunt', 9, 'L', 70.01, 91, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(42, 14, 'https://via.placeholder.com/640x480.png/003355?text=ab', 9, 'XL', 955.36, 59, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(43, 15, 'https://via.placeholder.com/640x480.png/001188?text=omnis', 16, 'L', 140.34, 3, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(44, 15, 'https://via.placeholder.com/640x480.png/00dd44?text=excepturi', 16, 'M', 70.27, 38, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(45, 15, 'https://via.placeholder.com/640x480.png/00cc00?text=dolores', 16, 'L', 856.37, 39, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(46, 16, 'https://via.placeholder.com/640x480.png/005544?text=aperiam', 11, 'S', 501.12, 44, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(47, 16, 'https://via.placeholder.com/640x480.png/001199?text=totam', 11, 'L', 390.48, 68, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(48, 16, 'https://via.placeholder.com/640x480.png/00ee66?text=voluptatibus', 11, 'L', 751.09, 38, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(49, 17, 'https://via.placeholder.com/640x480.png/005500?text=sint', 7, 'S', 569.09, 57, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(50, 17, 'https://via.placeholder.com/640x480.png/003377?text=rerum', 7, 'S', 569.70, 75, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(51, 17, 'https://via.placeholder.com/640x480.png/007700?text=quidem', 7, 'XL', 165.49, 88, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(52, 18, 'https://via.placeholder.com/640x480.png/001188?text=sit', 12, 'M', 63.42, 22, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(53, 18, 'https://via.placeholder.com/640x480.png/006699?text=enim', 12, 'L', 496.28, 14, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(54, 18, 'https://via.placeholder.com/640x480.png/000088?text=incidunt', 12, 'L', 174.76, 12, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(55, 19, 'https://via.placeholder.com/640x480.png/00dd22?text=necessitatibus', 16, 'XL', 245.12, 14, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(56, 19, 'https://via.placeholder.com/640x480.png/00ff44?text=nemo', 16, 'XL', 959.00, 14, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(57, 19, 'https://via.placeholder.com/640x480.png/0000ff?text=veritatis', 16, 'L', 394.91, 91, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(58, 20, 'https://via.placeholder.com/640x480.png/006677?text=velit', 19, 'M', 635.37, 56, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(59, 20, 'https://via.placeholder.com/640x480.png/00aadd?text=provident', 19, 'M', 997.57, 52, '2024-09-29 02:49:40', '2024-09-29 02:49:40'),
-(60, 20, 'https://via.placeholder.com/640x480.png/00ffaa?text=commodi', 19, 'L', 782.39, 16, '2024-09-29 02:49:40', '2024-09-29 02:49:40');
 
 -- --------------------------------------------------------
 
@@ -1209,8 +545,8 @@ INSERT INTO `product_variants` (`id`, `product_id`, `img_path`, `color_id`, `siz
 
 CREATE TABLE `roles` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `guard_name` varchar(255) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1220,9 +556,9 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'Super-Admin', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(2, 'Moderator', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(3, 'User', 'web', '2024-09-29 02:49:38', '2024-09-29 02:49:38');
+(1, 'Super-Admin', 'web', '2025-08-16 09:33:37', '2025-08-16 09:33:37'),
+(2, 'Moderator', 'web', '2025-08-16 09:33:37', '2025-08-16 09:33:37'),
+(3, 'User', 'web', '2025-08-16 09:33:37', '2025-08-16 09:33:37');
 
 -- --------------------------------------------------------
 
@@ -1274,103 +610,15 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `shipping_addresses`
---
-
-CREATE TABLE `shipping_addresses` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `full_address` text NOT NULL,
-  `state` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
-  `zip_code` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `shipping_methods`
---
-
-CREATE TABLE `shipping_methods` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `method_name` varchar(255) NOT NULL,
-  `description` text DEFAULT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT 1,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `shipping_methods`
---
-
-INSERT INTO `shipping_methods` (`id`, `method_name`, `description`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'Standard Shipping', 'tewdsf', 1, '2024-09-29 05:04:04', '2024-09-29 05:04:04');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `shipping_zones`
---
-
-CREATE TABLE `shipping_zones` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `shipping_method_id` bigint(20) UNSIGNED NOT NULL,
-  `zone_name` varchar(255) NOT NULL,
-  `cost` decimal(10,2) NOT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT 1,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `stores`
---
-
-CREATE TABLE `stores` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `store_name` varchar(255) DEFAULT NULL,
-  `store_code` varchar(255) NOT NULL,
-  `manager_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `district` varchar(255) DEFAULT NULL,
-  `division` varchar(255) DEFAULT NULL,
-  `country` varchar(255) NOT NULL DEFAULT 'Bangladesh',
-  `postal_code` varchar(4) DEFAULT NULL,
-  `phone` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `stores`
---
-
-INSERT INTO `stores` (`id`, `store_name`, `store_code`, `manager_id`, `address`, `district`, `division`, `country`, `postal_code`, `phone`, `email`, `description`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Center Store', 'CS001', 1, 'Gulshan', 'Dhaka', 'Dhaka', 'Bangladesh', '1212', '0123456789', 'center.store@example.com', 'This is the center store.', 1, NULL, NULL),
-(2, 'Gulshan Store', 'GS002', 1, 'Gulshan', 'Dhaka', 'Dhaka', 'Bangladesh', '1212', '0123456789', 'gulshan.store@example.com', 'This is the Gulshan store.', 1, NULL, NULL),
-(3, 'Shariatpur Store', 'SS003', 1, 'Shariatpur', 'Shariatpur', 'Barisal', 'Bangladesh', '1234', '0123456789', 'shariatpur.store@example.com', 'This is the Shariatpur store.', 1, NULL, NULL);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `unions`
 --
 
 CREATE TABLE `unions` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `upazila_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `bn_name` varchar(255) DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bn_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -5975,9 +5223,9 @@ INSERT INTO `unions` (`id`, `upazila_id`, `name`, `bn_name`, `url`, `created_at`
 CREATE TABLE `upazilas` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `district_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `bn_name` varchar(255) DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bn_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -6488,18 +5736,16 @@ INSERT INTO `upazilas` (`id`, `district_id`, `name`, `bn_name`, `url`, `created_
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `unique_id` varchar(255) DEFAULT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
-  `provider` varchar(255) DEFAULT NULL,
-  `provider_id` varchar(255) DEFAULT NULL,
-  `phone` varchar(255) DEFAULT NULL,
-  `profile_images` text DEFAULT NULL,
-  `store_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `customer_group_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `provider` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `provider_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_type` enum('Buyer','Agent') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `profile_images` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `is_admin` tinyint(1) NOT NULL DEFAULT 0,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -6510,59 +5756,18 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `unique_id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `provider`, `provider_id`, `phone`, `profile_images`, `store_id`, `customer_group_id`, `is_admin`, `status`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'Super Admin', 'super@gmail.com', '2024-09-29 02:49:38', '$2y$10$39dHt61VGEVI2v.gIicIpurBlBS9Dqm6M93KNuDN/m3.JnuKwH6ke', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:38', '2024-09-29 02:49:38'),
-(2, NULL, 'Ernest Schroeder', 'znolan@example.org', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'UxGBm6mMYi', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(3, NULL, 'Prof. Earnestine Kassulke', 'scrist@example.com', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'pWJZLJEQEr', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(4, NULL, 'Ms. Kavon Reynolds', 'abbott.emely@example.net', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'lLzqvVJP1Y', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(5, NULL, 'Green Ullrich', 'maurine.jacobson@example.org', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '3EmwW3l7ki', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(6, NULL, 'Mrs. Carmella Mayer', 'dferry@example.net', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'tR3TAwwwZi', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(7, NULL, 'Misael Nienow', 'emely63@example.org', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '8rnCOLeAbo', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(8, NULL, 'Jamey Zulauf', 'satterfield.rosamond@example.org', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'RQ47KF8ZWk', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(9, NULL, 'Madisen Langosh', 'harber.ian@example.org', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '8dvGSzbnHA', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(10, NULL, 'Keshaun Langworth IV', 'bradtke.bernadette@example.net', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'ws5e0jqL8Q', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(11, NULL, 'Cary Huels', 'mitchell.abigale@example.com', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'QVM7UF4pDg', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(12, NULL, 'Andres McLaughlin', 'marisol.ledner@example.net', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'JOQaENm6fT', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(13, NULL, 'Sean Kassulke', 'ystrosin@example.org', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'rfQ03URIAj', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(14, NULL, 'Dr. Ricky Weber IV', 'kory.jakubowski@example.org', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Syczgk9myo', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(15, NULL, 'Eileen Gerhold', 'ohara.helga@example.com', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'mpyjozyjqQ', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(16, NULL, 'Diego Goodwin', 'wmckenzie@example.org', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '2ikciSCgRX', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(17, NULL, 'Prof. Dejuan Howell', 'gbecker@example.net', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '9S56HyEDJB', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(18, NULL, 'Chasity Reichel', 'braun.bradley@example.org', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'akt3j36qBv', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(19, NULL, 'Dr. Jordi Waelchi', 'xjohns@example.net', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '7b8Eu6L3og', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(20, NULL, 'Prof. Anita Vandervort', 'tony64@example.org', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '3KEHA4HZAf', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(21, NULL, 'Darius Medhurst', 'powlowski.gayle@example.net', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Mjhos607pH', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(22, NULL, 'Ms. Sarah Bashirian II', 'margaret.lehner@example.com', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'M0EkYM0aCI', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(23, NULL, 'Prof. Fabiola Roob', 'nschultz@example.org', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '6GgPHTZU3s', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(24, NULL, 'Mr. Lucious Monahan', 'ostark@example.org', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'ebWhSDpBz9', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(25, NULL, 'Theodore Marvin Jr.', 'kreiger.kristian@example.com', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'E9a7uYGa4k', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(26, NULL, 'Giovanni Volkman', 'lori.schroeder@example.net', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'VWq63IiIxF', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(27, NULL, 'Israel Schaefer', 'sporer.jordane@example.org', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'B27kQHEuOR', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(28, NULL, 'Jessy Hane', 'elbert.torphy@example.org', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '6N78r2LoeI', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(29, NULL, 'Marjory Ernser PhD', 'kohler.carleton@example.com', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '5kXaCOvkFF', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(30, NULL, 'Kadin Olson', 'victor50@example.com', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'HWIsedSr4x', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39'),
-(31, NULL, 'Ronaldo Swaniawski Sr.', 'nader.jedediah@example.net', '2024-09-29 02:49:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'FDoFQR6209', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '2024-09-29 02:49:39', '2024-09-29 02:49:39');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `vouchers`
---
-
-CREATE TABLE `vouchers` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `voucher_code` varchar(255) NOT NULL,
-  `discount_type` enum('fixed','rate') NOT NULL,
-  `discount_value` decimal(10,2) NOT NULL,
-  `start_date` date NOT NULL,
-  `end_date` date NOT NULL,
-  `description` text DEFAULT NULL,
-  `status` enum('active','inactive') NOT NULL,
-  `max_usage` int(11) DEFAULT NULL,
-  `used_count` int(11) NOT NULL DEFAULT 0,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `users` (`id`, `name`, `email`, `phone`, `email_verified_at`, `password`, `remember_token`, `provider`, `provider_id`, `user_type`, `profile_images`, `is_admin`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Super Admin', 'super@gmail.com', NULL, '2025-08-16 09:33:38', '$2y$10$GtNMQm001Cm9Hq.5iyur8uXWWnfPp.0uHfJD4JF/NByzOo6a.6jq6', NULL, NULL, NULL, NULL, NULL, 0, 1, '2025-08-16 09:33:38', '2025-08-16 09:33:38'),
+(2, 'Connie McKenzie MD', 'abshire.kaelyn@example.com', NULL, '2025-08-16 09:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'gKaqBEhSR9', NULL, NULL, NULL, NULL, 0, 1, '2025-08-16 09:33:40', '2025-08-16 09:33:40'),
+(3, 'Stephon Armstrong', 'jennifer83@example.net', NULL, '2025-08-16 09:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'b0SbY8RgCT', NULL, NULL, NULL, NULL, 0, 1, '2025-08-16 09:33:40', '2025-08-16 09:33:40'),
+(4, 'Braxton Skiles', 'tlowe@example.net', NULL, '2025-08-16 09:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'yWBEXizKLm', NULL, NULL, NULL, NULL, 0, 1, '2025-08-16 09:33:40', '2025-08-16 09:33:40'),
+(5, 'Alf Bartell', 'vidal.schaden@example.com', NULL, '2025-08-16 09:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'b40GvnmMox', NULL, NULL, NULL, NULL, 0, 1, '2025-08-16 09:33:41', '2025-08-16 09:33:41'),
+(6, 'Emilia Jacobson', 'sharon.rowe@example.com', NULL, '2025-08-16 09:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'q5IbXnWmzH', NULL, NULL, NULL, NULL, 0, 1, '2025-08-16 09:33:41', '2025-08-16 09:33:41'),
+(7, 'Mr. Elbert Stokes', 'schuster.colt@example.org', NULL, '2025-08-16 09:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'goKJv9TJhI', NULL, NULL, NULL, NULL, 0, 1, '2025-08-16 09:33:41', '2025-08-16 09:33:41'),
+(8, 'Aryanna Powlowski', 'libbie.conn@example.org', NULL, '2025-08-16 09:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '3Qa3G16go7', NULL, NULL, NULL, NULL, 0, 1, '2025-08-16 09:33:41', '2025-08-16 09:33:41'),
+(9, 'Francesca Hettinger', 'makenna50@example.org', NULL, '2025-08-16 09:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Utnlq1DYxM', NULL, NULL, NULL, NULL, 0, 1, '2025-08-16 09:33:41', '2025-08-16 09:33:41'),
+(10, 'Thea Bayer II', 'era.champlin@example.net', NULL, '2025-08-16 09:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'bSM805xty4', NULL, NULL, NULL, NULL, 0, 1, '2025-08-16 09:33:41', '2025-08-16 09:33:41'),
+(11, 'Prof. Curtis Ferry IV', 'garth.predovic@example.org', NULL, '2025-08-16 09:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'U2cVhUQkyn', NULL, NULL, NULL, NULL, 0, 1, '2025-08-16 09:33:41', '2025-08-16 09:33:41');
 
 -- --------------------------------------------------------
 
@@ -6573,8 +5778,7 @@ CREATE TABLE `vouchers` (
 CREATE TABLE `wishlists` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
-  `product_id` bigint(20) UNSIGNED NOT NULL,
-  `product_variant_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `property_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -6596,8 +5800,9 @@ ALTER TABLE `blog_comments`
 --
 ALTER TABLE `blog_posts`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `blog_posts_slug_unique` (`slug`) USING HASH,
-  ADD KEY `blog_posts_author_id_foreign` (`author_id`);
+  ADD UNIQUE KEY `blog_posts_url_slug_unique` (`url_slug`),
+  ADD KEY `blog_posts_author_id_index` (`author_id`),
+  ADD KEY `blog_posts_title_index` (`title`);
 
 --
 -- Indexes for table `blog_shares`
@@ -6616,67 +5821,20 @@ ALTER TABLE `blog_views`
   ADD KEY `blog_views_user_id_foreign` (`user_id`);
 
 --
--- Indexes for table `brands`
---
-ALTER TABLE `brands`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `brands_url_slug_unique` (`url_slug`) USING HASH,
-  ADD KEY `brands_user_id_foreign` (`user_id`);
-
---
--- Indexes for table `carts`
---
-ALTER TABLE `carts`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `carts_user_id_foreign` (`user_id`),
-  ADD KEY `carts_product_id_foreign` (`product_id`),
-  ADD KEY `carts_product_variant_id_foreign` (`product_variant_id`);
-
---
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `categories_url_slug_unique` (`url_slug`) USING HASH,
-  ADD KEY `categories_parent_cat_id_foreign` (`parent_cat_id`),
-  ADD KEY `categories_user_id_foreign` (`user_id`);
+  ADD UNIQUE KEY `categories_url_slug_unique` (`url_slug`),
+  ADD KEY `categories_parent_cat_id_index` (`parent_cat_id`),
+  ADD KEY `categories_user_id_index` (`user_id`),
+  ADD KEY `categories_category_name_index` (`category_name`);
 
 --
--- Indexes for table `colors`
+-- Indexes for table `contacts`
 --
-ALTER TABLE `colors`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `colors_user_id_foreign` (`user_id`);
-
---
--- Indexes for table `compares`
---
-ALTER TABLE `compares`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `compares_user_id_foreign` (`user_id`),
-  ADD KEY `compares_product_id_foreign` (`product_id`);
-
---
--- Indexes for table `coupons`
---
-ALTER TABLE `coupons`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `coupons_coupon_code_unique` (`coupon_code`),
-  ADD KEY `coupons_customer_group_id_foreign` (`customer_group_id`),
-  ADD KEY `coupons_store_id_foreign` (`store_id`);
-
---
--- Indexes for table `currency_conversion_rates`
---
-ALTER TABLE `currency_conversion_rates`
+ALTER TABLE `contacts`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `customer_groups`
---
-ALTER TABLE `customer_groups`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `customer_groups_name_unique` (`name`);
 
 --
 -- Indexes for table `districts`
@@ -6699,41 +5857,6 @@ ALTER TABLE `failed_jobs`
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Indexes for table `gift_cards`
---
-ALTER TABLE `gift_cards`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `gift_cards_code_unique` (`code`);
-
---
--- Indexes for table `inventory_management`
---
-ALTER TABLE `inventory_management`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `inventory_management_product_id_foreign` (`product_id`),
-  ADD KEY `inventory_management_product_variant_id_foreign` (`product_variant_id`),
-  ADD KEY `inventory_management_store_id_foreign` (`store_id`);
-
---
--- Indexes for table `inventory_movements`
---
-ALTER TABLE `inventory_movements`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `inventory_movements_product_id_foreign` (`product_id`),
-  ADD KEY `inventory_movements_product_variant_id_foreign` (`product_variant_id`),
-  ADD KEY `inventory_movements_store_id_foreign` (`store_id`);
-
---
--- Indexes for table `item_returns`
---
-ALTER TABLE `item_returns`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `item_returns_order_id_foreign` (`order_id`),
-  ADD KEY `item_returns_product_id_foreign` (`product_id`),
-  ADD KEY `item_returns_product_variant_id_foreign` (`product_variant_id`),
-  ADD KEY `item_returns_store_id_foreign` (`store_id`);
-
---
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -6754,36 +5877,18 @@ ALTER TABLE `model_has_roles`
   ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
 
 --
--- Indexes for table `offers`
+-- Indexes for table `mortgages`
 --
-ALTER TABLE `offers`
+ALTER TABLE `mortgages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `orders`
+-- Indexes for table `other_information`
 --
-ALTER TABLE `orders`
+ALTER TABLE `other_information`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `orders_order_number_unique` (`order_number`),
-  ADD KEY `orders_user_id_foreign` (`user_id`),
-  ADD KEY `orders_coupon_code_foreign` (`coupon_code`);
-
---
--- Indexes for table `order_items`
---
-ALTER TABLE `order_items`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `order_items_order_id_foreign` (`order_id`),
-  ADD KEY `order_items_product_id_foreign` (`product_id`),
-  ADD KEY `order_items_product_variant_id_foreign` (`product_variant_id`);
-
---
--- Indexes for table `order_shipping_addresses`
---
-ALTER TABLE `order_shipping_addresses`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `order_shipping_addresses_order_id_foreign` (`order_id`),
-  ADD KEY `order_shipping_addresses_shipping_address_id_foreign` (`shipping_address_id`);
+  ADD UNIQUE KEY `other_information_identification_number_unique` (`identification_number`),
+  ADD KEY `other_information_user_id_foreign` (`user_id`);
 
 --
 -- Indexes for table `password_reset_tokens`
@@ -6807,49 +5912,25 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Indexes for table `products`
+-- Indexes for table `properties`
 --
-ALTER TABLE `products`
+ALTER TABLE `properties`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `products_url_slug_unique` (`url_slug`) USING HASH,
-  ADD KEY `products_category_id_foreign` (`category_id`),
-  ADD KEY `products_user_id_foreign` (`user_id`);
+  ADD KEY `properties_agent_id_foreign` (`agent_id`);
 
 --
--- Indexes for table `product_details`
+-- Indexes for table `property_addresses`
 --
-ALTER TABLE `product_details`
+ALTER TABLE `property_addresses`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `product_details_product_id_foreign` (`product_id`);
+  ADD KEY `property_addresses_property_id_foreign` (`property_id`);
 
 --
--- Indexes for table `product_images`
+-- Indexes for table `property_images`
 --
-ALTER TABLE `product_images`
+ALTER TABLE `property_images`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `product_images_product_id_foreign` (`product_id`);
-
---
--- Indexes for table `product_reviews`
---
-ALTER TABLE `product_reviews`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `product_reviews_product_id_foreign` (`product_id`),
-  ADD KEY `product_reviews_user_id_foreign` (`user_id`);
-
---
--- Indexes for table `product_specifications`
---
-ALTER TABLE `product_specifications`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `product_specifications_product_id_foreign` (`product_id`);
-
---
--- Indexes for table `product_variants`
---
-ALTER TABLE `product_variants`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `product_variants_product_id_foreign` (`product_id`);
+  ADD KEY `property_images_property_id_foreign` (`property_id`);
 
 --
 -- Indexes for table `roles`
@@ -6864,35 +5945,6 @@ ALTER TABLE `roles`
 ALTER TABLE `role_has_permissions`
   ADD PRIMARY KEY (`permission_id`,`role_id`),
   ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
-
---
--- Indexes for table `shipping_addresses`
---
-ALTER TABLE `shipping_addresses`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `shipping_addresses_user_id_foreign` (`user_id`);
-
---
--- Indexes for table `shipping_methods`
---
-ALTER TABLE `shipping_methods`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `shipping_zones`
---
-ALTER TABLE `shipping_zones`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `shipping_zones_zone_name_shipping_method_id_unique` (`zone_name`,`shipping_method_id`),
-  ADD KEY `shipping_zones_shipping_method_id_foreign` (`shipping_method_id`);
-
---
--- Indexes for table `stores`
---
-ALTER TABLE `stores`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `stores_store_code_unique` (`store_code`),
-  ADD KEY `stores_manager_id_foreign` (`manager_id`);
 
 --
 -- Indexes for table `unions`
@@ -6916,20 +5968,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- Indexes for table `vouchers`
---
-ALTER TABLE `vouchers`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `vouchers_voucher_code_unique` (`voucher_code`);
-
---
 -- Indexes for table `wishlists`
 --
 ALTER TABLE `wishlists`
   ADD PRIMARY KEY (`id`),
   ADD KEY `wishlists_user_id_foreign` (`user_id`),
-  ADD KEY `wishlists_product_id_foreign` (`product_id`),
-  ADD KEY `wishlists_product_variant_id_foreign` (`product_variant_id`);
+  ADD KEY `wishlists_property_id_foreign` (`property_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -6960,52 +6004,16 @@ ALTER TABLE `blog_views`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `brands`
---
-ALTER TABLE `brands`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT for table `carts`
---
-ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
-
---
--- AUTO_INCREMENT for table `colors`
---
-ALTER TABLE `colors`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT for table `compares`
+-- AUTO_INCREMENT for table `contacts`
 --
-ALTER TABLE `compares`
+ALTER TABLE `contacts`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `coupons`
---
-ALTER TABLE `coupons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `currency_conversion_rates`
---
-ALTER TABLE `currency_conversion_rates`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `customer_groups`
---
-ALTER TABLE `customer_groups`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `districts`
@@ -7026,57 +6034,21 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `gift_cards`
---
-ALTER TABLE `gift_cards`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `inventory_management`
---
-ALTER TABLE `inventory_management`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `inventory_movements`
---
-ALTER TABLE `inventory_movements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `item_returns`
---
-ALTER TABLE `item_returns`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT for table `offers`
+-- AUTO_INCREMENT for table `mortgages`
 --
-ALTER TABLE `offers`
+ALTER TABLE `mortgages`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `orders`
+-- AUTO_INCREMENT for table `other_information`
 --
-ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `order_items`
---
-ALTER TABLE `order_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `order_shipping_addresses`
---
-ALTER TABLE `order_shipping_addresses`
+ALTER TABLE `other_information`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -7092,69 +6064,27 @@ ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `products`
+-- AUTO_INCREMENT for table `properties`
 --
-ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT for table `product_details`
---
-ALTER TABLE `product_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
-
---
--- AUTO_INCREMENT for table `product_images`
---
-ALTER TABLE `product_images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
-
---
--- AUTO_INCREMENT for table `product_reviews`
---
-ALTER TABLE `product_reviews`
+ALTER TABLE `properties`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `product_specifications`
+-- AUTO_INCREMENT for table `property_addresses`
 --
-ALTER TABLE `product_specifications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+ALTER TABLE `property_addresses`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `product_variants`
+-- AUTO_INCREMENT for table `property_images`
 --
-ALTER TABLE `product_variants`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+ALTER TABLE `property_images`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `shipping_addresses`
---
-ALTER TABLE `shipping_addresses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `shipping_methods`
---
-ALTER TABLE `shipping_methods`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `shipping_zones`
---
-ALTER TABLE `shipping_zones`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `stores`
---
-ALTER TABLE `stores`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
@@ -7173,13 +6103,7 @@ ALTER TABLE `upazilas`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
-
---
--- AUTO_INCREMENT for table `vouchers`
---
-ALTER TABLE `vouchers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `wishlists`
@@ -7202,7 +6126,7 @@ ALTER TABLE `blog_comments`
 -- Constraints for table `blog_posts`
 --
 ALTER TABLE `blog_posts`
-  ADD CONSTRAINT `blog_posts_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `blog_posts_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `blog_shares`
@@ -7219,76 +6143,17 @@ ALTER TABLE `blog_views`
   ADD CONSTRAINT `blog_views_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `brands`
---
-ALTER TABLE `brands`
-  ADD CONSTRAINT `brands_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `carts`
---
-ALTER TABLE `carts`
-  ADD CONSTRAINT `carts_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `carts_product_variant_id_foreign` FOREIGN KEY (`product_variant_id`) REFERENCES `product_variants` (`id`),
-  ADD CONSTRAINT `carts_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
 -- Constraints for table `categories`
 --
 ALTER TABLE `categories`
-  ADD CONSTRAINT `categories_parent_cat_id_foreign` FOREIGN KEY (`parent_cat_id`) REFERENCES `categories` (`id`),
+  ADD CONSTRAINT `categories_parent_cat_id_foreign` FOREIGN KEY (`parent_cat_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `categories_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `colors`
---
-ALTER TABLE `colors`
-  ADD CONSTRAINT `colors_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `compares`
---
-ALTER TABLE `compares`
-  ADD CONSTRAINT `compares_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `compares_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `coupons`
---
-ALTER TABLE `coupons`
-  ADD CONSTRAINT `coupons_customer_group_id_foreign` FOREIGN KEY (`customer_group_id`) REFERENCES `customer_groups` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `coupons_store_id_foreign` FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `districts`
 --
 ALTER TABLE `districts`
   ADD CONSTRAINT `districts_division_id_foreign` FOREIGN KEY (`division_id`) REFERENCES `divisions` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `inventory_management`
---
-ALTER TABLE `inventory_management`
-  ADD CONSTRAINT `inventory_management_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `inventory_management_product_variant_id_foreign` FOREIGN KEY (`product_variant_id`) REFERENCES `product_variants` (`id`),
-  ADD CONSTRAINT `inventory_management_store_id_foreign` FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`);
-
---
--- Constraints for table `inventory_movements`
---
-ALTER TABLE `inventory_movements`
-  ADD CONSTRAINT `inventory_movements_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `inventory_movements_product_variant_id_foreign` FOREIGN KEY (`product_variant_id`) REFERENCES `product_variants` (`id`),
-  ADD CONSTRAINT `inventory_movements_store_id_foreign` FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`);
-
---
--- Constraints for table `item_returns`
---
-ALTER TABLE `item_returns`
-  ADD CONSTRAINT `item_returns_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
-  ADD CONSTRAINT `item_returns_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `item_returns_product_variant_id_foreign` FOREIGN KEY (`product_variant_id`) REFERENCES `product_variants` (`id`),
-  ADD CONSTRAINT `item_returns_store_id_foreign` FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`);
 
 --
 -- Constraints for table `model_has_permissions`
@@ -7303,64 +6168,28 @@ ALTER TABLE `model_has_roles`
   ADD CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `orders`
+-- Constraints for table `other_information`
 --
-ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_coupon_code_foreign` FOREIGN KEY (`coupon_code`) REFERENCES `coupons` (`id`),
-  ADD CONSTRAINT `orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+ALTER TABLE `other_information`
+  ADD CONSTRAINT `other_information_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `order_items`
+-- Constraints for table `properties`
 --
-ALTER TABLE `order_items`
-  ADD CONSTRAINT `order_items_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
-  ADD CONSTRAINT `order_items_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `order_items_product_variant_id_foreign` FOREIGN KEY (`product_variant_id`) REFERENCES `product_variants` (`id`);
+ALTER TABLE `properties`
+  ADD CONSTRAINT `properties_agent_id_foreign` FOREIGN KEY (`agent_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `order_shipping_addresses`
+-- Constraints for table `property_addresses`
 --
-ALTER TABLE `order_shipping_addresses`
-  ADD CONSTRAINT `order_shipping_addresses_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
-  ADD CONSTRAINT `order_shipping_addresses_shipping_address_id_foreign` FOREIGN KEY (`shipping_address_id`) REFERENCES `shipping_addresses` (`id`);
+ALTER TABLE `property_addresses`
+  ADD CONSTRAINT `property_addresses_property_id_foreign` FOREIGN KEY (`property_id`) REFERENCES `properties` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `products`
+-- Constraints for table `property_images`
 --
-ALTER TABLE `products`
-  ADD CONSTRAINT `products_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
-  ADD CONSTRAINT `products_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `product_details`
---
-ALTER TABLE `product_details`
-  ADD CONSTRAINT `product_details_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
-
---
--- Constraints for table `product_images`
---
-ALTER TABLE `product_images`
-  ADD CONSTRAINT `product_images_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
-
---
--- Constraints for table `product_reviews`
---
-ALTER TABLE `product_reviews`
-  ADD CONSTRAINT `product_reviews_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `product_reviews_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `product_specifications`
---
-ALTER TABLE `product_specifications`
-  ADD CONSTRAINT `product_specifications_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
-
---
--- Constraints for table `product_variants`
---
-ALTER TABLE `product_variants`
-  ADD CONSTRAINT `product_variants_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+ALTER TABLE `property_images`
+  ADD CONSTRAINT `property_images_property_id_foreign` FOREIGN KEY (`property_id`) REFERENCES `properties` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `role_has_permissions`
@@ -7368,24 +6197,6 @@ ALTER TABLE `product_variants`
 ALTER TABLE `role_has_permissions`
   ADD CONSTRAINT `role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `shipping_addresses`
---
-ALTER TABLE `shipping_addresses`
-  ADD CONSTRAINT `shipping_addresses_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `shipping_zones`
---
-ALTER TABLE `shipping_zones`
-  ADD CONSTRAINT `shipping_zones_shipping_method_id_foreign` FOREIGN KEY (`shipping_method_id`) REFERENCES `shipping_methods` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `stores`
---
-ALTER TABLE `stores`
-  ADD CONSTRAINT `stores_manager_id_foreign` FOREIGN KEY (`manager_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `unions`
@@ -7403,8 +6214,7 @@ ALTER TABLE `upazilas`
 -- Constraints for table `wishlists`
 --
 ALTER TABLE `wishlists`
-  ADD CONSTRAINT `wishlists_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `wishlists_product_variant_id_foreign` FOREIGN KEY (`product_variant_id`) REFERENCES `product_variants` (`id`),
+  ADD CONSTRAINT `wishlists_property_id_foreign` FOREIGN KEY (`property_id`) REFERENCES `properties` (`id`),
   ADD CONSTRAINT `wishlists_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
